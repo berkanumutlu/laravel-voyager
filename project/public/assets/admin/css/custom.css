@@ -1,0 +1,16 @@
+.fw-version {
+    margin-top: 15px;
+}
+
+.fw-version i {
+    margin-right: 4px;
+}
+
+.navbar .dropdown.profile .dropdown-menu {
+    position: absolute !important;
+}
+
+.navbar .navbar-right .open .dropdown-menu {
+    left: auto;
+    right: 0;
+}
