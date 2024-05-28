@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cd15e044b2229baaa3792ee490d3a5f",
+    "content-hash": "1ace8434f09080cfbfee6f20fac71729",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -6017,7 +6017,7 @@
         },
         {
             "name": "tcg/voyager",
-            "version": "dev-1.6-l10",
+            "version": "v1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thedevdojo/voyager.git",
@@ -8809,9 +8809,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "tcg/voyager": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
