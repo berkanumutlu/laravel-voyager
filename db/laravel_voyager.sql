@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 27 May 2024, 07:22:24
+-- Üretim Zamanı: 28 May 2024, 15:57:45
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -30,20 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tablo döküm verisi `categories`
 --
 
-INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, 'Kategori 1', 'kategori-1', '2024-05-25 13:05:53', '2024-05-25 13:12:35'),
-(2, NULL, 1, 'Kategori 2', 'kategori-2', '2024-05-25 13:05:53', '2024-05-25 13:12:51');
+INSERT INTO `categories` (`id`, `parent_id`, `name`, `slug`, `order`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, 'Kategori 1', 'kategori-1', 1, '2024-05-25 13:05:53', '2024-05-25 13:12:35', NULL),
+(2, NULL, 'Kategori 2', 'kategori-2', 2, '2024-05-25 13:05:53', '2024-05-25 13:12:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -72,61 +73,67 @@ CREATE TABLE `data_rows` (
 --
 
 INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, `required`, `browse`, `read`, `edit`, `add`, `delete`, `details`, `order`) VALUES
-(1, 1, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
-(2, 1, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
-(3, 1, 'email', 'text', 'Email', 1, 1, 1, 1, 1, 1, NULL, 3),
-(4, 1, 'password', 'password', 'Password', 1, 0, 0, 1, 1, 0, NULL, 4),
-(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, NULL, 5),
-(6, 1, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 0, 0, 0, NULL, 6),
-(7, 1, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 7),
-(8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, NULL, 8),
-(9, 1, 'user_belongsto_role_relationship', 'relationship', 'Role', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":0}', 10),
+(1, 1, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
+(2, 1, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
+(3, 1, 'email', 'text', 'Email', 1, 1, 1, 1, 1, 1, '{}', 3),
+(4, 1, 'password', 'password', 'Password', 1, 0, 0, 1, 1, 0, '{}', 4),
+(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, '{}', 5),
+(6, 1, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 0, 0, 0, '{}', 6),
+(7, 1, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 7),
+(8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, '{}', 8),
+(9, 1, 'user_belongsto_role_relationship', 'relationship', 'Role', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":\"0\",\"taggable\":\"0\"}', 10),
 (10, 1, 'user_belongstomany_role_relationship', 'relationship', 'Roles', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}', 11),
-(11, 1, 'settings', 'hidden', 'Settings', 0, 0, 0, 0, 0, 0, NULL, 12),
-(12, 2, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
-(13, 2, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
-(14, 2, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 3),
-(15, 2, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 4),
-(16, 3, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
-(17, 3, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
-(18, 3, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 3),
-(19, 3, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 4),
-(20, 3, 'display_name', 'text', 'Display Name', 1, 1, 1, 1, 1, 1, NULL, 5),
-(21, 1, 'role_id', 'text', 'Role', 1, 1, 1, 1, 1, 1, NULL, 9),
-(22, 4, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
-(23, 4, 'parent_id', 'select_dropdown', 'Parent', 0, 0, 1, 1, 1, 1, '{\"default\":\"\",\"null\":\"\",\"options\":{\"\":\"-- None --\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\"}}', 2),
-(24, 4, 'order', 'text', 'Order', 1, 1, 1, 1, 1, 1, '{\"default\":1}', 3),
-(25, 4, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 4),
-(26, 4, 'slug', 'text', 'Slug', 1, 1, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"name\"}}', 5),
-(27, 4, 'created_at', 'timestamp', 'Created At', 0, 0, 1, 0, 0, 0, NULL, 6),
-(28, 4, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 7),
+(11, 1, 'settings', 'hidden', 'Settings', 0, 0, 0, 0, 0, 0, '{}', 12),
+(12, 2, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
+(13, 2, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
+(14, 2, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(15, 2, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 4),
+(16, 3, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
+(17, 3, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
+(18, 3, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(19, 3, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 4),
+(20, 3, 'display_name', 'text', 'Display Name', 1, 1, 1, 1, 1, 1, '{}', 5),
+(21, 1, 'role_id', 'text', 'Role', 0, 1, 1, 1, 1, 1, '{}', 9),
+(22, 4, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
+(23, 4, 'parent_id', 'select_dropdown', 'Üst Kategori', 0, 0, 1, 1, 1, 1, '{\"default\":\"\",\"null\":\"\",\"options\":{\"\":\"-- None --\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\"}}', 2),
+(24, 4, 'order', 'text', 'Sıra', 1, 1, 1, 1, 1, 1, '{\"default\":1}', 5),
+(25, 4, 'name', 'text', 'Ad', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 3),
+(26, 4, 'slug', 'text', 'Slug', 1, 1, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"name\",\"forceUpdate\":true},\"validation\":{\"rule\":\"required|max:255\"},\"description\":\"Bo\\u015f b\\u0131rak\\u0131lmas\\u0131 durumunda otomatik olarak olu\\u015fturulacakt\\u0131r.\"}', 4),
+(27, 4, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 6),
+(28, 4, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 7),
 (29, 5, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
-(30, 5, 'author_id', 'text', 'Author', 1, 0, 1, 1, 0, 1, '{}', 2),
-(31, 5, 'category_id', 'text', 'Category', 0, 0, 1, 1, 1, 0, '{}', 3),
-(32, 5, 'title', 'text', 'Title', 1, 1, 1, 1, 1, 1, '{}', 4),
-(33, 5, 'excerpt', 'text_area', 'Excerpt', 0, 0, 1, 1, 1, 1, '{}', 5),
-(34, 5, 'body', 'rich_text_box', 'Body', 1, 0, 1, 1, 1, 1, '{}', 6),
-(35, 5, 'image', 'image', 'Post Image', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 7),
-(36, 5, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:posts,slug\"}}', 8),
-(37, 5, 'meta_description', 'text_area', 'Meta Description', 0, 0, 1, 1, 1, 1, '{}', 9),
-(38, 5, 'meta_keywords', 'text_area', 'Meta Keywords', 0, 0, 1, 1, 1, 1, '{}', 10),
-(39, 5, 'status', 'select_dropdown', 'Status', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"published\",\"DRAFT\":\"draft\",\"PENDING\":\"pending\"}}', 11),
-(40, 5, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 0, 0, 0, '{}', 12),
-(41, 5, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 13),
-(42, 5, 'seo_title', 'text', 'SEO Title', 0, 1, 1, 1, 1, 1, '{}', 14),
-(43, 5, 'featured', 'checkbox', 'Featured', 1, 1, 1, 1, 1, 1, '{}', 15),
-(44, 6, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
-(45, 6, 'author_id', 'text', 'Author', 1, 0, 0, 0, 0, 0, NULL, 2),
-(46, 6, 'title', 'text', 'Title', 1, 1, 1, 1, 1, 1, NULL, 3),
-(47, 6, 'excerpt', 'text_area', 'Excerpt', 1, 0, 1, 1, 1, 1, NULL, 4),
-(48, 6, 'body', 'rich_text_box', 'Body', 1, 0, 1, 1, 1, 1, NULL, 5),
+(30, 5, 'author_id', 'text', 'Yazar', 1, 1, 1, 1, 1, 0, '{\"validation\":{\"rule\":\"required\"}}', 2),
+(31, 5, 'category_id', 'text', 'Kategori', 0, 0, 0, 1, 1, 0, '{\"validation\":{\"rule\":\"required\"}}', 3),
+(32, 5, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 6),
+(33, 5, 'excerpt', 'text_area', 'Alıntı', 0, 0, 1, 1, 1, 1, '{}', 8),
+(34, 5, 'body', 'rich_text_box', 'İçerik', 1, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\"}}', 9),
+(35, 5, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 10),
+(36, 5, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:posts,slug\"}}', 7),
+(37, 5, 'meta_description', 'text_area', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"null\":\"\",\"validation\":{\"rule\":\"max:160\"}}', 11),
+(38, 5, 'meta_keywords', 'text_area', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{\"null\":\"\"}', 12),
+(39, 5, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"yay\\u0131nland\\u0131\",\"DRAFT\":\"taslak\",\"PENDING\":\"bekliyor\"}}', 16),
+(40, 5, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 17),
+(41, 5, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 18),
+(42, 5, 'seo_title', 'text', 'SEO Başlık', 0, 0, 1, 1, 1, 1, '{\"null\":\"\"}', 13),
+(43, 5, 'featured', 'checkbox', 'Öne Çıkanlar', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 14),
+(44, 6, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
+(45, 6, 'author_id', 'text', 'Yazar', 1, 0, 0, 0, 0, 0, '{}', 2),
+(46, 6, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 3),
+(47, 6, 'excerpt', 'text_area', 'Excerpt', 0, 0, 1, 1, 1, 1, '{}', 4),
+(48, 6, 'body', 'rich_text_box', 'İçerik', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\"}}', 5),
 (49, 6, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}', 6),
-(50, 6, 'meta_description', 'text', 'Meta Description', 1, 0, 1, 1, 1, 1, NULL, 7),
-(51, 6, 'meta_keywords', 'text', 'Meta Keywords', 1, 0, 1, 1, 1, 1, NULL, 8),
-(52, 6, 'status', 'select_dropdown', 'Status', 1, 1, 1, 1, 1, 1, '{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"INACTIVE\",\"ACTIVE\":\"ACTIVE\"}}', 9),
-(53, 6, 'created_at', 'timestamp', 'Created At', 1, 1, 1, 0, 0, 0, NULL, 10),
-(54, 6, 'updated_at', 'timestamp', 'Updated At', 1, 0, 0, 0, 0, 0, NULL, 11),
-(55, 6, 'image', 'image', 'Page Image', 0, 1, 1, 1, 1, 1, NULL, 12);
+(50, 6, 'meta_description', 'text', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"max:160\"}}', 7),
+(51, 6, 'meta_keywords', 'text', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{}', 8),
+(52, 6, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"Pasif\",\"ACTIVE\":\"Aktif\"}}', 9),
+(53, 6, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 10),
+(54, 6, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 11),
+(55, 6, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 12),
+(56, 4, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 8),
+(57, 5, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 19),
+(58, 1, 'email_verified_at', 'timestamp', 'Email Verified At', 0, 1, 1, 1, 1, 1, '{}', 6),
+(59, 5, 'post_belongsto_user_relationship', 'relationship', 'Yazar', 1, 1, 1, 1, 1, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
+(60, 5, 'post_belongsto_category_relationship', 'relationship', 'Kategori', 1, 1, 1, 0, 0, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"category_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 4),
+(61, 5, 'hit', 'number', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15);
 
 -- --------------------------------------------------------
 
@@ -157,12 +164,12 @@ CREATE TABLE `data_types` (
 --
 
 INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `display_name_plural`, `icon`, `model_name`, `policy_name`, `controller`, `description`, `generate_permissions`, `server_side`, `details`, `created_at`, `updated_at`) VALUES
-(1, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', '', 1, 0, NULL, '2024-05-25 07:13:16', '2024-05-25 07:13:16'),
-(2, 'menus', 'menus', 'Menu', 'Menus', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, '', '', 1, 0, NULL, '2024-05-25 07:13:16', '2024-05-25 07:13:16'),
-(3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', '', 1, 0, NULL, '2024-05-25 07:13:16', '2024-05-25 07:13:16'),
-(4, 'categories', 'categories', 'Category', 'Categories', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, '', '', 1, 0, NULL, '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
-(5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-26 12:40:35'),
-(6, 'pages', 'pages', 'Page', 'Pages', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, '', '', 1, 0, NULL, '2024-05-25 13:05:53', '2024-05-25 13:05:53');
+(1, 'users', 'users', 'Kullanıcı', 'Kullanıcılar', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:34:31'),
+(2, 'menus', 'menus', 'Menü', 'Menüler', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:18:46'),
+(3, 'roles', 'roles', 'Rol', 'Roller', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:37:41'),
+(4, 'categories', 'categories', 'Kategori', 'Kategoriler', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, NULL, 'Deneme kategori tanımı', 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:52:59'),
+(5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:51:11'),
+(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:52:53');
 
 -- --------------------------------------------------------
 
@@ -199,7 +206,7 @@ CREATE TABLE `menus` (
 
 INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '2024-05-25 07:13:16', '2024-05-25 07:13:16'),
-(2, 'content', '2024-05-25 14:16:52', '2024-05-25 14:16:52');
+(2, 'deneme-menu', '2024-05-25 14:16:52', '2024-05-28 11:42:05');
 
 -- --------------------------------------------------------
 
@@ -229,19 +236,19 @@ CREATE TABLE `menu_items` (
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Kontrol Paneli', '', '_self', 'voyager-boat', '#000000', NULL, 1, '2024-05-25 07:13:16', '2024-05-25 14:59:05', 'voyager.dashboard', 'null'),
-(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 4, '2024-05-25 07:13:16', '2024-05-25 15:00:21', 'voyager.media.index', 'null'),
-(3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', NULL, 3, '2024-05-25 07:13:16', '2024-05-25 15:00:12', 'voyager.users.index', 'null'),
-(4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', NULL, 2, '2024-05-25 07:13:16', '2024-05-25 14:59:47', 'voyager.roles.index', 'null'),
-(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-05-25 15:00:46', NULL, ''),
-(6, 1, 'Menu Builder', '', '_self', 'voyager-list', NULL, 5, 1, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.menus.index', NULL),
-(7, 1, 'Database', '', '_self', 'voyager-data', NULL, 5, 2, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.database.index', NULL),
-(8, 1, 'Compass', '', '_self', 'voyager-compass', NULL, 5, 3, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.compass.index', NULL),
+(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-05-28 15:56:43', 'voyager.media.index', 'null'),
+(3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-05-28 15:56:43', 'voyager.users.index', 'null'),
+(4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', NULL, 7, '2024-05-25 07:13:16', '2024-05-28 15:56:41', 'voyager.roles.index', 'null'),
+(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 9, '2024-05-25 07:13:16', '2024-05-28 14:48:25', NULL, ''),
+(6, 1, 'Menü Oluşturucu', '', '_self', 'voyager-list', '#000000', 5, 1, '2024-05-25 07:13:16', '2024-05-28 14:50:15', 'voyager.menus.index', 'null'),
+(7, 1, 'Veritabanı', '', '_self', 'voyager-data', '#000000', 5, 2, '2024-05-25 07:13:16', '2024-05-28 11:48:13', 'voyager.database.index', 'null'),
+(8, 1, 'Pusula', '', '_self', 'voyager-compass', '#000000', 5, 3, '2024-05-25 07:13:16', '2024-05-28 14:50:40', 'voyager.compass.index', 'null'),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.bread.index', NULL),
-(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-05-25 15:01:01', 'voyager.settings.index', 'null'),
-(11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', NULL, 8, '2024-05-25 13:05:53', '2024-05-25 15:01:53', 'voyager.categories.index', 'null'),
-(12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', NULL, 6, '2024-05-25 13:05:53', '2024-05-26 12:41:31', 'voyager.posts.index', 'null'),
-(13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', NULL, 7, '2024-05-25 13:05:53', '2024-05-25 15:01:43', 'voyager.pages.index', 'null'),
-(14, 2, 'Deneme', '', '_self', NULL, '#000000', NULL, 9, '2024-05-25 15:16:54', '2024-05-25 15:16:54', NULL, '');
+(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 8, '2024-05-25 07:13:16', '2024-05-28 14:48:34', 'voyager.settings.index', 'null'),
+(11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', NULL, 4, '2024-05-25 13:05:53', '2024-05-28 14:48:43', 'voyager.categories.index', 'null'),
+(12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', NULL, 3, '2024-05-25 13:05:53', '2024-05-28 14:48:43', 'voyager.posts.index', 'null'),
+(13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', NULL, 2, '2024-05-25 13:05:53', '2024-05-28 14:48:43', 'voyager.pages.index', 'null'),
+(14, 2, 'Deneme Item', 'deneme', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-28 11:44:42', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -476,28 +483,30 @@ CREATE TABLE `posts` (
   `author_id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `excerpt` text COLLATE utf8mb4_unicode_ci,
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_description` text COLLATE utf8mb4_unicode_ci,
   `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `featured` tinyint(1) NOT NULL DEFAULT '0',
+  `hit` int(11) DEFAULT '0',
+  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tablo döküm verisi `posts`
 --
 
-INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `seo_title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`) VALUES
-(1, 0, NULL, 'Lorem Ipsum Post', NULL, 'This is the excerpt for the Lorem Ipsum Post', '<p>This is the body of the lorem ipsum post</p>', 'posts/post1.jpg', 'lorem-ipsum-post', 'This is the meta description', 'keyword1, keyword2, keyword3', 'PUBLISHED', 0, '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
-(2, 0, NULL, 'My Sample Post', NULL, 'This is the excerpt for the sample Post', '<p>This is the body for the sample post, which includes the body.</p>\n                <h2>We can use all kinds of format!</h2>\n                <p>And include a bunch of other stuff.</p>', 'posts/post2.jpg', 'my-sample-post', 'Meta Description for sample post', 'keyword1, keyword2, keyword3', 'PUBLISHED', 0, '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
-(3, 0, NULL, 'Latest Post', NULL, 'This is the excerpt for the latest post', '<p>This is the body for the latest post</p>', 'posts/post3.jpg', 'latest-post', 'This is the meta description', 'keyword1, keyword2, keyword3', 'PUBLISHED', 0, '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
-(4, 0, NULL, 'Yarr Post', NULL, 'Reef sails nipperkin bring a spring upon her cable coffer jury mast spike marooned Pieces of Eight poop deck pillage. Clipper driver coxswain galleon hempen halter come about pressgang gangplank boatswain swing the lead. Nipperkin yard skysail swab lanyard Blimey bilge water ho quarter Buccaneer.', '<p>Swab deadlights Buccaneer fire ship square-rigged dance the hempen jig weigh anchor cackle fruit grog furl. Crack Jennys tea cup chase guns pressgang hearties spirits hogshead Gold Road six pounders fathom measured fer yer chains. Main sheet provost come about trysail barkadeer crimp scuttle mizzenmast brig plunder.</p>\n<p>Mizzen league keelhaul galleon tender cog chase Barbary Coast doubloon crack Jennys tea cup. Blow the man down lugsail fire ship pinnace cackle fruit line warp Admiral of the Black strike colors doubloon. Tackle Jack Ketch come about crimp rum draft scuppers run a shot across the bow haul wind maroon.</p>\n<p>Interloper heave down list driver pressgang holystone scuppers tackle scallywag bilged on her anchor. Jack Tar interloper draught grapple mizzenmast hulk knave cable transom hogshead. Gaff pillage to go on account grog aft chase guns piracy yardarm knave clap of thunder.</p>', 'posts/post4.jpg', 'yarr-post', 'this be a meta descript', 'keyword1, keyword2, keyword3', 'PUBLISHED', 0, '2024-05-25 13:05:53', '2024-05-25 13:05:53');
+INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt`, `body`, `image`, `meta_description`, `meta_keywords`, `seo_title`, `featured`, `hit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 'Lorem Ipsum Yazısı', 'lorem-ipsum-yazisi', 'Bu yazının kısa açıklamasıdır.', '<p>Bu lorem ipsum yazısının g&ouml;vdesidir.</p>\n<figure class=\"image\"><img title=\"G&ouml;rsel Başlığı\" src=\"http://localhost/storage/posts/May2024/lorem.png\" alt=\"Alternatif A&ccedil;ıklama\" width=\"1560\" height=\"1040\">\n<figcaption>G&ouml;rsel Alt Başlık</figcaption>\n</figure>\n<p>&nbsp;</p>', 'posts/post1.jpg', 'Bu meta açıklamasıdır.', 'anahtar1, anahtar2, anahtar3', 'SEO Başlığı', 0, 0, 'PUBLISHED', '2024-05-25 13:05:53', '2024-05-28 13:16:13', NULL),
+(2, 1, 1, 'Örnek Yazı', 'ornek-yazi', 'Bu örnek yazının alıntısıdır', '<p>Bu, g&ouml;vdeyi i&ccedil;eren &ouml;rnek g&ouml;nderinin g&ouml;vdesidir.</p>\n<h2>Her t&uuml;rl&uuml; formatı kullanabiliriz!</h2>\n<p>Ve bir s&uuml;r&uuml; başka şey ekleyin.</p>', 'posts/post2.jpg', 'Örnek yazı için Meta Açıklama', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 0, 'PUBLISHED', '2024-05-25 13:05:54', '2024-05-28 13:15:42', NULL),
+(3, 1, 2, 'Son Yazı', 'son-yazi', 'Bu son yazının alıntısı', '<p>Bu son yazının i&ccedil;eriği</p>', 'posts/post3.jpg', 'Bu meta açıklamasıdır', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 0, 'PUBLISHED', '2024-05-25 13:05:55', '2024-05-28 13:17:19', NULL),
+(4, 1, 2, 'Yarr Yazısı', 'yarr-yazisi', 'Resif yelkenleri, kablo sandığının üzerine bir yay getiriyor, jüri direği sivri uçlu Sekiz Parçası kıç güvertesini yağmalıyor. Kırpıcı sürücüsü dümenci kalyon kenevir yular baskı çetesi ile geliyor çete kalasları tekneler liderliği sallıyor. Nipperkin yarda gök yelkeni sürüntü kordonu Blimey sintine suyu ho çeyrek Buccaneer.', '<p>Swab &ouml;l&uuml; ışıklar Korsan ateş gemisi kare te&ccedil;hizatlı dans kenevir jig\'i tartmak &ccedil;apa gevezelik meyve i&ccedil;eceği salkımı. Jenny\'nin &ccedil;ay fincanı kovalayan silahlar, kalplerin ruhları, fı&ccedil;ı kafalı Gold Road, zincirlerinize g&ouml;re &ouml;l&ccedil;&uuml;len altı poundluk kula&ccedil;. Ana ıskota vekili, yelkenli barkadeer kıvrımlı mizzenmast tugayı yağmalamaya &ccedil;alışıyor.</p>\n<p>Mizzen ligi keelhaul kalyon ihale dişli kovalamaca Berberi Sahili doublon Jenny\'nin &ccedil;ay bardağını kırdı. Adamı u&ccedil;urun yelkenli ateş gemisi pinnace kıkırdama meyve hattı warp Kara saldırı renkleri doubloon\'un amirali. Jack Ketch\'le m&uuml;cadele edin, kıvrımlı rom draft frengileri pruvada r&uuml;zgar kestane rengi bir atış yapın.</p>\n<p>Interloper listeyi aşağı &ccedil;ekiyor, s&uuml;r&uuml;c&uuml; kutsal taş frengisine basıyor ve &ccedil;apasındaki sintineli sintineyle m&uuml;cadele ediyor. Jack Tar araya giren taslak kıskacı mizzen direği hulk knave kablo kı&ccedil; yatırması fı&ccedil;ıbaşı. Gaff yağma, grog kı&ccedil;ını takip etmek i&ccedil;in silahları korsanlık yardarm d&uuml;zenbaz g&ouml;k g&uuml;r&uuml;lt&uuml;s&uuml; alkışını takip ediyor.</p>', 'posts/post4.jpg', 'bu bir meta açıklama olsun', 'Resif yelkenleri, Nipperkin yarda gök yelkeni, Buccaneer', '', 0, 0, 'PUBLISHED', '2024-05-25 13:05:56', '2024-05-28 13:15:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -545,14 +554,14 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`, `order`, `group`) VALUES
 (1, 'site.title', 'Site Title', 'Site Title', '', 'text', 1, 'Site'),
 (2, 'site.description', 'Site Description', 'Site Description', '', 'text', 2, 'Site'),
-(3, 'site.logo', 'Site Logo', '', '', 'image', 3, 'Site'),
+(3, 'site.logo', 'Site Logo', 'settings/May2024/QpffiDuPUTMh9Tti2dqj.png', '', 'image', 3, 'Site'),
 (4, 'site.google_analytics_tracking_id', 'Google Analytics Tracking ID', NULL, '', 'text', 4, 'Site'),
 (5, 'admin.bg_image', 'Admin Background Image', '', '', 'image', 6, 'Admin'),
 (6, 'admin.title', 'Admin Title', 'Voyager', '', 'text', 2, 'Admin'),
 (7, 'admin.description', 'Admin Description', 'Welcome to Voyager. The Missing Admin for Laravel', '', 'text', 3, 'Admin'),
 (8, 'admin.loader', 'Admin Loader', '', '', 'image', 4, 'Admin'),
 (9, 'admin.icon_image', 'Admin Icon Image', '', '', 'image', 5, 'Admin'),
-(10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', NULL, '', 'text', 1, 'Admin'),
+(10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', NULL, '', 'text', 7, 'Admin'),
 (11, 'admin.fw_version', 'Framework Version', 'v1.0.0', NULL, 'text', 1, 'Admin');
 
 -- --------------------------------------------------------
@@ -622,7 +631,7 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (43, 'menu_items', 'title', 10, 'en', 'Settings', '2024-05-25 15:01:01', '2024-05-25 15:01:01'),
 (44, 'menu_items', 'title', 13, 'en', 'Pages', '2024-05-25 15:01:43', '2024-05-25 15:01:43'),
 (45, 'menu_items', 'title', 11, 'en', 'Categories', '2024-05-25 15:01:53', '2024-05-25 15:01:53'),
-(46, 'menu_items', 'title', 14, 'en', 'Test', '2024-05-25 15:16:55', '2024-05-25 15:16:55'),
+(46, 'menu_items', 'title', 14, 'en', 'Test Item', '2024-05-25 15:16:55', '2024-05-28 11:44:54'),
 (47, 'data_rows', 'display_name', 29, 'en', 'ID', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
 (48, 'data_rows', 'display_name', 30, 'en', 'Author', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
 (49, 'data_rows', 'display_name', 31, 'en', 'Category', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
@@ -640,7 +649,90 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (61, 'data_rows', 'display_name', 41, 'en', 'Updated At', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
 (62, 'data_types', 'display_name_singular', 5, 'en', 'Post', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
 (63, 'data_types', 'display_name_plural', 5, 'en', 'Posts', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
-(64, 'menu_items', 'title', 12, 'en', 'Posts', '2024-05-26 12:41:31', '2024-05-26 12:41:31');
+(64, 'menu_items', 'title', 12, 'en', 'Posts', '2024-05-26 12:41:31', '2024-05-26 12:41:31'),
+(65, 'menu_items', 'title', 7, 'en', 'Database', '2024-05-28 11:48:13', '2024-05-28 11:48:13'),
+(66, 'data_rows', 'display_name', 22, 'en', 'ID', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(67, 'data_rows', 'display_name', 23, 'en', 'Parent', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(68, 'data_rows', 'display_name', 25, 'en', 'Name', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(69, 'data_rows', 'display_name', 26, 'en', 'Slug', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(70, 'data_rows', 'display_name', 24, 'en', 'Order', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(71, 'data_rows', 'display_name', 27, 'en', 'Created At', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(72, 'data_rows', 'display_name', 28, 'en', 'Updated At', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(73, 'data_types', 'display_name_singular', 4, 'en', 'Category', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(74, 'data_types', 'display_name_plural', 4, 'en', 'Categories', '2024-05-28 11:57:51', '2024-05-28 11:57:51'),
+(75, 'data_rows', 'display_name', 56, 'en', 'Deleted At', '2024-05-28 12:03:29', '2024-05-28 12:03:29'),
+(76, 'data_rows', 'display_name', 12, 'en', 'ID', '2024-05-28 12:18:47', '2024-05-28 12:18:47'),
+(77, 'data_rows', 'display_name', 13, 'en', 'Name', '2024-05-28 12:18:47', '2024-05-28 12:18:47'),
+(78, 'data_rows', 'display_name', 14, 'en', 'Created At', '2024-05-28 12:18:47', '2024-05-28 12:18:47'),
+(79, 'data_rows', 'display_name', 15, 'en', 'Updated At', '2024-05-28 12:18:47', '2024-05-28 12:18:47'),
+(80, 'data_types', 'display_name_singular', 2, 'en', 'Menu', '2024-05-28 12:18:47', '2024-05-28 12:18:47'),
+(81, 'data_types', 'display_name_plural', 2, 'en', 'Menus', '2024-05-28 12:18:47', '2024-05-28 12:18:47'),
+(82, 'data_rows', 'display_name', 44, 'en', 'ID', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(83, 'data_rows', 'display_name', 45, 'en', 'Author', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(84, 'data_rows', 'display_name', 46, 'en', 'Title', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(85, 'data_rows', 'display_name', 47, 'en', 'Excerpt', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(86, 'data_rows', 'display_name', 48, 'en', 'Body', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(87, 'data_rows', 'display_name', 55, 'en', 'Page Image', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(88, 'data_rows', 'display_name', 49, 'en', 'Slug', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(89, 'data_rows', 'display_name', 50, 'en', 'Meta Description', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(90, 'data_rows', 'display_name', 51, 'en', 'Meta Keywords', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(91, 'data_rows', 'display_name', 52, 'en', 'Status', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(92, 'data_rows', 'display_name', 53, 'en', 'Created At', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(93, 'data_rows', 'display_name', 54, 'en', 'Updated At', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(94, 'data_types', 'display_name_singular', 6, 'en', 'Page', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(95, 'data_types', 'display_name_plural', 6, 'en', 'Pages', '2024-05-28 12:22:25', '2024-05-28 12:22:25'),
+(96, 'data_rows', 'display_name', 57, 'en', 'Deleted At', '2024-05-28 12:33:25', '2024-05-28 12:33:25'),
+(97, 'data_rows', 'display_name', 1, 'en', 'ID', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(98, 'data_rows', 'display_name', 21, 'en', 'Role', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(99, 'data_rows', 'display_name', 2, 'en', 'Name', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(100, 'data_rows', 'display_name', 3, 'en', 'Email', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(101, 'data_rows', 'display_name', 8, 'en', 'Avatar', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(102, 'data_rows', 'display_name', 4, 'en', 'Password', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(103, 'data_rows', 'display_name', 5, 'en', 'Remember Token', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(104, 'data_rows', 'display_name', 11, 'en', 'Settings', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(105, 'data_rows', 'display_name', 6, 'en', 'Created At', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(106, 'data_rows', 'display_name', 7, 'en', 'Updated At', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(107, 'data_rows', 'display_name', 9, 'en', 'Role', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(108, 'data_rows', 'display_name', 10, 'en', 'Roles', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(109, 'data_types', 'display_name_singular', 1, 'en', 'User', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(110, 'data_types', 'display_name_plural', 1, 'en', 'Users', '2024-05-28 12:34:31', '2024-05-28 12:34:31'),
+(111, 'data_rows', 'display_name', 16, 'en', 'ID', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(112, 'data_rows', 'display_name', 17, 'en', 'Name', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(113, 'data_rows', 'display_name', 20, 'en', 'Display Name', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(114, 'data_rows', 'display_name', 18, 'en', 'Created At', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(115, 'data_rows', 'display_name', 19, 'en', 'Updated At', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(116, 'data_types', 'display_name_singular', 3, 'en', 'Role', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(117, 'data_types', 'display_name_plural', 3, 'en', 'Roles', '2024-05-28 12:37:41', '2024-05-28 12:37:41'),
+(118, 'data_rows', 'display_name', 59, 'en', 'users', '2024-05-28 13:00:24', '2024-05-28 13:00:24'),
+(119, 'posts', 'title', 1, 'en', 'Lorem Ipsum Post', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(120, 'posts', 'excerpt', 1, 'en', 'This is the excerpt for the Lorem Ipsum Post', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(121, 'posts', 'body', 1, 'en', '<p>This is the body of the lorem ipsum post</p>', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(122, 'posts', 'slug', 1, 'en', 'lorem-ipsum-post', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(123, 'posts', 'meta_description', 1, 'en', 'This is the meta description', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(124, 'posts', 'meta_keywords', 1, 'en', 'keyword1, keyword2, keyword3', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(125, 'posts', 'seo_title', 1, 'en', 'SEO Title', '2024-05-28 13:06:36', '2024-05-28 13:06:36'),
+(126, 'posts', 'title', 2, 'en', 'My Sample Post', '2024-05-28 13:08:55', '2024-05-28 13:08:55'),
+(127, 'posts', 'excerpt', 2, 'en', 'This is the excerpt for the sample Post', '2024-05-28 13:08:55', '2024-05-28 13:08:55'),
+(128, 'posts', 'body', 2, 'en', '<p>This is the body for the sample post, which includes the body.</p>\n<h2>We can use all kinds of format!</h2>\n<p>And include a bunch of other stuff.</p>', '2024-05-28 13:08:55', '2024-05-28 13:08:55'),
+(129, 'posts', 'slug', 2, 'en', 'my-sample-post', '2024-05-28 13:08:55', '2024-05-28 13:08:55'),
+(130, 'posts', 'meta_description', 2, 'en', 'Meta Description for sample post', '2024-05-28 13:08:55', '2024-05-28 13:08:55'),
+(131, 'posts', 'meta_keywords', 2, 'en', 'keyword1, keyword2, keyword3', '2024-05-28 13:08:55', '2024-05-28 13:08:55'),
+(132, 'posts', 'title', 4, 'en', 'Yarr Post', '2024-05-28 13:15:05', '2024-05-28 13:15:05'),
+(133, 'posts', 'excerpt', 4, 'en', 'Reef sails nipperkin bring a spring upon her cable coffer jury mast spike marooned Pieces of Eight poop deck pillage. Clipper driver coxswain galleon hempen halter come about pressgang gangplank boatswain swing the lead. Nipperkin yard skysail swab lanyard Blimey bilge water ho quarter Buccaneer.', '2024-05-28 13:15:05', '2024-05-28 13:15:05'),
+(134, 'posts', 'body', 4, 'en', '<p>Swab deadlights Buccaneer fire ship square-rigged dance the hempen jig weigh anchor cackle fruit grog furl. Crack Jennys tea cup chase guns pressgang hearties spirits hogshead Gold Road six pounders fathom measured fer yer chains. Main sheet provost come about trysail barkadeer crimp scuttle mizzenmast brig plunder.</p>\n<p>Mizzen league keelhaul galleon tender cog chase Barbary Coast doubloon crack Jennys tea cup. Blow the man down lugsail fire ship pinnace cackle fruit line warp Admiral of the Black strike colors doubloon. Tackle Jack Ketch come about crimp rum draft scuppers run a shot across the bow haul wind maroon.</p>\n<p>Interloper heave down list driver pressgang holystone scuppers tackle scallywag bilged on her anchor. Jack Tar interloper draught grapple mizzenmast hulk knave cable transom hogshead. Gaff pillage to go on account grog aft chase guns piracy yardarm knave clap of thunder.</p>', '2024-05-28 13:15:05', '2024-05-28 13:15:05'),
+(135, 'posts', 'slug', 4, 'en', 'yarr-post', '2024-05-28 13:15:05', '2024-05-28 13:15:05'),
+(136, 'posts', 'meta_description', 4, 'en', 'this be a meta descript', '2024-05-28 13:15:05', '2024-05-28 13:15:05'),
+(137, 'posts', 'meta_keywords', 4, 'en', 'Reef sails, Clipper driver, Buccaneer', '2024-05-28 13:15:05', '2024-05-28 13:15:05'),
+(138, 'posts', 'title', 3, 'en', 'Latest Post', '2024-05-28 13:17:19', '2024-05-28 13:17:19'),
+(139, 'posts', 'excerpt', 3, 'en', 'This is the excerpt for the latest post', '2024-05-28 13:17:19', '2024-05-28 13:17:19'),
+(140, 'posts', 'body', 3, 'en', '<p>This is the body for the latest post</p>', '2024-05-28 13:17:19', '2024-05-28 13:17:19'),
+(141, 'posts', 'slug', 3, 'en', 'latest-post', '2024-05-28 13:17:19', '2024-05-28 13:17:19'),
+(142, 'posts', 'meta_description', 3, 'en', 'This is the meta description', '2024-05-28 13:17:19', '2024-05-28 13:17:19'),
+(143, 'posts', 'meta_keywords', 3, 'en', 'keyword1, keyword2, keyword3', '2024-05-28 13:17:19', '2024-05-28 13:17:19'),
+(144, 'data_rows', 'display_name', 60, 'en', 'categories', '2024-05-28 13:40:02', '2024-05-28 13:40:02'),
+(145, 'data_rows', 'display_name', 61, 'en', 'Hit', '2024-05-28 13:52:37', '2024-05-28 13:52:37'),
+(146, 'menu_items', 'title', 6, 'en', 'Menu Builder', '2024-05-28 14:50:15', '2024-05-28 14:50:15'),
+(147, 'menu_items', 'title', 8, 'en', 'Compass', '2024-05-28 14:50:40', '2024-05-28 14:50:40');
 
 -- --------------------------------------------------------
 
@@ -667,7 +759,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Admin', 'admin@admin.com', 'users/default.png', NULL, '$2y$12$KDpWyrE3IqKonspgRbf84edxXEFoSCoOCNyErjs3rpIHhvE4sJXNm', '8zousC5svHFRb9LCcG7mBKrGdY1cMCXFNbxwwsPn4RCa9qWBt0LTcVHArpak', '{\"locale\":\"tr\"}', '2024-05-25 07:21:47', '2024-05-25 15:25:43');
+(1, 1, 'Admin', 'admin@admin.com', 'users/default.png', NULL, '$2y$12$hGqVoNWGJNa5.H81u93vB.G6CX.bv.6QT91eGboFt4IKO1L72YKwO', 'cOm2NzUmXFbnGqKKsuQXQ964XiqVzzfsBnEg5SZgjymNJ0G9SDO3NQcM3DLx', '{\"locale\":\"tr\"}', '2024-05-25 07:21:47', '2024-05-28 11:37:02');
 
 -- --------------------------------------------------------
 
@@ -828,7 +920,7 @@ ALTER TABLE `categories`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
@@ -900,7 +992,7 @@ ALTER TABLE `settings`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
