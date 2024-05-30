@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 28 May 2024, 15:57:45
+-- Üretim Zamanı: 30 May 2024, 16:24:17
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Veritabanı: `laravel_voyager`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `catalogs`
+--
+
+CREATE TABLE `catalogs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `featured` tinyint(4) NOT NULL DEFAULT '0',
+  `hit` int(11) DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `catalogs`
+--
+
+INSERT INTO `catalogs` (`id`, `title`, `slug`, `image`, `featured`, `hit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Katalog 1', 'katalog-1', 'catalogs/May2024/C3wyVnpWPPOtKbqVKxlo.png', 1, 0, 1, '2024-05-30 14:56:06', '2024-05-30 14:56:06', NULL),
+(2, 'Katalog 2', 'katalog-2', 'catalogs/May2024/WAYkmotzBv8J2PZP7jMj.png', 1, 0, 1, '2024-05-30 14:56:31', '2024-05-30 14:56:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -74,16 +101,16 @@ CREATE TABLE `data_rows` (
 
 INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, `required`, `browse`, `read`, `edit`, `add`, `delete`, `details`, `order`) VALUES
 (1, 1, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
-(2, 1, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
-(3, 1, 'email', 'text', 'Email', 1, 1, 1, 1, 1, 1, '{}', 3),
-(4, 1, 'password', 'password', 'Password', 1, 0, 0, 1, 1, 0, '{}', 4),
-(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, '{}', 5),
-(6, 1, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 0, 0, 0, '{}', 6),
-(7, 1, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 7),
-(8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, '{}', 8),
-(9, 1, 'user_belongsto_role_relationship', 'relationship', 'Role', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":\"0\",\"taggable\":\"0\"}', 10),
-(10, 1, 'user_belongstomany_role_relationship', 'relationship', 'Roles', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}', 11),
-(11, 1, 'settings', 'hidden', 'Settings', 0, 0, 0, 0, 0, 0, '{}', 12),
+(2, 1, 'name', 'text', 'Ad', 1, 1, 1, 1, 1, 1, '{}', 2),
+(3, 1, 'email', 'text', 'E-posta', 1, 1, 1, 1, 1, 1, '{}', 3),
+(4, 1, 'password', 'password', 'Şifre', 1, 0, 0, 1, 1, 0, '{}', 4),
+(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, '{}', 10),
+(6, 1, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 12),
+(7, 1, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 0, 0, 0, 0, '{}', 13),
+(8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, '{}', 5),
+(9, 1, 'user_belongsto_role_relationship', 'relationship', 'Rol', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7),
+(10, 1, 'user_belongstomany_role_relationship', 'relationship', 'Roller', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}', 8),
+(11, 1, 'settings', 'hidden', 'Ayarlar', 0, 0, 0, 0, 0, 0, '{}', 11),
 (12, 2, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
 (13, 2, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
 (14, 2, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, '{}', 3),
@@ -93,7 +120,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (18, 3, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, '{}', 3),
 (19, 3, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 4),
 (20, 3, 'display_name', 'text', 'Display Name', 1, 1, 1, 1, 1, 1, '{}', 5),
-(21, 1, 'role_id', 'text', 'Role', 0, 1, 1, 1, 1, 1, '{}', 9),
+(21, 1, 'role_id', 'text', 'Rol', 0, 1, 1, 1, 1, 1, '{}', 6),
 (22, 4, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
 (23, 4, 'parent_id', 'select_dropdown', 'Üst Kategori', 0, 0, 1, 1, 1, 1, '{\"default\":\"\",\"null\":\"\",\"options\":{\"\":\"-- None --\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\"}}', 2),
 (24, 4, 'order', 'text', 'Sıra', 1, 1, 1, 1, 1, 1, '{\"default\":1}', 5),
@@ -119,21 +146,31 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (44, 6, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
 (45, 6, 'author_id', 'text', 'Yazar', 1, 0, 0, 0, 0, 0, '{}', 2),
 (46, 6, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 3),
-(47, 6, 'excerpt', 'text_area', 'Excerpt', 0, 0, 1, 1, 1, 1, '{}', 4),
-(48, 6, 'body', 'rich_text_box', 'İçerik', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\"}}', 5),
-(49, 6, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}', 6),
-(50, 6, 'meta_description', 'text', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"max:160\"}}', 7),
-(51, 6, 'meta_keywords', 'text', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{}', 8),
-(52, 6, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"Pasif\",\"ACTIVE\":\"Aktif\"}}', 9),
-(53, 6, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 10),
-(54, 6, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 11),
-(55, 6, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 12),
+(47, 6, 'excerpt', 'text_area', 'Excerpt', 0, 0, 1, 1, 1, 1, '{}', 5),
+(48, 6, 'body', 'rich_text_box', 'İçerik', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\"}}', 6),
+(49, 6, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}', 4),
+(50, 6, 'meta_description', 'text', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"max:160\"}}', 8),
+(51, 6, 'meta_keywords', 'text', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{}', 9),
+(52, 6, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"Pasif\",\"ACTIVE\":\"Aktif\"}}', 10),
+(53, 6, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 11),
+(54, 6, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 12),
+(55, 6, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 7),
 (56, 4, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 8),
-(57, 5, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 19),
-(58, 1, 'email_verified_at', 'timestamp', 'Email Verified At', 0, 1, 1, 1, 1, 1, '{}', 6),
+(57, 5, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 19),
+(58, 1, 'email_verified_at', 'timestamp', 'E-posta Doğrulama Tarihi', 0, 1, 1, 1, 1, 1, '{}', 9),
 (59, 5, 'post_belongsto_user_relationship', 'relationship', 'Yazar', 1, 1, 1, 1, 1, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
 (60, 5, 'post_belongsto_category_relationship', 'relationship', 'Kategori', 1, 1, 1, 0, 0, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"category_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 4),
-(61, 5, 'hit', 'number', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15);
+(61, 5, 'hit', 'number', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15),
+(62, 7, 'id', 'number', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(63, 7, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 2),
+(64, 7, 'slug', 'text', 'Slug', 1, 1, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:catalogs,slug\"}}', 3),
+(65, 7, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"250\",\"height\":\"300\"}}]}', 4),
+(66, 7, 'featured', 'checkbox', 'Öne Çıkanlar', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 5),
+(67, 7, 'hit', 'number', 'Görüntülenme', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 6),
+(68, 7, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 7),
+(69, 7, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 8),
+(70, 7, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 9),
+(71, 7, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 10);
 
 -- --------------------------------------------------------
 
@@ -164,12 +201,13 @@ CREATE TABLE `data_types` (
 --
 
 INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `display_name_plural`, `icon`, `model_name`, `policy_name`, `controller`, `description`, `generate_permissions`, `server_side`, `details`, `created_at`, `updated_at`) VALUES
-(1, 'users', 'users', 'Kullanıcı', 'Kullanıcılar', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:34:31'),
+(1, 'users', 'users', 'Kullanıcı', 'Kullanıcılar', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-30 10:47:45'),
 (2, 'menus', 'menus', 'Menü', 'Menüler', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:18:46'),
 (3, 'roles', 'roles', 'Rol', 'Roller', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:37:41'),
 (4, 'categories', 'categories', 'Kategori', 'Kategoriler', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, NULL, 'Deneme kategori tanımı', 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:52:59'),
-(5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:51:11'),
-(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:52:53');
+(5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-30 14:47:27'),
+(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-30 12:35:06'),
+(7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-05-30 16:15:13');
 
 -- --------------------------------------------------------
 
@@ -206,7 +244,7 @@ CREATE TABLE `menus` (
 
 INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '2024-05-25 07:13:16', '2024-05-25 07:13:16'),
-(2, 'deneme-menu', '2024-05-25 14:16:52', '2024-05-28 11:42:05');
+(2, 'site', '2024-05-25 14:16:52', '2024-05-30 12:14:42');
 
 -- --------------------------------------------------------
 
@@ -236,19 +274,20 @@ CREATE TABLE `menu_items` (
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Kontrol Paneli', '', '_self', 'voyager-boat', '#000000', NULL, 1, '2024-05-25 07:13:16', '2024-05-25 14:59:05', 'voyager.dashboard', 'null'),
-(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-05-28 15:56:43', 'voyager.media.index', 'null'),
-(3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-05-28 15:56:43', 'voyager.users.index', 'null'),
-(4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', NULL, 7, '2024-05-25 07:13:16', '2024-05-28 15:56:41', 'voyager.roles.index', 'null'),
-(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 9, '2024-05-25 07:13:16', '2024-05-28 14:48:25', NULL, ''),
+(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-05-30 13:23:15', 'voyager.media.index', 'null'),
+(3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', NULL, 7, '2024-05-25 07:13:16', '2024-05-30 13:23:15', 'voyager.users.index', 'null'),
+(4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', NULL, 8, '2024-05-25 07:13:16', '2024-05-30 13:23:15', 'voyager.roles.index', 'null'),
+(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 10, '2024-05-25 07:13:16', '2024-05-30 13:23:15', NULL, ''),
 (6, 1, 'Menü Oluşturucu', '', '_self', 'voyager-list', '#000000', 5, 1, '2024-05-25 07:13:16', '2024-05-28 14:50:15', 'voyager.menus.index', 'null'),
 (7, 1, 'Veritabanı', '', '_self', 'voyager-data', '#000000', 5, 2, '2024-05-25 07:13:16', '2024-05-28 11:48:13', 'voyager.database.index', 'null'),
 (8, 1, 'Pusula', '', '_self', 'voyager-compass', '#000000', 5, 3, '2024-05-25 07:13:16', '2024-05-28 14:50:40', 'voyager.compass.index', 'null'),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.bread.index', NULL),
-(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 8, '2024-05-25 07:13:16', '2024-05-28 14:48:34', 'voyager.settings.index', 'null'),
-(11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', NULL, 4, '2024-05-25 13:05:53', '2024-05-28 14:48:43', 'voyager.categories.index', 'null'),
+(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 9, '2024-05-25 07:13:16', '2024-05-30 13:23:15', 'voyager.settings.index', 'null'),
+(11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', NULL, 5, '2024-05-25 13:05:53', '2024-05-30 13:23:16', 'voyager.categories.index', 'null'),
 (12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', NULL, 3, '2024-05-25 13:05:53', '2024-05-28 14:48:43', 'voyager.posts.index', 'null'),
 (13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', NULL, 2, '2024-05-25 13:05:53', '2024-05-28 14:48:43', 'voyager.pages.index', 'null'),
-(14, 2, 'Deneme Item', 'deneme', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-28 11:44:42', NULL, '');
+(14, 2, 'Anasayfa', '', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-30 12:17:59', 'home', 'null'),
+(15, 1, 'Kataloglar', '', '_self', 'voyager-documentation', '#000000', NULL, 4, '2024-05-30 13:11:17', '2024-05-30 13:24:03', 'voyager.catalogs.index', 'null');
 
 -- --------------------------------------------------------
 
@@ -394,7 +433,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (37, 'read_pages', 'pages', '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
 (38, 'edit_pages', 'pages', '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
 (39, 'add_pages', 'pages', '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
-(40, 'delete_pages', 'pages', '2024-05-25 13:05:53', '2024-05-25 13:05:53');
+(40, 'delete_pages', 'pages', '2024-05-25 13:05:53', '2024-05-25 13:05:53'),
+(41, 'browse_catalogs', 'catalogs', '2024-05-30 13:11:17', '2024-05-30 13:11:17'),
+(42, 'read_catalogs', 'catalogs', '2024-05-30 13:11:17', '2024-05-30 13:11:17'),
+(43, 'edit_catalogs', 'catalogs', '2024-05-30 13:11:17', '2024-05-30 13:11:17'),
+(44, 'add_catalogs', 'catalogs', '2024-05-30 13:11:17', '2024-05-30 13:11:17'),
+(45, 'delete_catalogs', 'catalogs', '2024-05-30 13:11:17', '2024-05-30 13:11:17');
 
 -- --------------------------------------------------------
 
@@ -451,7 +495,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (37, 1),
 (38, 1),
 (39, 1),
-(40, 1);
+(40, 1),
+(41, 1),
+(42, 1),
+(43, 1),
+(44, 1),
+(45, 1);
 
 -- --------------------------------------------------------
 
@@ -631,7 +680,7 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (43, 'menu_items', 'title', 10, 'en', 'Settings', '2024-05-25 15:01:01', '2024-05-25 15:01:01'),
 (44, 'menu_items', 'title', 13, 'en', 'Pages', '2024-05-25 15:01:43', '2024-05-25 15:01:43'),
 (45, 'menu_items', 'title', 11, 'en', 'Categories', '2024-05-25 15:01:53', '2024-05-25 15:01:53'),
-(46, 'menu_items', 'title', 14, 'en', 'Test Item', '2024-05-25 15:16:55', '2024-05-28 11:44:54'),
+(46, 'menu_items', 'title', 14, 'en', 'Home', '2024-05-25 15:16:55', '2024-05-30 12:17:59'),
 (47, 'data_rows', 'display_name', 29, 'en', 'ID', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
 (48, 'data_rows', 'display_name', 30, 'en', 'Author', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
 (49, 'data_rows', 'display_name', 31, 'en', 'Category', '2024-05-26 12:39:45', '2024-05-26 12:39:45'),
@@ -732,7 +781,25 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (144, 'data_rows', 'display_name', 60, 'en', 'categories', '2024-05-28 13:40:02', '2024-05-28 13:40:02'),
 (145, 'data_rows', 'display_name', 61, 'en', 'Hit', '2024-05-28 13:52:37', '2024-05-28 13:52:37'),
 (146, 'menu_items', 'title', 6, 'en', 'Menu Builder', '2024-05-28 14:50:15', '2024-05-28 14:50:15'),
-(147, 'menu_items', 'title', 8, 'en', 'Compass', '2024-05-28 14:50:40', '2024-05-28 14:50:40');
+(147, 'menu_items', 'title', 8, 'en', 'Compass', '2024-05-28 14:50:40', '2024-05-28 14:50:40'),
+(148, 'data_rows', 'display_name', 58, 'en', 'Email Verified At', '2024-05-30 07:14:29', '2024-05-30 07:14:29'),
+(149, 'data_rows', 'display_name', 62, 'en', 'Id', '2024-05-30 13:11:34', '2024-05-30 13:11:34'),
+(150, 'data_rows', 'display_name', 63, 'en', 'Title', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(151, 'data_rows', 'display_name', 64, 'en', 'Slug', '2024-05-30 13:11:34', '2024-05-30 13:11:34'),
+(152, 'data_rows', 'display_name', 65, 'en', 'Image', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(153, 'data_rows', 'display_name', 66, 'en', 'Featured', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(154, 'data_rows', 'display_name', 67, 'en', 'Hit', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(155, 'data_rows', 'display_name', 68, 'en', 'Status', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(156, 'data_rows', 'display_name', 69, 'en', 'Created At', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(157, 'data_rows', 'display_name', 70, 'en', 'Updated At', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(158, 'data_rows', 'display_name', 71, 'en', 'Deleted At', '2024-05-30 13:11:34', '2024-05-30 14:42:29'),
+(159, 'data_types', 'display_name_singular', 7, 'en', 'Catalog', '2024-05-30 13:11:34', '2024-05-30 13:11:34'),
+(160, 'data_types', 'display_name_plural', 7, 'en', 'Catalogs', '2024-05-30 13:11:34', '2024-05-30 13:11:34'),
+(161, 'menu_items', 'title', 15, 'en', 'Catalogs', '2024-05-30 13:24:03', '2024-05-30 13:24:03'),
+(162, 'catalogs', 'title', 1, 'en', 'Catalog 1', '2024-05-30 14:56:06', '2024-05-30 14:56:06'),
+(163, 'catalogs', 'slug', 1, 'en', 'catalog-1', '2024-05-30 14:56:06', '2024-05-30 14:56:06'),
+(164, 'catalogs', 'title', 2, 'en', 'Catalog 2', '2024-05-30 14:56:31', '2024-05-30 14:56:31'),
+(165, 'catalogs', 'slug', 2, 'en', 'catalog-2', '2024-05-30 14:56:31', '2024-05-30 14:56:31');
 
 -- --------------------------------------------------------
 
@@ -759,7 +826,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Admin', 'admin@admin.com', 'users/default.png', NULL, '$2y$12$hGqVoNWGJNa5.H81u93vB.G6CX.bv.6QT91eGboFt4IKO1L72YKwO', 'cOm2NzUmXFbnGqKKsuQXQ964XiqVzzfsBnEg5SZgjymNJ0G9SDO3NQcM3DLx', '{\"locale\":\"tr\"}', '2024-05-25 07:21:47', '2024-05-28 11:37:02');
+(1, 1, 'Admin', 'admin@admin.com', 'users/default.png', NULL, '$2y$12$hGqVoNWGJNa5.H81u93vB.G6CX.bv.6QT91eGboFt4IKO1L72YKwO', 'NAaFB4UoIvymYzQr0svw5QuuunDvg6F2bsQdc9jeR7pxGNbcRx3QQK4ZEkVV', '{\"locale\":\"tr\"}', '2024-05-25 07:21:47', '2024-05-28 11:37:02'),
+(2, 2, 'User', 'user@user.com', 'users/default.png', NULL, '$2y$12$rX.ISptVFOTL.crMksfU6uA2dRldtphvov7R.2ZJwI8hmlRndOSa2', NULL, '{\"locale\":\"tr\"}', '2024-05-30 07:30:57', '2024-05-30 07:30:57');
 
 -- --------------------------------------------------------
 
@@ -773,8 +841,22 @@ CREATE TABLE `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Tablo döküm verisi `user_roles`
+--
+
+INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
+(2, 2);
+
+--
 -- Dökümü yapılmış tablolar için indeksler
 --
+
+--
+-- Tablo için indeksler `catalogs`
+--
+ALTER TABLE `catalogs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `catalogs_slug_unique` (`slug`);
 
 --
 -- Tablo için indeksler `categories`
@@ -911,6 +993,12 @@ ALTER TABLE `user_roles`
 --
 
 --
+-- Tablo için AUTO_INCREMENT değeri `catalogs`
+--
+ALTER TABLE `catalogs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `categories`
 --
 ALTER TABLE `categories`
@@ -920,13 +1008,13 @@ ALTER TABLE `categories`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `failed_jobs`
@@ -944,7 +1032,7 @@ ALTER TABLE `menus`
 -- Tablo için AUTO_INCREMENT değeri `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `migrations`
@@ -962,7 +1050,7 @@ ALTER TABLE `pages`
 -- Tablo için AUTO_INCREMENT değeri `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `personal_access_tokens`
@@ -992,13 +1080,13 @@ ALTER TABLE `settings`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
