@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 01 Haz 2024, 06:25:54
+-- Üretim Zamanı: 02 Haz 2024, 11:30:37
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -99,6 +99,38 @@ CREATE TABLE `contact_messages` (
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `phone`, `company`, `subject`, `message`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Berkan TEST', 'berkan@test.com', '05123456789', 'Test Company', 'Test Subject', 'Test message', 'PENDING', '2024-06-01 02:48:58', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `currencies`
+--
+
+CREATE TABLE `currencies` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `forex_buying` decimal(10,0) DEFAULT '0',
+  `forex_selling` decimal(10,0) DEFAULT '0',
+  `banknote_buying` decimal(10,0) DEFAULT '0',
+  `banknote_selling` decimal(10,0) DEFAULT '0',
+  `source_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `source_no` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `currencies`
+--
+
+INSERT INTO `currencies` (`id`, `name`, `code`, `forex_buying`, `forex_selling`, `banknote_buying`, `banknote_selling`, `source_at`, `source_no`, `sort`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Türk Lirası', 'TRY', NULL, NULL, NULL, NULL, '2024-06-02 11:27:58', NULL, 1, 1, '2024-06-02 11:27:58', '2024-06-02 11:27:58', NULL),
+(2, 'US Dollar', 'USD', NULL, NULL, NULL, NULL, '2024-06-02 11:28:28', NULL, 2, 1, '2024-06-02 11:28:28', '2024-06-02 11:28:28', NULL),
+(3, 'Euro', 'EUR', NULL, NULL, NULL, NULL, '2024-06-02 11:28:42', NULL, 3, 1, '2024-06-02 11:28:42', '2024-06-02 11:28:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -227,7 +259,21 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (98, 9, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 0, 1, '{\"default\":\"PENDING\",\"options\":{\"PENDING\":\"bekliyor\",\"VIEWED\":\"g\\u00f6r\\u00fcnt\\u00fclendi\",\"RESPONDED\":\"yan\\u0131t verildi\"}}', 8),
 (99, 9, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 9),
 (100, 9, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 10),
-(101, 9, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11);
+(101, 9, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11),
+(102, 10, 'id', 'number', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(103, 10, 'name', 'text', 'Ad', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:50\"}}', 2),
+(104, 10, 'code', 'text', 'Kod', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:5\"}}', 3),
+(105, 10, 'forex_buying', 'text', 'Döviz Alış', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 4),
+(106, 10, 'forex_selling', 'text', 'Döviz Satış', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 5),
+(107, 10, 'banknote_buying', 'text', 'Efektif Alış', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 6),
+(108, 10, 'banknote_selling', 'text', 'Efektif Satış', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 7),
+(109, 10, 'source_at', 'timestamp', 'Kaynak Tarih', 1, 1, 1, 0, 0, 0, '{}', 8),
+(110, 10, 'source_no', 'text', 'Kaynak No', 0, 1, 1, 0, 0, 0, '{}', 9),
+(111, 10, 'sort', 'number', 'Sıra', 0, 1, 1, 1, 1, 1, '{}', 10),
+(112, 10, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{}', 11),
+(113, 10, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 12),
+(114, 10, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 13),
+(115, 10, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 14);
 
 -- --------------------------------------------------------
 
@@ -266,7 +312,8 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-30 12:35:06'),
 (7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-05-30 16:15:13'),
 (8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-05-31 11:40:13'),
-(9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-05-31 23:54:02');
+(9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-05-31 23:54:02'),
+(10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-02 11:30:01');
 
 -- --------------------------------------------------------
 
@@ -333,24 +380,25 @@ CREATE TABLE `menu_items` (
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Kontrol Paneli', '', '_self', 'voyager-boat', '#000000', NULL, 1, '2024-05-25 07:13:16', '2024-05-25 14:59:05', 'voyager.dashboard', 'null'),
-(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 4, '2024-05-25 07:13:16', '2024-05-31 23:43:46', 'voyager.media.index', 'null'),
+(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-06-02 11:19:43', 'voyager.media.index', 'null'),
 (3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', 16, 1, '2024-05-25 07:13:16', '2024-05-31 11:05:07', 'voyager.users.index', 'null'),
 (4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', 16, 2, '2024-05-25 07:13:16', '2024-05-31 11:05:07', 'voyager.roles.index', 'null'),
-(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 7, '2024-05-25 07:13:16', '2024-05-31 23:43:46', NULL, ''),
+(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 8, '2024-05-25 07:13:16', '2024-06-02 11:19:43', NULL, ''),
 (6, 1, 'Menü Oluşturucu', '', '_self', 'voyager-list', '#000000', 5, 1, '2024-05-25 07:13:16', '2024-05-28 14:50:15', 'voyager.menus.index', 'null'),
 (7, 1, 'Veritabanı', '', '_self', 'voyager-data', '#000000', 5, 2, '2024-05-25 07:13:16', '2024-05-28 11:48:13', 'voyager.database.index', 'null'),
 (8, 1, 'Pusula', '', '_self', 'voyager-compass', '#000000', 5, 3, '2024-05-25 07:13:16', '2024-05-28 14:50:40', 'voyager.compass.index', 'null'),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.bread.index', NULL),
-(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-05-31 23:43:46', 'voyager.settings.index', 'null'),
+(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-06-02 11:19:43', 'voyager.settings.index', 'null'),
 (11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', 17, 5, '2024-05-25 13:05:53', '2024-05-31 11:34:06', 'voyager.categories.index', 'null'),
 (12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', 17, 2, '2024-05-25 13:05:53', '2024-05-31 11:09:45', 'voyager.posts.index', 'null'),
 (13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', 17, 1, '2024-05-25 13:05:53', '2024-05-31 11:09:38', 'voyager.pages.index', 'null'),
 (14, 2, 'Anasayfa', '', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-30 12:17:59', 'home', 'null'),
 (15, 1, 'Kataloglar', '', '_self', 'voyager-documentation', '#000000', 17, 3, '2024-05-30 13:11:17', '2024-05-31 11:09:48', 'voyager.catalogs.index', 'null'),
-(16, 1, 'Yetki', '', '_self', 'voyager-people', '#000000', NULL, 6, '2024-05-31 11:04:45', '2024-05-31 23:43:46', NULL, ''),
+(16, 1, 'Yetki', '', '_self', 'voyager-people', '#000000', NULL, 7, '2024-05-31 11:04:45', '2024-06-02 11:19:43', NULL, ''),
 (17, 1, 'İçerikler', '', '_self', 'voyager-file-code', '#000000', NULL, 2, '2024-05-31 11:09:24', '2024-05-31 11:09:52', NULL, ''),
 (18, 1, 'Haberler', '', '_self', 'voyager-news', '#000000', 17, 4, '2024-05-31 11:28:31', '2024-05-31 11:34:06', 'voyager.news.index', 'null'),
-(19, 1, 'İletişim Mesajları', '', '_self', 'voyager-mail', '#000000', NULL, 3, '2024-05-31 23:40:10', '2024-05-31 23:43:46', 'voyager.contact-messages.index', 'null');
+(19, 1, 'İletişim Mesajları', '', '_self', 'voyager-mail', '#000000', NULL, 3, '2024-05-31 23:40:10', '2024-05-31 23:43:46', 'voyager.contact-messages.index', 'null'),
+(20, 1, 'Para Birimleri', '', '_self', 'voyager-credit-cards', '#000000', NULL, 4, '2024-06-02 11:17:10', '2024-06-02 11:19:43', 'voyager.currencies.index', 'null');
 
 -- --------------------------------------------------------
 
@@ -545,7 +593,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (52, 'read_contact_messages', 'contact_messages', '2024-05-31 23:40:10', '2024-05-31 23:40:10'),
 (53, 'edit_contact_messages', 'contact_messages', '2024-05-31 23:40:10', '2024-05-31 23:40:10'),
 (54, 'add_contact_messages', 'contact_messages', '2024-05-31 23:40:10', '2024-05-31 23:40:10'),
-(55, 'delete_contact_messages', 'contact_messages', '2024-05-31 23:40:10', '2024-05-31 23:40:10');
+(55, 'delete_contact_messages', 'contact_messages', '2024-05-31 23:40:10', '2024-05-31 23:40:10'),
+(56, 'browse_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
+(57, 'read_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
+(58, 'edit_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
+(59, 'add_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
+(60, 'delete_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10');
 
 -- --------------------------------------------------------
 
@@ -616,7 +669,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (51, 1),
 (52, 1),
 (53, 1),
-(55, 1);
+(55, 1),
+(56, 1),
+(57, 1),
+(58, 1),
+(59, 1),
+(60, 1);
 
 -- --------------------------------------------------------
 
@@ -965,7 +1023,24 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (212, 'data_rows', 'display_name', 101, 'en', 'Deleted At', '2024-05-31 23:41:12', '2024-05-31 23:41:12'),
 (213, 'data_types', 'display_name_singular', 9, 'en', 'Contact Message', '2024-05-31 23:41:12', '2024-05-31 23:41:12'),
 (214, 'data_types', 'display_name_plural', 9, 'en', 'Contact Messages', '2024-05-31 23:41:12', '2024-05-31 23:41:12'),
-(215, 'menu_items', 'title', 19, 'en', 'Contact Messages', '2024-05-31 23:43:36', '2024-05-31 23:43:36');
+(215, 'menu_items', 'title', 19, 'en', 'Contact Messages', '2024-05-31 23:43:36', '2024-05-31 23:43:36'),
+(216, 'menu_items', 'title', 20, 'en', 'Currencies', '2024-06-02 11:19:31', '2024-06-02 11:19:31'),
+(217, 'data_rows', 'display_name', 102, 'en', 'Id', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(218, 'data_rows', 'display_name', 103, 'en', 'Name', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(219, 'data_rows', 'display_name', 104, 'en', 'Code', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(220, 'data_rows', 'display_name', 105, 'en', 'Forex Buying', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(221, 'data_rows', 'display_name', 106, 'en', 'Forex Selling', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(222, 'data_rows', 'display_name', 107, 'en', 'Banknote Buying', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(223, 'data_rows', 'display_name', 108, 'en', 'Banknote Selling', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(224, 'data_rows', 'display_name', 109, 'en', 'Source At', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(225, 'data_rows', 'display_name', 110, 'en', 'Source No', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(226, 'data_rows', 'display_name', 111, 'en', 'Sort', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(227, 'data_rows', 'display_name', 112, 'en', 'Status', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(228, 'data_rows', 'display_name', 113, 'en', 'Created At', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(229, 'data_rows', 'display_name', 114, 'en', 'Updated At', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(230, 'data_rows', 'display_name', 115, 'en', 'Deleted At', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(231, 'data_types', 'display_name_singular', 10, 'en', 'Currency', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(232, 'data_types', 'display_name_plural', 10, 'en', 'Currencies', '2024-06-02 11:22:51', '2024-06-02 11:22:51');
 
 -- --------------------------------------------------------
 
@@ -1036,6 +1111,12 @@ ALTER TABLE `categories`
 -- Tablo için indeksler `contact_messages`
 --
 ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `currencies`
+--
+ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1190,16 +1271,22 @@ ALTER TABLE `contact_messages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `currencies`
+--
+ALTER TABLE `currencies`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `failed_jobs`
@@ -1217,7 +1304,7 @@ ALTER TABLE `menus`
 -- Tablo için AUTO_INCREMENT değeri `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `migrations`
@@ -1241,7 +1328,7 @@ ALTER TABLE `pages`
 -- Tablo için AUTO_INCREMENT değeri `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `personal_access_tokens`
@@ -1271,7 +1358,7 @@ ALTER TABLE `settings`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
