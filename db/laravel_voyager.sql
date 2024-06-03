@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 02 Haz 2024, 11:30:37
+-- Üretim Zamanı: 03 Haz 2024, 08:26:14
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -273,7 +273,16 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (112, 10, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{}', 11),
 (113, 10, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 12),
 (114, 10, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 13),
-(115, 10, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 14);
+(115, 10, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 14),
+(116, 11, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(117, 11, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 2),
+(118, 11, 'slug', 'text', 'Slug', 1, 1, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:qualities,slug\"}}', 3),
+(119, 11, 'content', 'rich_text_box', 'İçerik', 0, 1, 1, 1, 1, 1, '{}', 5),
+(120, 11, 'hit', 'number', 'Hit', 1, 1, 1, 0, 0, 0, '{\"default\":0}', 6),
+(121, 11, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 7),
+(122, 11, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 8),
+(123, 11, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 9),
+(124, 11, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 4);
 
 -- --------------------------------------------------------
 
@@ -313,7 +322,8 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-05-30 16:15:13'),
 (8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-05-31 11:40:13'),
 (9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-05-31 23:54:02'),
-(10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-02 11:30:01');
+(10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-02 11:30:01'),
+(11, 'qualities', 'qualities', 'Kalite', 'Kaliteler', 'voyager-documentation', 'App\\Models\\Quality', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-03 07:54:08', '2024-06-03 08:14:44');
 
 -- --------------------------------------------------------
 
@@ -389,7 +399,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (8, 1, 'Pusula', '', '_self', 'voyager-compass', '#000000', 5, 3, '2024-05-25 07:13:16', '2024-05-28 14:50:40', 'voyager.compass.index', 'null'),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.bread.index', NULL),
 (10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-06-02 11:19:43', 'voyager.settings.index', 'null'),
-(11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', 17, 5, '2024-05-25 13:05:53', '2024-05-31 11:34:06', 'voyager.categories.index', 'null'),
+(11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', 17, 6, '2024-05-25 13:05:53', '2024-06-03 08:10:47', 'voyager.categories.index', 'null'),
 (12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', 17, 2, '2024-05-25 13:05:53', '2024-05-31 11:09:45', 'voyager.posts.index', 'null'),
 (13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', 17, 1, '2024-05-25 13:05:53', '2024-05-31 11:09:38', 'voyager.pages.index', 'null'),
 (14, 2, 'Anasayfa', '', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-30 12:17:59', 'home', 'null'),
@@ -398,7 +408,8 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (17, 1, 'İçerikler', '', '_self', 'voyager-file-code', '#000000', NULL, 2, '2024-05-31 11:09:24', '2024-05-31 11:09:52', NULL, ''),
 (18, 1, 'Haberler', '', '_self', 'voyager-news', '#000000', 17, 4, '2024-05-31 11:28:31', '2024-05-31 11:34:06', 'voyager.news.index', 'null'),
 (19, 1, 'İletişim Mesajları', '', '_self', 'voyager-mail', '#000000', NULL, 3, '2024-05-31 23:40:10', '2024-05-31 23:43:46', 'voyager.contact-messages.index', 'null'),
-(20, 1, 'Para Birimleri', '', '_self', 'voyager-credit-cards', '#000000', NULL, 4, '2024-06-02 11:17:10', '2024-06-02 11:19:43', 'voyager.currencies.index', 'null');
+(20, 1, 'Para Birimleri', '', '_self', 'voyager-credit-cards', '#000000', NULL, 4, '2024-06-02 11:17:10', '2024-06-02 11:19:43', 'voyager.currencies.index', 'null'),
+(21, 1, 'Kaliteler', '', '_self', 'voyager-documentation', '#000000', 17, 5, '2024-06-03 07:54:09', '2024-06-03 08:11:14', 'voyager.qualities.index', 'null');
 
 -- --------------------------------------------------------
 
@@ -598,7 +609,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (57, 'read_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
 (58, 'edit_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
 (59, 'add_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
-(60, 'delete_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10');
+(60, 'delete_currencies', 'currencies', '2024-06-02 11:17:10', '2024-06-02 11:17:10'),
+(61, 'browse_qualities', 'qualities', '2024-06-03 07:54:09', '2024-06-03 07:54:09'),
+(62, 'read_qualities', 'qualities', '2024-06-03 07:54:09', '2024-06-03 07:54:09'),
+(63, 'edit_qualities', 'qualities', '2024-06-03 07:54:09', '2024-06-03 07:54:09'),
+(64, 'add_qualities', 'qualities', '2024-06-03 07:54:09', '2024-06-03 07:54:09'),
+(65, 'delete_qualities', 'qualities', '2024-06-03 07:54:09', '2024-06-03 07:54:09');
 
 -- --------------------------------------------------------
 
@@ -674,7 +690,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (57, 1),
 (58, 1),
 (59, 1),
-(60, 1);
+(60, 1),
+(61, 1),
+(62, 1),
+(63, 1),
+(64, 1),
+(65, 1);
 
 -- --------------------------------------------------------
 
@@ -730,6 +751,32 @@ INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt
 (2, 1, 1, 'Örnek Yazı', 'ornek-yazi', 'Bu örnek yazının alıntısıdır', '<p>Bu, g&ouml;vdeyi i&ccedil;eren &ouml;rnek g&ouml;nderinin g&ouml;vdesidir.</p>\n<h2>Her t&uuml;rl&uuml; formatı kullanabiliriz!</h2>\n<p>Ve bir s&uuml;r&uuml; başka şey ekleyin.</p>', 'posts/post2.jpg', 'Örnek yazı için Meta Açıklama', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 0, 'PUBLISHED', '2024-05-25 13:05:54', '2024-05-28 13:15:42', NULL),
 (3, 1, 2, 'Son Yazı', 'son-yazi', 'Bu son yazının alıntısı', '<p>Bu son yazının i&ccedil;eriği</p>', 'posts/post3.jpg', 'Bu meta açıklamasıdır', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 0, 'PUBLISHED', '2024-05-25 13:05:55', '2024-05-28 13:17:19', NULL),
 (4, 1, 2, 'Yarr Yazısı', 'yarr-yazisi', 'Resif yelkenleri, kablo sandığının üzerine bir yay getiriyor, jüri direği sivri uçlu Sekiz Parçası kıç güvertesini yağmalıyor. Kırpıcı sürücüsü dümenci kalyon kenevir yular baskı çetesi ile geliyor çete kalasları tekneler liderliği sallıyor. Nipperkin yarda gök yelkeni sürüntü kordonu Blimey sintine suyu ho çeyrek Buccaneer.', '<p>Swab &ouml;l&uuml; ışıklar Korsan ateş gemisi kare te&ccedil;hizatlı dans kenevir jig\'i tartmak &ccedil;apa gevezelik meyve i&ccedil;eceği salkımı. Jenny\'nin &ccedil;ay fincanı kovalayan silahlar, kalplerin ruhları, fı&ccedil;ı kafalı Gold Road, zincirlerinize g&ouml;re &ouml;l&ccedil;&uuml;len altı poundluk kula&ccedil;. Ana ıskota vekili, yelkenli barkadeer kıvrımlı mizzenmast tugayı yağmalamaya &ccedil;alışıyor.</p>\n<p>Mizzen ligi keelhaul kalyon ihale dişli kovalamaca Berberi Sahili doublon Jenny\'nin &ccedil;ay bardağını kırdı. Adamı u&ccedil;urun yelkenli ateş gemisi pinnace kıkırdama meyve hattı warp Kara saldırı renkleri doubloon\'un amirali. Jack Ketch\'le m&uuml;cadele edin, kıvrımlı rom draft frengileri pruvada r&uuml;zgar kestane rengi bir atış yapın.</p>\n<p>Interloper listeyi aşağı &ccedil;ekiyor, s&uuml;r&uuml;c&uuml; kutsal taş frengisine basıyor ve &ccedil;apasındaki sintineli sintineyle m&uuml;cadele ediyor. Jack Tar araya giren taslak kıskacı mizzen direği hulk knave kablo kı&ccedil; yatırması fı&ccedil;ıbaşı. Gaff yağma, grog kı&ccedil;ını takip etmek i&ccedil;in silahları korsanlık yardarm d&uuml;zenbaz g&ouml;k g&uuml;r&uuml;lt&uuml;s&uuml; alkışını takip ediyor.</p>', 'posts/post4.jpg', 'bu bir meta açıklama olsun', 'Resif yelkenleri, Nipperkin yarda gök yelkeni, Buccaneer', '', 0, 0, 'PUBLISHED', '2024-05-25 13:05:56', '2024-05-28 13:15:05', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `qualities`
+--
+
+CREATE TABLE `qualities` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `hit` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `qualities`
+--
+
+INSERT INTO `qualities` (`id`, `title`, `slug`, `image`, `content`, `hit`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Kalite 1', 'kalite-1', 'qualities/June2024/aoumlLiXcFkRdhj3c6HK.png', '<p>Kalite 1 İ&ccedil;erik</p>', 0, '2024-06-03 08:18:08', '2024-06-03 08:18:08', NULL),
+(2, 'Kalite 2', 'kalite-2', 'qualities/June2024/2Evz1n3bd2WBgqYpECZ1.png', '<p>Kalite 2 İ&ccedil;erik</p>', 0, '2024-06-03 08:25:53', '2024-06-03 08:25:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -1040,7 +1087,25 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (229, 'data_rows', 'display_name', 114, 'en', 'Updated At', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
 (230, 'data_rows', 'display_name', 115, 'en', 'Deleted At', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
 (231, 'data_types', 'display_name_singular', 10, 'en', 'Currency', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
-(232, 'data_types', 'display_name_plural', 10, 'en', 'Currencies', '2024-06-02 11:22:51', '2024-06-02 11:22:51');
+(232, 'data_types', 'display_name_plural', 10, 'en', 'Currencies', '2024-06-02 11:22:51', '2024-06-02 11:22:51'),
+(233, 'data_rows', 'display_name', 116, 'en', 'Id', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(234, 'data_rows', 'display_name', 117, 'en', 'Title', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(235, 'data_rows', 'display_name', 118, 'en', 'Slug', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(236, 'data_rows', 'display_name', 119, 'en', 'Content', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(237, 'data_rows', 'display_name', 120, 'en', 'Hit', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(238, 'data_rows', 'display_name', 121, 'en', 'Created At', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(239, 'data_rows', 'display_name', 122, 'en', 'Updated At', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(240, 'data_rows', 'display_name', 123, 'en', 'Deleted At', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(241, 'data_types', 'display_name_singular', 11, 'en', 'Quality', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(242, 'data_types', 'display_name_plural', 11, 'en', 'Qualities', '2024-06-03 08:08:57', '2024-06-03 08:08:57'),
+(243, 'menu_items', 'title', 21, 'en', 'Qualities', '2024-06-03 08:11:14', '2024-06-03 08:11:14'),
+(244, 'data_rows', 'display_name', 124, 'en', 'Image', '2024-06-03 08:14:44', '2024-06-03 08:14:44'),
+(245, 'qualities', 'title', 1, 'en', 'Quality 1', '2024-06-03 08:18:08', '2024-06-03 08:18:08'),
+(246, 'qualities', 'slug', 1, 'en', 'quality-1', '2024-06-03 08:18:08', '2024-06-03 08:18:08'),
+(247, 'qualities', 'content', 1, 'en', '<p>Quality 1 Content</p>', '2024-06-03 08:18:08', '2024-06-03 08:18:08'),
+(248, 'qualities', 'title', 2, 'en', 'Quality 2', '2024-06-03 08:25:53', '2024-06-03 08:25:53'),
+(249, 'qualities', 'slug', 2, 'en', 'quality-2', '2024-06-03 08:25:53', '2024-06-03 08:25:53'),
+(250, 'qualities', 'content', 2, 'en', '<p>Quality 2 Content</p>', '2024-06-03 08:25:53', '2024-06-03 08:25:53');
 
 -- --------------------------------------------------------
 
@@ -1212,6 +1277,13 @@ ALTER TABLE `posts`
   ADD UNIQUE KEY `posts_slug_unique` (`slug`);
 
 --
+-- Tablo için indeksler `qualities`
+--
+ALTER TABLE `qualities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `qualities_slug_unique` (`slug`);
+
+--
 -- Tablo için indeksler `roles`
 --
 ALTER TABLE `roles`
@@ -1280,13 +1352,13 @@ ALTER TABLE `currencies`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `failed_jobs`
@@ -1304,7 +1376,7 @@ ALTER TABLE `menus`
 -- Tablo için AUTO_INCREMENT değeri `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `migrations`
@@ -1328,7 +1400,7 @@ ALTER TABLE `pages`
 -- Tablo için AUTO_INCREMENT değeri `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `personal_access_tokens`
@@ -1341,6 +1413,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `qualities`
+--
+ALTER TABLE `qualities`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `roles`
@@ -1358,7 +1436,7 @@ ALTER TABLE `settings`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
