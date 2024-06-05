@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 04 Haz 2024, 15:40:46
+-- Üretim Zamanı: 05 Haz 2024, 15:16:01
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -35,7 +35,7 @@ CREATE TABLE `catalogs` (
   `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `featured` tinyint(4) NOT NULL DEFAULT '0',
   `hit` int(11) DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -61,6 +61,7 @@ CREATE TABLE `categories` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order` int(11) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -70,9 +71,9 @@ CREATE TABLE `categories` (
 -- Tablo döküm verisi `categories`
 --
 
-INSERT INTO `categories` (`id`, `parent_id`, `name`, `slug`, `order`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, 'Kategori 1', 'kategori-1', 1, '2024-05-25 13:05:53', '2024-05-25 13:12:35', NULL),
-(2, NULL, 'Kategori 2', 'kategori-2', 2, '2024-05-25 13:05:53', '2024-05-25 13:12:51', NULL);
+INSERT INTO `categories` (`id`, `parent_id`, `name`, `slug`, `order`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, 'Kategori 1', 'kategori-1', 1, 1, '2024-05-25 13:05:53', '2024-05-25 13:12:35', NULL),
+(2, NULL, 'Kategori 2', 'kategori-2', 2, 1, '2024-05-25 13:05:53', '2024-05-25 13:12:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,7 @@ CREATE TABLE `currencies` (
   `source_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `source_no` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sort` int(11) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -186,8 +187,8 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (24, 4, 'order', 'text', 'Sıra', 1, 1, 1, 1, 1, 1, '{\"default\":1}', 5),
 (25, 4, 'name', 'text', 'Ad', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 3),
 (26, 4, 'slug', 'text', 'Slug', 1, 1, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"name\",\"forceUpdate\":true},\"validation\":{\"rule\":\"required|max:255\"},\"description\":\"Bo\\u015f b\\u0131rak\\u0131lmas\\u0131 durumunda otomatik olarak olu\\u015fturulacakt\\u0131r.\"}', 4),
-(27, 4, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 6),
-(28, 4, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 7),
+(27, 4, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 7),
+(28, 4, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 8),
 (29, 5, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
 (30, 5, 'author_id', 'text', 'Yazar', 1, 1, 1, 1, 1, 0, '{\"validation\":{\"rule\":\"required\"}}', 2),
 (31, 5, 'category_id', 'text', 'Kategori', 0, 0, 0, 1, 1, 0, '{\"validation\":{\"rule\":\"required\"}}', 3),
@@ -198,7 +199,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (36, 5, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:posts,slug\"}}', 7),
 (37, 5, 'meta_description', 'text_area', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"null\":\"\",\"validation\":{\"rule\":\"max:160\"}}', 11),
 (38, 5, 'meta_keywords', 'text_area', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{\"null\":\"\"}', 12),
-(39, 5, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"yay\\u0131nland\\u0131\",\"DRAFT\":\"taslak\",\"PENDING\":\"bekliyor\"}}', 16),
+(39, 5, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"Yay\\u0131nland\\u0131\",\"DRAFT\":\"Taslak\",\"PENDING\":\"Bekliyor\"}}', 16),
 (40, 5, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 17),
 (41, 5, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 18),
 (42, 5, 'seo_title', 'text', 'SEO Başlık', 0, 0, 1, 1, 1, 1, '{\"null\":\"\"}', 13),
@@ -211,11 +212,11 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (49, 6, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}', 4),
 (50, 6, 'meta_description', 'text', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"max:160\"}}', 8),
 (51, 6, 'meta_keywords', 'text', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{}', 9),
-(52, 6, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"Pasif\",\"ACTIVE\":\"Aktif\"}}', 10),
+(52, 6, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 10),
 (53, 6, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 11),
 (54, 6, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 12),
 (55, 6, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 7),
-(56, 4, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 8),
+(56, 4, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 9),
 (57, 5, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 19),
 (58, 1, 'email_verified_at', 'timestamp', 'E-posta Doğrulama Tarihi', 0, 1, 1, 1, 1, 1, '{}', 9),
 (59, 5, 'post_belongsto_user_relationship', 'relationship', 'Yazar', 1, 1, 1, 1, 1, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
@@ -227,7 +228,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (65, 7, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"250\",\"height\":\"300\"}}]}', 4),
 (66, 7, 'featured', 'checkbox', 'Öne Çıkanlar', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 6),
 (67, 7, 'hit', 'number', 'Görüntülenme', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 7),
-(68, 7, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 8),
+(68, 7, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 8),
 (69, 7, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 9),
 (70, 7, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 10),
 (71, 7, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11),
@@ -243,8 +244,8 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (81, 8, 'meta_keywords', 'text_area', 'Anahtar Kelimeler', 0, 0, 1, 1, 1, 1, '{\"null\":\"\"}', 12),
 (82, 8, 'seo_title', 'text', 'SEO Başlık', 0, 0, 1, 1, 1, 1, '{\"null\":\"\"}', 13),
 (83, 8, 'featured', 'checkbox', 'Öne Çıkanlar', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 14),
-(84, 8, 'hit', 'text', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15),
-(85, 8, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"yay\\u0131nland\\u0131\",\"DRAFT\":\"taslak\",\"PENDING\":\"bekliyor\"}}', 16),
+(84, 8, 'hit', 'number', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15),
+(85, 8, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"Yay\\u0131nland\\u0131\",\"DRAFT\":\"Taslak\",\"PENDING\":\"Bekliyor\"}}', 16),
 (86, 8, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 17),
 (87, 8, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 18),
 (88, 8, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 19),
@@ -257,7 +258,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (95, 9, 'company', 'text', 'Firma', 0, 1, 1, 0, 0, 1, '{}', 5),
 (96, 9, 'subject', 'text', 'Konu', 1, 1, 1, 0, 0, 1, '{}', 6),
 (97, 9, 'message', 'rich_text_box', 'Mesaj', 1, 1, 1, 0, 0, 1, '{}', 7),
-(98, 9, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 0, 1, '{\"default\":\"PENDING\",\"options\":{\"PENDING\":\"bekliyor\",\"VIEWED\":\"g\\u00f6r\\u00fcnt\\u00fclendi\",\"RESPONDED\":\"yan\\u0131t verildi\"}}', 8),
+(98, 9, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 0, 1, '{\"default\":\"PENDING\",\"options\":{\"PENDING\":\"Bekliyor\",\"VIEWED\":\"G\\u00f6r\\u00fcnt\\u00fclendi\",\"RESPONDED\":\"Yan\\u0131t verildi\"}}', 8),
 (99, 9, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 9),
 (100, 9, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 10),
 (101, 9, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11),
@@ -271,7 +272,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (109, 10, 'source_at', 'timestamp', 'Kaynak Tarih', 1, 1, 1, 0, 0, 0, '{}', 8),
 (110, 10, 'source_no', 'text', 'Kaynak No', 0, 1, 1, 0, 0, 0, '{}', 9),
 (111, 10, 'sort', 'number', 'Sıra', 0, 1, 1, 1, 1, 1, '{}', 10),
-(112, 10, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{}', 11),
+(112, 10, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 11),
 (113, 10, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 12),
 (114, 10, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 13),
 (115, 10, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 14),
@@ -280,22 +281,35 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (118, 11, 'slug', 'text', 'Slug', 1, 1, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:qualities,slug\"}}', 3),
 (119, 11, 'content', 'rich_text_box', 'İçerik', 0, 1, 1, 1, 1, 1, '{}', 5),
 (120, 11, 'hit', 'number', 'Hit', 1, 1, 1, 0, 0, 0, '{\"default\":0}', 6),
-(121, 11, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 7),
-(122, 11, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 8),
-(123, 11, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 9),
-(124, 11, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 4),
+(121, 11, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 8),
+(122, 11, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 9),
+(123, 11, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 10),
+(124, 11, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{}', 4),
 (125, 7, 'file', 'file', 'Dosya', 0, 1, 1, 1, 1, 1, '{}', 5),
 (126, 12, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
 (127, 12, 'type', 'select_dropdown', 'Tür', 0, 1, 1, 1, 1, 1, '{\"default\":\"IMAGE\",\"options\":{\"IMAGE\":\"G\\u00f6rsel\",\"VIDEO\":\"Video\",\"EXTERNALVIDEOLINK\":\"Video linki\"}}', 2),
-(128, 12, 'media_name', 'media_picker', 'Media Name', 1, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1920\",\"height\":\"500\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"500\",\"height\":\"null\"}}]}', 3),
+(128, 12, 'media_name', 'media_picker', 'Medya', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1920\",\"height\":\"500\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"500\",\"height\":\"null\"}}]}', 3),
 (129, 12, 'title', 'text', 'Başlık', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 4),
 (130, 12, 'description', 'text', 'Açıklama', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 5),
 (131, 12, 'url', 'text', 'Url', 0, 1, 1, 1, 1, 1, '{\"null\":\"\"}', 6),
 (132, 12, 'sort', 'number', 'Sıra', 0, 1, 1, 1, 1, 1, '{}', 7),
-(133, 12, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":0}', 8),
+(133, 12, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 8),
 (134, 12, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 9),
 (135, 12, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 10),
-(136, 12, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11);
+(136, 12, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11),
+(137, 16, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(138, 16, 'name', 'text', 'Ad', 1, 1, 1, 1, 1, 1, '{}', 2),
+(139, 16, 'icon', 'text', 'Icon', 0, 1, 1, 1, 1, 1, '{\"description\":\"Font Awesome (eg: fa-brands fa-facebook)\"}', 3),
+(140, 16, 'link', 'text', 'Link', 0, 1, 1, 1, 1, 1, '{}', 4),
+(141, 16, 'description', 'text', 'Açıklama', 0, 1, 1, 1, 1, 1, '{}', 5),
+(142, 16, 'sort', 'number', 'Sıra', 0, 1, 1, 1, 1, 1, '{}', 6),
+(143, 16, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 7),
+(144, 16, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 8),
+(145, 16, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 9),
+(146, 16, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 10),
+(147, 11, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 7),
+(148, 4, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 6),
+(149, 6, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 13);
 
 -- --------------------------------------------------------
 
@@ -329,15 +343,16 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (1, 'users', 'users', 'Kullanıcı', 'Kullanıcılar', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-30 10:47:45'),
 (2, 'menus', 'menus', 'Menü', 'Menüler', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:18:46'),
 (3, 'roles', 'roles', 'Rol', 'Roller', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:37:41'),
-(4, 'categories', 'categories', 'Kategori', 'Kategoriler', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, NULL, 'Deneme kategori tanımı', 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-28 15:52:59'),
-(5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-30 14:47:27'),
-(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-05-30 12:35:06'),
-(7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-06-04 13:06:56'),
-(8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-05-31 11:40:13'),
-(9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-05-31 23:54:02'),
-(10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-02 11:30:01'),
-(11, 'qualities', 'qualities', 'Kalite', 'Kaliteler', 'voyager-documentation', 'App\\Models\\Quality', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-03 07:54:08', '2024-06-04 13:27:12'),
-(12, 'sliders', 'sliders', 'Slider', 'Sliders', 'voyager-images', 'App\\Models\\Slider', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"media_name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-04 14:01:13', '2024-06-04 14:35:25');
+(4, 'categories', 'categories', 'Kategori', 'Kategoriler', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, NULL, 'Deneme kategori tanımı', 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:51:33'),
+(5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:54:38'),
+(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:54:14'),
+(7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-06-05 14:51:21'),
+(8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-06-05 14:52:48'),
+(9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-06-05 14:52:03'),
+(10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-05 14:52:26'),
+(11, 'qualities', 'qualities', 'Kalite', 'Kaliteler', 'voyager-documentation', 'App\\Models\\Quality', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-03 07:54:08', '2024-06-05 14:55:31'),
+(12, 'sliders', 'sliders', 'Slider', 'Sliders', 'voyager-photos', 'App\\Models\\Slider', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"media_name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-04 14:01:13', '2024-06-05 14:56:11'),
+(16, 'social_media', 'social-media', 'Sosyal Medya', 'Sosyal Medya', 'voyager-sound', 'App\\Models\\SocialMedia', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-05 14:07:12', '2024-06-05 14:57:35');
 
 -- --------------------------------------------------------
 
@@ -407,24 +422,25 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-06-02 11:19:43', 'voyager.media.index', 'null'),
 (3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', 16, 1, '2024-05-25 07:13:16', '2024-05-31 11:05:07', 'voyager.users.index', 'null'),
 (4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', 16, 2, '2024-05-25 07:13:16', '2024-05-31 11:05:07', 'voyager.roles.index', 'null'),
-(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 8, '2024-05-25 07:13:16', '2024-06-02 11:19:43', NULL, ''),
+(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 9, '2024-05-25 07:13:16', '2024-06-05 14:02:26', NULL, ''),
 (6, 1, 'Menü Oluşturucu', '', '_self', 'voyager-list', '#000000', 5, 1, '2024-05-25 07:13:16', '2024-05-28 14:50:15', 'voyager.menus.index', 'null'),
 (7, 1, 'Veritabanı', '', '_self', 'voyager-data', '#000000', 5, 2, '2024-05-25 07:13:16', '2024-05-28 11:48:13', 'voyager.database.index', 'null'),
 (8, 1, 'Pusula', '', '_self', 'voyager-compass', '#000000', 5, 3, '2024-05-25 07:13:16', '2024-05-28 14:50:40', 'voyager.compass.index', 'null'),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.bread.index', NULL),
-(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-06-02 11:19:43', 'voyager.settings.index', 'null'),
+(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 7, '2024-05-25 07:13:16', '2024-06-05 14:02:26', 'voyager.settings.index', 'null'),
 (11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', 17, 7, '2024-05-25 13:05:53', '2024-06-04 14:21:52', 'voyager.categories.index', 'null'),
 (12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', 17, 2, '2024-05-25 13:05:53', '2024-05-31 11:09:45', 'voyager.posts.index', 'null'),
 (13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', 17, 1, '2024-05-25 13:05:53', '2024-05-31 11:09:38', 'voyager.pages.index', 'null'),
 (14, 2, 'Anasayfa', '', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-30 12:17:59', 'home', 'null'),
 (15, 1, 'Kataloglar', '', '_self', 'voyager-documentation', '#000000', 17, 3, '2024-05-30 13:11:17', '2024-05-31 11:09:48', 'voyager.catalogs.index', 'null'),
-(16, 1, 'Yetki', '', '_self', 'voyager-people', '#000000', NULL, 7, '2024-05-31 11:04:45', '2024-06-02 11:19:43', NULL, ''),
+(16, 1, 'Yetki', '', '_self', 'voyager-people', '#000000', NULL, 8, '2024-05-31 11:04:45', '2024-06-05 14:02:26', NULL, ''),
 (17, 1, 'İçerikler', '', '_self', 'voyager-file-code', '#000000', NULL, 2, '2024-05-31 11:09:24', '2024-05-31 11:09:52', NULL, ''),
 (18, 1, 'Haberler', '', '_self', 'voyager-news', '#000000', 17, 4, '2024-05-31 11:28:31', '2024-05-31 11:34:06', 'voyager.news.index', 'null'),
 (19, 1, 'İletişim Mesajları', '', '_self', 'voyager-mail', '#000000', NULL, 3, '2024-05-31 23:40:10', '2024-05-31 23:43:46', 'voyager.contact-messages.index', 'null'),
 (20, 1, 'Para Birimleri', '', '_self', 'voyager-credit-cards', '#000000', NULL, 4, '2024-06-02 11:17:10', '2024-06-02 11:19:43', 'voyager.currencies.index', 'null'),
 (21, 1, 'Kaliteler', '', '_self', 'voyager-documentation', '#000000', 17, 5, '2024-06-03 07:54:09', '2024-06-03 08:11:14', 'voyager.qualities.index', 'null'),
-(22, 1, 'Sliders', '', '_self', 'voyager-images', '#000000', 17, 6, '2024-06-04 14:01:14', '2024-06-04 14:21:52', 'voyager.sliders.index', 'null');
+(22, 1, 'Sliders', '', '_self', 'voyager-photos', '#000000', 17, 6, '2024-06-04 14:01:14', '2024-06-05 13:48:15', 'voyager.sliders.index', 'null'),
+(25, 1, 'Sosyal Medya', '', '_self', 'voyager-sound', '#000000', NULL, 6, '2024-06-05 14:07:12', '2024-06-05 14:20:07', 'voyager.social-media.index', 'null');
 
 -- --------------------------------------------------------
 
@@ -522,17 +538,18 @@ CREATE TABLE `pages` (
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_description` text COLLATE utf8mb4_unicode_ci,
   `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tablo döküm verisi `pages`
 --
 
-INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Merhaba Dünya', 'Pervaneyi asın, grog, grog çiçeği, kenevir jigiyle dans edin, iskeleye basın, sintine faresini hesap yağmacısına götürün. Nelson\'ın çılgın gabion hattı taslak scallywag yangın gemisi gaff şans eseri kulaç vakası vuruldu. Deniz Bacakları sintine faresi sloop matey gabion uzun elbiseleriyle Gold Road dişli liginde bir atış yapıyor.', '<p>Selam D&uuml;nya. Scallywag grog &ccedil;ubuğu Cat o\'nine tails scuttle te&ccedil;hizatı sert kablo kesici Yellow Jack. C&ouml;mert ruhlar kara yağmacısını kandırıyor ya da sadece Jenny\'nin &ccedil;ay fincanını kırarak şarkı s&ouml;yl&uuml;yorlar. Provost uzun elbiseli siyah nokta Yellow Jack, ana ligindeki laten yelkenli vakasında lee m&uuml;cadelesine saldırdı.</p>\n<p>Balast ruhları şans eseri bana &ccedil;eyrek g&uuml;verte guletinin kara yağmacısını ya da sadece gabion emniyet pimini yağlıyor. Pinnace kı&ccedil; kalyonu sancak tarafındaki &ccedil;&ouml;zg&uuml; atlıkarıncası, zincirleriniz &uuml;zerinde &ouml;l&ccedil;&uuml;lm&uuml;ş kenevir jig neşeli teknesiyle dans etmeye devam ediyor. Delikteki savaş adamı ateşi, c&ouml;mert&ccedil;e doubloon barkader Sahil Kardeşleri darağacı şof&ouml;r&uuml; burun kıvırıyor.</p>', 'pages/page1.jpg', 'merhaba-dunya', 'Meta Açıklaması', 'anahtar kelime 1, anahtar kelime 2', 'ACTIVE', '2024-05-25 13:05:53', '2024-05-25 13:10:26');
+INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'Merhaba Dünya', 'Pervaneyi asın, grog, grog çiçeği, kenevir jigiyle dans edin, iskeleye basın, sintine faresini hesap yağmacısına götürün. Nelson\'ın çılgın gabion hattı taslak scallywag yangın gemisi gaff şans eseri kulaç vakası vuruldu. Deniz Bacakları sintine faresi sloop matey gabion uzun elbiseleriyle Gold Road dişli liginde bir atış yapıyor.', '<p>Selam D&uuml;nya. Scallywag grog &ccedil;ubuğu Cat o\'nine tails scuttle te&ccedil;hizatı sert kablo kesici Yellow Jack. C&ouml;mert ruhlar kara yağmacısını kandırıyor ya da sadece Jenny\'nin &ccedil;ay fincanını kırarak şarkı s&ouml;yl&uuml;yorlar. Provost uzun elbiseli siyah nokta Yellow Jack, ana ligindeki laten yelkenli vakasında lee m&uuml;cadelesine saldırdı.</p>\n<p>Balast ruhları şans eseri bana &ccedil;eyrek g&uuml;verte guletinin kara yağmacısını ya da sadece gabion emniyet pimini yağlıyor. Pinnace kı&ccedil; kalyonu sancak tarafındaki &ccedil;&ouml;zg&uuml; atlıkarıncası, zincirleriniz &uuml;zerinde &ouml;l&ccedil;&uuml;lm&uuml;ş kenevir jig neşeli teknesiyle dans etmeye devam ediyor. Delikteki savaş adamı ateşi, c&ouml;mert&ccedil;e doubloon barkader Sahil Kardeşleri darağacı şof&ouml;r&uuml; burun kıvırıyor.</p>', 'pages/page1.jpg', 'merhaba-dunya', 'Meta Açıklaması', 'anahtar kelime 1, anahtar kelime 2', 1, '2024-05-25 13:05:53', '2024-05-25 13:10:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -634,7 +651,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (67, 'read_sliders', 'sliders', '2024-06-04 14:01:13', '2024-06-04 14:01:13'),
 (68, 'edit_sliders', 'sliders', '2024-06-04 14:01:13', '2024-06-04 14:01:13'),
 (69, 'add_sliders', 'sliders', '2024-06-04 14:01:13', '2024-06-04 14:01:13'),
-(70, 'delete_sliders', 'sliders', '2024-06-04 14:01:13', '2024-06-04 14:01:13');
+(70, 'delete_sliders', 'sliders', '2024-06-04 14:01:13', '2024-06-04 14:01:13'),
+(81, 'browse_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
+(82, 'read_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
+(83, 'edit_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
+(84, 'add_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
+(85, 'delete_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12');
 
 -- --------------------------------------------------------
 
@@ -720,7 +742,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (67, 1),
 (68, 1),
 (69, 1),
-(70, 1);
+(70, 1),
+(81, 1),
+(82, 1),
+(83, 1),
+(84, 1),
+(85, 1);
 
 -- --------------------------------------------------------
 
@@ -790,6 +817,7 @@ CREATE TABLE `qualities` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `content` text COLLATE utf8mb4_unicode_ci,
   `hit` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -799,9 +827,9 @@ CREATE TABLE `qualities` (
 -- Tablo döküm verisi `qualities`
 --
 
-INSERT INTO `qualities` (`id`, `title`, `slug`, `image`, `content`, `hit`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Kalite 1', 'kalite-1', 'qualities/June2024/aoumlLiXcFkRdhj3c6HK.png', '<p>Kalite 1 İ&ccedil;erik</p>', 0, '2024-06-03 08:18:08', '2024-06-03 08:18:08', NULL),
-(2, 'Kalite 2', 'kalite-2', 'qualities/June2024/2Evz1n3bd2WBgqYpECZ1.png', '<p>Kalite 2 İ&ccedil;erik</p>', 0, '2024-06-03 08:25:53', '2024-06-03 08:25:53', NULL);
+INSERT INTO `qualities` (`id`, `title`, `slug`, `image`, `content`, `hit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Kalite 1', 'kalite-1', 'qualities/June2024/aoumlLiXcFkRdhj3c6HK.png', '<p>Kalite 1 İ&ccedil;erik</p>', 0, 1, '2024-06-03 08:18:08', '2024-06-03 08:18:08', NULL),
+(2, 'Kalite 2', 'kalite-2', 'qualities/June2024/2Evz1n3bd2WBgqYpECZ1.png', '<p>Kalite 2 İ&ccedil;erik</p>', 0, 1, '2024-06-03 08:25:53', '2024-06-03 08:25:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -868,12 +896,12 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 CREATE TABLE `sliders` (
   `id` int(10) UNSIGNED NOT NULL,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `media_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `media_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sort` int(11) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -887,6 +915,37 @@ INSERT INTO `sliders` (`id`, `type`, `media_name`, `title`, `description`, `url`
 (1, 'IMAGE', 'sliders/slider.png', 'Slider 1', 'Slider 1 Açıklama', NULL, 1, 1, '2024-06-04 14:46:23', '2024-06-04 14:46:23', NULL),
 (2, 'IMAGE', 'sliders/slider-1.png', 'Slider 2', 'Slider 2 Açıklama', NULL, 2, 1, '2024-06-04 15:36:17', '2024-06-04 15:36:17', NULL),
 (3, 'IMAGE', 'sliders/slider-2.png', 'Slider 3', 'Slider 3 Açıklama', NULL, 3, 1, '2024-06-04 15:37:51', '2024-06-04 15:37:51', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `social_media`
+--
+
+CREATE TABLE `social_media` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `social_media`
+--
+
+INSERT INTO `social_media` (`id`, `name`, `icon`, `link`, `description`, `sort`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Facebook', 'fa-brands fa-facebook', 'https://www.facebook.com', NULL, 1, 1, '2024-06-05 14:58:33', '2024-06-05 14:58:33', NULL),
+(2, 'Twitter', 'fa-brands fa-twitter', 'https://twitter.com', NULL, 2, 1, '2024-06-05 14:59:21', '2024-06-05 14:59:21', NULL),
+(3, 'Instagram', 'fa-brands fa-instagram', 'https://www.instagram.com', NULL, 3, 1, '2024-06-05 15:00:01', '2024-06-05 15:00:01', NULL),
+(4, 'Youtube', 'fa-brands fa-youtube', 'https://www.youtube.com', NULL, 4, 1, '2024-06-05 15:02:36', '2024-06-05 15:02:36', NULL),
+(5, 'Linkedin', 'fa-brands fa-linkedin', 'https://www.linkedin.com', NULL, 5, 1, '2024-06-05 15:03:57', '2024-06-05 15:03:57', NULL),
+(6, 'Google', 'fa-solid fa-location-dot', 'https://google.com/maps', NULL, 6, 1, '2024-06-05 15:14:59', '2024-06-05 15:15:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -1179,7 +1238,24 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (267, 'sliders', 'title', 1, 'en', 'Slider 1', '2024-06-04 15:36:53', '2024-06-04 15:36:53'),
 (268, 'sliders', 'description', 1, 'en', 'Slider 1 Description', '2024-06-04 15:36:53', '2024-06-04 15:36:53'),
 (269, 'sliders', 'title', 3, 'en', 'Slider 3', '2024-06-04 15:37:51', '2024-06-04 15:37:51'),
-(270, 'sliders', 'description', 3, 'en', 'Slider 3 Description', '2024-06-04 15:37:51', '2024-06-04 15:37:51');
+(270, 'sliders', 'description', 3, 'en', 'Slider 3 Description', '2024-06-04 15:37:51', '2024-06-04 15:37:51'),
+(271, 'data_rows', 'display_name', 137, 'en', 'Id', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(272, 'data_rows', 'display_name', 138, 'en', 'Name', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(273, 'data_rows', 'display_name', 139, 'en', 'Icon', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(274, 'data_rows', 'display_name', 140, 'en', 'Link', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(275, 'data_rows', 'display_name', 141, 'en', 'Description', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(276, 'data_rows', 'display_name', 142, 'en', 'Sort', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(277, 'data_rows', 'display_name', 143, 'en', 'Status', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(278, 'data_rows', 'display_name', 144, 'en', 'Created At', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(279, 'data_rows', 'display_name', 145, 'en', 'Updated At', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(280, 'data_rows', 'display_name', 146, 'en', 'Deleted At', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(281, 'data_types', 'display_name_singular', 16, 'en', 'Social Media', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(282, 'data_types', 'display_name_plural', 16, 'en', 'Social Media', '2024-06-05 14:09:00', '2024-06-05 14:09:00'),
+(283, 'menu_items', 'title', 25, 'en', 'Social Media', '2024-06-05 14:20:07', '2024-06-05 14:20:07'),
+(284, 'data_rows', 'display_name', 125, 'en', 'Dosya', '2024-06-05 14:34:48', '2024-06-05 14:34:48'),
+(285, 'data_rows', 'display_name', 148, 'en', 'Durum', '2024-06-05 14:37:13', '2024-06-05 14:37:13'),
+(286, 'data_rows', 'display_name', 149, 'en', 'Deleted At', '2024-06-05 14:54:03', '2024-06-05 14:54:03'),
+(287, 'data_rows', 'display_name', 147, 'en', 'Durum', '2024-06-05 14:55:13', '2024-06-05 14:55:13');
 
 -- --------------------------------------------------------
 
@@ -1378,6 +1454,12 @@ ALTER TABLE `sliders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `social_media`
+--
+ALTER TABLE `social_media`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `translations`
 --
 ALTER TABLE `translations`
@@ -1432,13 +1514,13 @@ ALTER TABLE `currencies`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `failed_jobs`
@@ -1456,7 +1538,7 @@ ALTER TABLE `menus`
 -- Tablo için AUTO_INCREMENT değeri `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `migrations`
@@ -1480,7 +1562,7 @@ ALTER TABLE `pages`
 -- Tablo için AUTO_INCREMENT değeri `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `personal_access_tokens`
@@ -1519,10 +1601,16 @@ ALTER TABLE `sliders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `social_media`
+--
+ALTER TABLE `social_media`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
