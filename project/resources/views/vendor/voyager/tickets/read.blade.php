@@ -79,7 +79,41 @@
                                          src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
                                 @endif
                             @elseif($row->type == 'relationship')
-                                @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
+                                @if($row->details->table === 'ticket_messages')
+                                    @php
+                                        $relationshipData = (isset($data)) ? $data : $dataTypeContent;
+                                        $model = app($row->details->model);
+                                        $ticket_messages = $model::where($row->details->column, '=', $relationshipData->{$row->details->key})
+                                        ->selectRaw('DATE(created_at) as day, count(*) as message_count')
+                                        ->groupBy('day')
+                                        ->orderBy('day')
+                                        ->get()->map(function ($item) use ($model, $row, $relationshipData) {
+                                            $item->messages = $model::where($row->details->column, '=', $relationshipData->{$row->details->key})
+                                            ->whereDate('created_at', $item->day)
+                                            ->get()->map(function ($sub_item) {
+                                                $sub_item->hour = $sub_item->created_at->format('H:i');
+                                                return $sub_item;
+                                            });
+                                            $item->messages->load('sender:id,name,email,avatar');
+                                            return $item;
+                                        });
+                                        $user = $ticket_messages->first()->messages?->first()->sender;
+                                        $message_list = $ticket_messages->all();
+                                        $default_logo = voyager_asset('images/logo-icon.png');
+                                    @endphp
+                                    <x-admin.chat
+                                        :defaultAvatar="$default_logo"
+                                        :user="$user"
+                                        :messageList="$message_list"
+                                    ></x-admin.chat>
+                                    {{--<ul>
+                                        @foreach($selected_values as $selected_value)
+                                            <li>{{ $selected_value }}</li>
+                                        @endforeach
+                                    </ul>--}}
+                                @else
+                                    @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
+                                @endif
                             @elseif($row->type == 'select_dropdown' && property_exists($row->details, 'options') &&
                                     !empty($row->details->options->{$dataTypeContent->{$row->field}})
                             )

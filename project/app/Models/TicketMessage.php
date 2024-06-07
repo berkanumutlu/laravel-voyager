@@ -23,7 +23,7 @@ class TicketMessage extends Model
         return parent::save();
     }
 
-    public function senderId()
+    public function sender()
     {
         return $this->belongsTo(Voyager::modelClass('User'), 'sender_id', 'id');
     }

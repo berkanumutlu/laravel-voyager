@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 05 Haz 2024, 15:16:01
+-- Üretim Zamanı: 07 Haz 2024, 16:11:05
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -33,7 +33,7 @@ CREATE TABLE `catalogs` (
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `featured` tinyint(4) NOT NULL DEFAULT '0',
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
   `hit` int(11) DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -309,7 +309,20 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (146, 16, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 10),
 (147, 11, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 7),
 (148, 4, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 6),
-(149, 6, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 13);
+(149, 6, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 13),
+(150, 18, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(151, 18, 'department', 'text', 'Departman', 1, 1, 1, 0, 0, 0, '{\"default\":\"OTHER\",\"options\":{\"ACCOUNTING\":\"MUHASEBE\",\"SELLING\":\"SATI\\u015e\",\"TECHNICALSUPPORT\":\"TEKN\\u0130K DESTEK\",\"HUMANRESOURCES\":\"\\u0130NSAN KAYNAKLARI\",\"OTHER\":\"D\\u0130\\u011eER\"}}', 2),
+(152, 18, 'sender_id', 'text', 'Sender Id', 1, 0, 0, 0, 0, 0, '{}', 3),
+(153, 18, 'receiver_id', 'text', 'Receiver Id', 1, 0, 0, 0, 0, 0, '{}', 4),
+(154, 18, 'code', 'text', 'Kod', 0, 1, 1, 0, 0, 1, '{\"validation\":{\"rule\":\"unique:tickets,code\"}}', 7),
+(155, 18, 'subject', 'text', 'Konu', 0, 1, 1, 0, 0, 1, '{}', 8),
+(156, 18, 'status', 'checkbox', 'Durum', 1, 1, 1, 1, 0, 1, '{\"default\":1,\"on\":\"Aktif\",\"off\":\"Pasif\",\"checked\":true}', 9),
+(157, 18, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 10),
+(158, 18, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 11),
+(159, 18, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 12),
+(160, 18, 'ticket_belongsto_user_relationship', 'relationship', 'Gönderen', 0, 1, 1, 0, 0, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"sender_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
+(161, 18, 'ticket_belongsto_user_relationship_1', 'relationship', 'Alıcı', 0, 1, 1, 0, 0, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"receiver_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6),
+(162, 18, 'ticket_belongstomany_ticket_message_relationship', 'relationship', 'Mesajlar', 0, 0, 1, 0, 0, 1, '{\"model\":\"App\\\\Models\\\\TicketMessage\",\"table\":\"ticket_messages\",\"type\":\"hasMany\",\"column\":\"ticket_id\",\"key\":\"id\",\"label\":\"message\",\"pivot_table\":\"ticket_messages\",\"pivot\":\"0\",\"taggable\":\"0\"}', 13);
 
 -- --------------------------------------------------------
 
@@ -352,7 +365,8 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-05 14:52:26'),
 (11, 'qualities', 'qualities', 'Kalite', 'Kaliteler', 'voyager-documentation', 'App\\Models\\Quality', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-03 07:54:08', '2024-06-05 14:55:31'),
 (12, 'sliders', 'sliders', 'Slider', 'Sliders', 'voyager-photos', 'App\\Models\\Slider', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"media_name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-04 14:01:13', '2024-06-05 14:56:11'),
-(16, 'social_media', 'social-media', 'Sosyal Medya', 'Sosyal Medya', 'voyager-sound', 'App\\Models\\SocialMedia', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-05 14:07:12', '2024-06-05 14:57:35');
+(16, 'social_media', 'social-media', 'Sosyal Medya', 'Sosyal Medya', 'voyager-sound', 'App\\Models\\SocialMedia', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-05 14:07:12', '2024-06-05 14:57:35'),
+(18, 'tickets', 'tickets', 'Destek Kaydı', 'Destek Kayıtları', 'voyager-ticket', 'App\\Models\\Ticket', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"code\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-06 11:17:24', '2024-06-06 18:09:46');
 
 -- --------------------------------------------------------
 
@@ -419,28 +433,29 @@ CREATE TABLE `menu_items` (
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Kontrol Paneli', '', '_self', 'voyager-boat', '#000000', NULL, 1, '2024-05-25 07:13:16', '2024-05-25 14:59:05', 'voyager.dashboard', 'null'),
-(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 5, '2024-05-25 07:13:16', '2024-06-02 11:19:43', 'voyager.media.index', 'null'),
+(2, 1, 'Medya', '', '_self', 'voyager-images', '#000000', NULL, 6, '2024-05-25 07:13:16', '2024-06-06 11:23:41', 'voyager.media.index', 'null'),
 (3, 1, 'Kullanıcılar', '', '_self', 'voyager-person', '#000000', 16, 1, '2024-05-25 07:13:16', '2024-05-31 11:05:07', 'voyager.users.index', 'null'),
 (4, 1, 'Roller', '', '_self', 'voyager-lock', '#000000', 16, 2, '2024-05-25 07:13:16', '2024-05-31 11:05:07', 'voyager.roles.index', 'null'),
-(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 9, '2024-05-25 07:13:16', '2024-06-05 14:02:26', NULL, ''),
+(5, 1, 'Araçlar', '', '_self', 'voyager-tools', '#000000', NULL, 10, '2024-05-25 07:13:16', '2024-06-06 11:23:41', NULL, ''),
 (6, 1, 'Menü Oluşturucu', '', '_self', 'voyager-list', '#000000', 5, 1, '2024-05-25 07:13:16', '2024-05-28 14:50:15', 'voyager.menus.index', 'null'),
 (7, 1, 'Veritabanı', '', '_self', 'voyager-data', '#000000', 5, 2, '2024-05-25 07:13:16', '2024-05-28 11:48:13', 'voyager.database.index', 'null'),
 (8, 1, 'Pusula', '', '_self', 'voyager-compass', '#000000', 5, 3, '2024-05-25 07:13:16', '2024-05-28 14:50:40', 'voyager.compass.index', 'null'),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2024-05-25 07:13:16', '2024-05-25 08:12:25', 'voyager.bread.index', NULL),
-(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 7, '2024-05-25 07:13:16', '2024-06-05 14:02:26', 'voyager.settings.index', 'null'),
+(10, 1, 'Ayarlar', '', '_self', 'voyager-settings', '#000000', NULL, 8, '2024-05-25 07:13:16', '2024-06-06 11:23:41', 'voyager.settings.index', 'null'),
 (11, 1, 'Kategoriler', '', '_self', 'voyager-categories', '#000000', 17, 7, '2024-05-25 13:05:53', '2024-06-04 14:21:52', 'voyager.categories.index', 'null'),
 (12, 1, 'Gönderiler', '', '_self', 'voyager-news', '#000000', 17, 2, '2024-05-25 13:05:53', '2024-05-31 11:09:45', 'voyager.posts.index', 'null'),
 (13, 1, 'Sayfalar', '', '_self', 'voyager-file-text', '#000000', 17, 1, '2024-05-25 13:05:53', '2024-05-31 11:09:38', 'voyager.pages.index', 'null'),
 (14, 2, 'Anasayfa', '', '_self', 'voyager-dot', '#af1818', NULL, 9, '2024-05-25 15:16:54', '2024-05-30 12:17:59', 'home', 'null'),
 (15, 1, 'Kataloglar', '', '_self', 'voyager-documentation', '#000000', 17, 3, '2024-05-30 13:11:17', '2024-05-31 11:09:48', 'voyager.catalogs.index', 'null'),
-(16, 1, 'Yetki', '', '_self', 'voyager-people', '#000000', NULL, 8, '2024-05-31 11:04:45', '2024-06-05 14:02:26', NULL, ''),
+(16, 1, 'Yetki', '', '_self', 'voyager-people', '#000000', NULL, 9, '2024-05-31 11:04:45', '2024-06-06 11:23:41', NULL, ''),
 (17, 1, 'İçerikler', '', '_self', 'voyager-file-code', '#000000', NULL, 2, '2024-05-31 11:09:24', '2024-05-31 11:09:52', NULL, ''),
 (18, 1, 'Haberler', '', '_self', 'voyager-news', '#000000', 17, 4, '2024-05-31 11:28:31', '2024-05-31 11:34:06', 'voyager.news.index', 'null'),
 (19, 1, 'İletişim Mesajları', '', '_self', 'voyager-mail', '#000000', NULL, 3, '2024-05-31 23:40:10', '2024-05-31 23:43:46', 'voyager.contact-messages.index', 'null'),
-(20, 1, 'Para Birimleri', '', '_self', 'voyager-credit-cards', '#000000', NULL, 4, '2024-06-02 11:17:10', '2024-06-02 11:19:43', 'voyager.currencies.index', 'null'),
+(20, 1, 'Para Birimleri', '', '_self', 'voyager-credit-cards', '#000000', NULL, 5, '2024-06-02 11:17:10', '2024-06-06 11:23:41', 'voyager.currencies.index', 'null'),
 (21, 1, 'Kaliteler', '', '_self', 'voyager-documentation', '#000000', 17, 5, '2024-06-03 07:54:09', '2024-06-03 08:11:14', 'voyager.qualities.index', 'null'),
 (22, 1, 'Sliders', '', '_self', 'voyager-photos', '#000000', 17, 6, '2024-06-04 14:01:14', '2024-06-05 13:48:15', 'voyager.sliders.index', 'null'),
-(25, 1, 'Sosyal Medya', '', '_self', 'voyager-sound', '#000000', NULL, 6, '2024-06-05 14:07:12', '2024-06-05 14:20:07', 'voyager.social-media.index', 'null');
+(25, 1, 'Sosyal Medya', '', '_self', 'voyager-sound', '#000000', NULL, 7, '2024-06-05 14:07:12', '2024-06-06 11:23:41', 'voyager.social-media.index', 'null'),
+(26, 1, 'Destek Kayıtları', '', '_self', 'voyager-ticket', '#000000', NULL, 4, '2024-06-06 11:17:24', '2024-06-06 11:23:41', 'voyager.tickets.index', 'null');
 
 -- --------------------------------------------------------
 
@@ -506,7 +521,7 @@ CREATE TABLE `news` (
   `meta_description` text COLLATE utf8mb4_unicode_ci,
   `meta_keywords` text COLLATE utf8mb4_unicode_ci,
   `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `featured` tinyint(4) NOT NULL DEFAULT '0',
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
   `hit` int(11) DEFAULT '0',
   `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -656,7 +671,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (82, 'read_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
 (83, 'edit_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
 (84, 'add_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
-(85, 'delete_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12');
+(85, 'delete_social_media', 'social_media', '2024-06-05 14:07:12', '2024-06-05 14:07:12'),
+(86, 'browse_tickets', 'tickets', '2024-06-06 11:17:24', '2024-06-06 11:17:24'),
+(87, 'read_tickets', 'tickets', '2024-06-06 11:17:24', '2024-06-06 11:17:24'),
+(88, 'edit_tickets', 'tickets', '2024-06-06 11:17:24', '2024-06-06 11:17:24'),
+(89, 'add_tickets', 'tickets', '2024-06-06 11:17:24', '2024-06-06 11:17:24'),
+(90, 'delete_tickets', 'tickets', '2024-06-06 11:17:24', '2024-06-06 11:17:24');
 
 -- --------------------------------------------------------
 
@@ -747,7 +767,11 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (82, 1),
 (83, 1),
 (84, 1),
-(85, 1);
+(85, 1),
+(86, 1),
+(87, 1),
+(88, 1),
+(90, 1);
 
 -- --------------------------------------------------------
 
@@ -946,6 +970,66 @@ INSERT INTO `social_media` (`id`, `name`, `icon`, `link`, `description`, `sort`,
 (4, 'Youtube', 'fa-brands fa-youtube', 'https://www.youtube.com', NULL, 4, 1, '2024-06-05 15:02:36', '2024-06-05 15:02:36', NULL),
 (5, 'Linkedin', 'fa-brands fa-linkedin', 'https://www.linkedin.com', NULL, 5, 1, '2024-06-05 15:03:57', '2024-06-05 15:03:57', NULL),
 (6, 'Google', 'fa-solid fa-location-dot', 'https://google.com/maps', NULL, 6, 1, '2024-06-05 15:14:59', '2024-06-05 15:15:08', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `department` enum('ACCOUNTING','SELLING','TECHNICALSUPPORT','HUMANRESOURCES','OTHER') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'OTHER',
+  `sender_id` bigint(20) NOT NULL,
+  `receiver_id` bigint(20) NOT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `department`, `sender_id`, `receiver_id`, `code`, `subject`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'OTHER', 2, 1, 'ABC123', 'Test', 1, '2024-06-06 16:05:52', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ticket_messages`
+--
+
+CREATE TABLE `ticket_messages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `ticket_id` bigint(20) NOT NULL,
+  `sender_id` bigint(20) NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `ticket_messages`
+--
+
+INSERT INTO `ticket_messages` (`id`, `ticket_id`, `sender_id`, `message`, `file`, `ip_address`, `is_read`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 2, 'Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500\'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.', NULL, NULL, 0, 1, '2024-06-05 21:07:33', NULL, NULL),
+(2, 1, 1, 'Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960\'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.', NULL, NULL, 0, 1, '2024-06-05 21:07:33', NULL, NULL),
+(3, 1, 1, 'Yaygın inancın tersine, Lorem Ipsum rastgele sözcüklerden oluşmaz.', NULL, NULL, 0, 1, '2024-06-07 11:07:33', NULL, NULL),
+(4, 1, 1, 'Kökleri M.Ö. 45 tarihinden bu yana klasik Latin edebiyatına kadar uzanan 2000 yıllık bir geçmişi vardır.', NULL, NULL, 0, 1, '2024-06-07 12:07:33', NULL, NULL),
+(5, 1, 2, 'Virginia\'daki Hampden-Sydney College\'dan Latince profesörü Richard McClintock, bir Lorem Ipsum pasajında geçen ve anlaşılması en güç sözcüklerden biri olan \'consectetur\' sözcüğünün klasik edebiyattaki örneklerini incelediğinde kesin bir kaynağa ulaşmıştır.', NULL, NULL, 0, 1, '2024-06-07 13:07:33', NULL, NULL),
+(6, 1, 2, 'orm Ipsum, Çiçero tarafından M.Ö. 45 tarihinde kaleme alınan \"de Finibus Bonorum et Malorum\" (İyi ve Kötünün Uç Sınırları) eserinin 1.10.32 ve 1.10.33 sayılı bölümlerinden gelmektedir.', NULL, NULL, 0, 1, '2024-06-07 13:08:33', NULL, NULL),
+(7, 1, 2, 'Bu kitap, ahlak kuramı üzerine bir tezdir ve Rönesans döneminde çok popüler olmuştur. Lorem Ipsum pasajının ilk satırı olan \"Lorem ipsum dolor sit amet\" 1.10.32 sayılı bölümdeki bir satırdan gelmektedir.', NULL, NULL, 0, 1, '2024-06-07 14:08:33', NULL, NULL),
+(8, 1, 1, '1500\'lerden beri kullanılmakta olan standard Lorem Ipsum metinleri ilgilenenler için yeniden üretilmiştir. Çiçero tarafından yazılan 1.10.32 ve 1.10.33 bölümleri de 1914 H. Rackham çevirisinden alınan İngilizce sürümleri eşliğinde özgün biçiminden yeniden üretilmiştir.', NULL, NULL, 0, 1, '2024-06-07 15:07:33', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1255,7 +1339,23 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (284, 'data_rows', 'display_name', 125, 'en', 'Dosya', '2024-06-05 14:34:48', '2024-06-05 14:34:48'),
 (285, 'data_rows', 'display_name', 148, 'en', 'Durum', '2024-06-05 14:37:13', '2024-06-05 14:37:13'),
 (286, 'data_rows', 'display_name', 149, 'en', 'Deleted At', '2024-06-05 14:54:03', '2024-06-05 14:54:03'),
-(287, 'data_rows', 'display_name', 147, 'en', 'Durum', '2024-06-05 14:55:13', '2024-06-05 14:55:13');
+(287, 'data_rows', 'display_name', 147, 'en', 'Durum', '2024-06-05 14:55:13', '2024-06-05 14:55:13'),
+(288, 'data_rows', 'display_name', 150, 'en', 'Id', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(289, 'data_rows', 'display_name', 151, 'en', 'Department', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(290, 'data_rows', 'display_name', 152, 'en', 'Sender Id', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(291, 'data_rows', 'display_name', 153, 'en', 'Receiver Id', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(292, 'data_rows', 'display_name', 154, 'en', 'Code', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(293, 'data_rows', 'display_name', 155, 'en', 'Subject', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(294, 'data_rows', 'display_name', 156, 'en', 'Status', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(295, 'data_rows', 'display_name', 157, 'en', 'Created At', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(296, 'data_rows', 'display_name', 158, 'en', 'Updated At', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(297, 'data_rows', 'display_name', 159, 'en', 'Deleted At', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(298, 'data_types', 'display_name_singular', 18, 'en', 'Ticket', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(299, 'data_types', 'display_name_plural', 18, 'en', 'Tickets', '2024-06-06 11:18:58', '2024-06-06 11:18:58'),
+(300, 'menu_items', 'title', 26, 'en', 'Tickets', '2024-06-06 11:23:33', '2024-06-06 11:23:33'),
+(301, 'data_rows', 'display_name', 160, 'en', 'users', '2024-06-06 12:12:16', '2024-06-06 12:12:16'),
+(302, 'data_rows', 'display_name', 161, 'en', 'users', '2024-06-06 12:12:16', '2024-06-06 12:12:16'),
+(303, 'data_rows', 'display_name', 162, 'en', 'ticket_messages', '2024-06-06 18:06:20', '2024-06-06 18:06:20');
 
 -- --------------------------------------------------------
 
@@ -1460,6 +1560,18 @@ ALTER TABLE `social_media`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `ticket_messages`
+--
+ALTER TABLE `ticket_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `translations`
 --
 ALTER TABLE `translations`
@@ -1514,13 +1626,13 @@ ALTER TABLE `currencies`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `failed_jobs`
@@ -1538,7 +1650,7 @@ ALTER TABLE `menus`
 -- Tablo için AUTO_INCREMENT değeri `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `migrations`
@@ -1562,7 +1674,7 @@ ALTER TABLE `pages`
 -- Tablo için AUTO_INCREMENT değeri `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `personal_access_tokens`
@@ -1607,10 +1719,22 @@ ALTER TABLE `social_media`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `ticket_messages`
+--
+ALTER TABLE `ticket_messages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
