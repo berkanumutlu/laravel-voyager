@@ -102,6 +102,7 @@
                                         $default_logo = voyager_asset('images/logo-icon.png');
                                     @endphp
                                     <x-admin.chat
+                                        :dataTypeContent="$dataTypeContent"
                                         :defaultAvatar="$default_logo"
                                         :user="$user"
                                         :messageList="$message_list"
