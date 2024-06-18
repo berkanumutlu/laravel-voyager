@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 07 Haz 2024, 16:11:05
+-- Üretim Zamanı: 18 Haz 2024, 08:37:39
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -207,7 +207,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (44, 6, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
 (45, 6, 'author_id', 'text', 'Yazar', 1, 0, 0, 0, 0, 0, '{}', 2),
 (46, 6, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 3),
-(47, 6, 'excerpt', 'text_area', 'Excerpt', 0, 0, 1, 1, 1, 1, '{}', 5),
+(47, 6, 'excerpt', 'text_area', 'Alıntı', 0, 0, 1, 1, 1, 1, '{}', 5),
 (48, 6, 'body', 'rich_text_box', 'İçerik', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\"}}', 6),
 (49, 6, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}', 4),
 (50, 6, 'meta_description', 'text', 'Meta Açıklaması', 0, 0, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"max:160\"}}', 8),
@@ -358,7 +358,7 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (3, 'roles', 'roles', 'Rol', 'Roller', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:37:41'),
 (4, 'categories', 'categories', 'Kategori', 'Kategoriler', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, NULL, 'Deneme kategori tanımı', 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:51:33'),
 (5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:54:38'),
-(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:54:14'),
+(6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-16 12:11:44'),
 (7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-06-05 14:51:21'),
 (8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-06-05 14:52:48'),
 (9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-06-05 14:52:03'),
@@ -366,7 +366,7 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (11, 'qualities', 'qualities', 'Kalite', 'Kaliteler', 'voyager-documentation', 'App\\Models\\Quality', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-03 07:54:08', '2024-06-05 14:55:31'),
 (12, 'sliders', 'sliders', 'Slider', 'Sliders', 'voyager-photos', 'App\\Models\\Slider', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"media_name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-04 14:01:13', '2024-06-05 14:56:11'),
 (16, 'social_media', 'social-media', 'Sosyal Medya', 'Sosyal Medya', 'voyager-sound', 'App\\Models\\SocialMedia', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-05 14:07:12', '2024-06-05 14:57:35'),
-(18, 'tickets', 'tickets', 'Destek Kaydı', 'Destek Kayıtları', 'voyager-ticket', 'App\\Models\\Ticket', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"code\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-06 11:17:24', '2024-06-06 18:09:46');
+(18, 'tickets', 'tickets', 'Destek Kaydı', 'Destek Kayıtları', 'voyager-ticket', 'App\\Models\\Ticket', NULL, 'App\\Http\\Controllers\\Admin\\TicketController', NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"code\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-06 11:17:24', '2024-06-16 11:23:45');
 
 -- --------------------------------------------------------
 
@@ -1029,7 +1029,13 @@ INSERT INTO `ticket_messages` (`id`, `ticket_id`, `sender_id`, `message`, `file`
 (5, 1, 2, 'Virginia\'daki Hampden-Sydney College\'dan Latince profesörü Richard McClintock, bir Lorem Ipsum pasajında geçen ve anlaşılması en güç sözcüklerden biri olan \'consectetur\' sözcüğünün klasik edebiyattaki örneklerini incelediğinde kesin bir kaynağa ulaşmıştır.', NULL, NULL, 0, 1, '2024-06-07 13:07:33', NULL, NULL),
 (6, 1, 2, 'orm Ipsum, Çiçero tarafından M.Ö. 45 tarihinde kaleme alınan \"de Finibus Bonorum et Malorum\" (İyi ve Kötünün Uç Sınırları) eserinin 1.10.32 ve 1.10.33 sayılı bölümlerinden gelmektedir.', NULL, NULL, 0, 1, '2024-06-07 13:08:33', NULL, NULL),
 (7, 1, 2, 'Bu kitap, ahlak kuramı üzerine bir tezdir ve Rönesans döneminde çok popüler olmuştur. Lorem Ipsum pasajının ilk satırı olan \"Lorem ipsum dolor sit amet\" 1.10.32 sayılı bölümdeki bir satırdan gelmektedir.', NULL, NULL, 0, 1, '2024-06-07 14:08:33', NULL, NULL),
-(8, 1, 1, '1500\'lerden beri kullanılmakta olan standard Lorem Ipsum metinleri ilgilenenler için yeniden üretilmiştir. Çiçero tarafından yazılan 1.10.32 ve 1.10.33 bölümleri de 1914 H. Rackham çevirisinden alınan İngilizce sürümleri eşliğinde özgün biçiminden yeniden üretilmiştir.', NULL, NULL, 0, 1, '2024-06-07 15:07:33', NULL, NULL);
+(8, 1, 1, '1500\'lerden beri kullanılmakta olan standard Lorem Ipsum metinleri ilgilenenler için yeniden üretilmiştir. Çiçero tarafından yazılan 1.10.32 ve 1.10.33 bölümleri de 1914 H. Rackham çevirisinden alınan İngilizce sürümleri eşliğinde özgün biçiminden yeniden üretilmiştir.', NULL, NULL, 0, 1, '2024-06-07 15:07:33', NULL, NULL),
+(9, 1, 1, 'lkşdgfmdfhgfghdh\njhffghfgh\n\nfhg\nfhgfhghfgfhghfg', NULL, NULL, 0, 1, '2024-06-16 12:48:56', NULL, NULL),
+(10, 1, 1, 'Test deneme 123\n\ngdf\nfdggdffdg\n\nhfgfghhfg\n\nfghfghadasd', NULL, NULL, 0, 1, '2024-06-16 12:52:21', NULL, NULL),
+(11, 1, 1, 'asddassaddsasdaads', NULL, NULL, 0, 1, '2024-06-16 12:53:56', NULL, NULL),
+(12, 1, 1, 'test test test', NULL, NULL, 0, 1, '2024-06-16 13:42:41', NULL, NULL),
+(13, 1, 1, 'the last message', NULL, NULL, 0, 1, '2024-06-16 13:43:28', NULL, NULL),
+(14, 1, 1, 'test message', NULL, NULL, 0, 1, '2024-06-16 13:50:14', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1355,7 +1361,8 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (300, 'menu_items', 'title', 26, 'en', 'Tickets', '2024-06-06 11:23:33', '2024-06-06 11:23:33'),
 (301, 'data_rows', 'display_name', 160, 'en', 'users', '2024-06-06 12:12:16', '2024-06-06 12:12:16'),
 (302, 'data_rows', 'display_name', 161, 'en', 'users', '2024-06-06 12:12:16', '2024-06-06 12:12:16'),
-(303, 'data_rows', 'display_name', 162, 'en', 'ticket_messages', '2024-06-06 18:06:20', '2024-06-06 18:06:20');
+(303, 'data_rows', 'display_name', 162, 'en', 'ticket_messages', '2024-06-06 18:06:20', '2024-06-06 18:06:20'),
+(304, 'pages', 'excerpt', 1, 'en', 'Pervaneyi asın, grog, grog çiçeği, kenevir jigiyle dans edin, iskeleye basın, sintine faresini hesap yağmacısına götürün. Nelson\'ın çılgın gabion hattı taslak scallywag yangın gemisi gaff şans eseri kulaç vakası vuruldu. Deniz Bacakları sintine faresi sloop matey gabion uzun elbiseleriyle Gold Road dişli liginde bir atış yapıyor.', '2024-06-16 12:12:45', '2024-06-16 12:12:45');
 
 -- --------------------------------------------------------
 
@@ -1728,13 +1735,13 @@ ALTER TABLE `tickets`
 -- Tablo için AUTO_INCREMENT değeri `ticket_messages`
 --
 ALTER TABLE `ticket_messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
