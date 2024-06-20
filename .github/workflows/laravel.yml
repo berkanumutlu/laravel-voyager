@@ -21,7 +21,7 @@ jobs:
     - name: Clear Composer Cache
       run: composer clear-cache
     - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist -d project
     - name: Generate key if not exists
       run: |
         if ! grep -q "APP_KEY=" project/.env; then
