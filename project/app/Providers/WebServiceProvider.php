@@ -27,7 +27,7 @@ class WebServiceProvider extends ServiceProvider
                     'site_slogan'         => setting('site.description'),
                     'site_logo'           => asset('storage/'.setting('site.logo')),
                     'site_logo_secondary' => asset('storage/'.setting('site.logo_secondary')),
-                    'favicon'             => storage_path(setting('admin.icon_image'))
+                    'favicon'             => asset('storage/'.setting('admin.icon_image'))
                 ]);
             });
         }
