@@ -19,12 +19,14 @@
     <div class="px-3 py-2 text-bg-dark border-bottom">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <a href="{{ route('home') }}"
+                   class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
                     <img src="{{ $site_logo_secondary }}" alt="{{ $site_name }} Logo" width="200">
                 </a>
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                     <li>
-                        <a href="#" class="nav-link text-secondary d-flex flex-column">
+                        <a href="{{ route('home') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('home') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-house-door mx-auto fs-4"></i>
                             Home
                         </a>
@@ -57,9 +59,9 @@
             </div>
         </div>
     </div>
-    <div class="px-3 py-2 border-bottom mb-3">
+    <div class="px-3 py-2 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+            <form action="#" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
             <div class="text-end">
