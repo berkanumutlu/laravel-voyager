@@ -9,6 +9,7 @@
     @yield("head")
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-icons/font/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/animate-css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/css/style.min.css') }}">
     @yield("style")
     @stack("style")
