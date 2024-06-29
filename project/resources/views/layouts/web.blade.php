@@ -33,9 +33,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-white d-flex flex-column">
+                        <a href="{{ route('about_us') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('about_us') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-speedometer2 mx-auto fs-4"></i>
-                            Dashboard
+                            About Us
                         </a>
                     </li>
                     <li>
