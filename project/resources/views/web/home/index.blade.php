@@ -1,6 +1,7 @@
 @extends("layouts.web")
 @section("style")
     <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/web/css/pages/home.min.css') }}">
 @endsection
 @section("content")
     @if(!empty($slider_list))

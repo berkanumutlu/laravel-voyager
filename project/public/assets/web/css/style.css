@@ -8,6 +8,19 @@ footer {
     margin-top: auto;
 }
 
+.container-page {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+.page-heading .page-title {
+    margin: 20px 0;
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
 a, button {
     color: inherit;
     line-height: inherit;
@@ -38,146 +51,4 @@ button, input[type="submit"] {
 
 .button:hover {
     background: #41545b;
-}
-
-.slider-section .slider-item {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.slider-section .slider-item .text-section {
-    padding: 25px 20px;
-    width: 100%;
-    position: absolute;
-    left: 13%;
-    text-align: center;
-}
-
-@media only screen and (min-width: 768px) {
-    .slider-section .slider-item .text-section {
-        padding: 40px 0 40px 50px;
-        width: unset;
-        text-align: left;
-    }
-}
-
-.slider-section .slider-item .text-section .title {
-    margin-bottom: 12px;
-    position: relative;
-    display: inline-block;
-    font-size: 17px;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 20px;
-}
-
-@media only screen and (min-width: 768px) {
-    .slider-section .slider-item .text-section .title {
-        margin-bottom: 10px;
-        font-size: 24px;
-        line-height: 24px;
-    }
-}
-
-.slider-section .slider-item .text-section .title::before {
-    display: none;
-    position: absolute;
-    content: "";
-    height: 1px;
-    width: 70px;
-    background: #333;
-    right: -88px;
-    opacity: 0.5;
-    top: 50%;
-    -webkit-transform: translatey(-50%);
-    transform: translatey(-50%);
-}
-
-@media only screen and (min-width: 768px) {
-    .slider-section .slider-item .text-section .title::before {
-        display: block;
-    }
-}
-
-.slider-section .slider-item .text-section .description {
-    margin-bottom: 18px;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 27px;
-}
-
-@media only screen and (min-width: 768px) {
-    .slider-section .slider-item .text-section .description {
-        font-size: 45px;
-        line-height: 45px;
-    }
-}
-
-@media only screen and (min-width: 992px) {
-    .slider-section .slider-item .text-section .description {
-        margin-bottom: 0;
-        font-size: 48px;
-        line-height: 48px;
-    }
-}
-
-.slider-section .slider-item .text-section .button {
-    margin-top: 0;
-    padding: 0 20px;
-    height: 40px;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 40px;
-    border-radius: 5px;
-}
-
-@media only screen and (min-width: 768px) {
-    .slider-section .slider-item .text-section .button {
-        margin-top: 20px;
-        padding: 0 25px;
-        height: 43px;
-        line-height: 43px;
-    }
-}
-
-@media only screen and (min-width: 992px) {
-    .slider-section .slider-item .text-section .button {
-        margin-top: 25px;
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    .slider-section .slider-item .text-section .button {
-        margin-top: 45px;
-        padding: 0 25px;
-        height: 48px;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 47px;
-    }
-}
-
-.active .slider-item .text-section .title,
-.active .slider-item .text-section .description,
-.active .slider-item .text-section .button {
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
-    -webkit-animation-delay: 0.3s;
-    animation-delay: 0.3s;
-}
-
-.active .slider-item .text-section .description {
-    -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-}
-
-.active .slider-item .text-section .button {
-    -webkit-animation-delay: 0.9s;
-    animation-delay: 0.9s;
 }

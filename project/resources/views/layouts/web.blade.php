@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ !empty($title) ? $title.' - '.$site_name : $site_slogan.' - '.$site_name }}</title>
+    @if(!empty($meta_description))
+        <meta name="description" content="{!! $meta_description !!}">
+    @endif
+    @if(!empty($meta_keywords))
+        <meta name="keywords" content="{!! $meta_keywords !!}">
+    @endif
+    <meta name="author" content="Berkan Ümütlü">
+    <meta name="publisher" content="Berkan Ümütlü"/>
+    <meta name="copyright" content="© Copyright 2024 {{ $site_name }}"/>
     @yield("head")
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-icons/font/bootstrap-icons.min.css') }}">

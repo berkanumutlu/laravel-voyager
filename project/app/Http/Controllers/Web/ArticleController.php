@@ -8,11 +8,19 @@ class ArticleController extends Controller
 {
     public function show_article_page()
     {
-        $record = \TCG\Voyager\Models\Page::query()->select(['id', 'title', 'body', 'image'])->first();
+        config('app.locale');
+        $record = \TCG\Voyager\Models\Page::query()->where('status', 1)->select([
+            'id', 'title', 'body', 'image', 'meta_description', 'meta_keywords'
+        ])->first();
         if (empty($record)) {
             abort(404);
         }
+        if (!empty($record->image)) {
+            $record->image_url = asset('storage/'.$record->image);
+        }
         $title = $record->title;
-        return view('web.article.page', compact(['title', 'record']));
+        $meta_description = $record->meta_description;
+        $meta_keywords = $record->meta_keywords;
+        return view('web.article.page', compact(['title', 'meta_description', 'meta_keywords', 'record']));
     }
 }
