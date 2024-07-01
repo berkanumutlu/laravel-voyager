@@ -1,3 +1,8 @@
+:root {
+    --color-primary: #2F3740;
+    --color-primary-hover: #41545b;
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -39,7 +44,7 @@ button, input[type="submit"] {
 .button {
     box-shadow: none;
     color: #ffffff;
-    background: #2F3740;
+    background: var(--color-primary);
     display: inline-block;
     height: 45px;
     line-height: 45px;
@@ -50,5 +55,5 @@ button, input[type="submit"] {
 }
 
 .button:hover {
-    background: #41545b;
+    background: var(--color-primary-hover);
 }

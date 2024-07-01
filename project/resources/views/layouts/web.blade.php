@@ -42,16 +42,17 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('about_us') }}"
-                           class="nav-link d-flex flex-column {{ Route::is('about_us') ? 'text-secondary' : 'text-white' }}">
-                            <i class="bi bi-speedometer2 mx-auto fs-4"></i>
+                        <a href="{{ route('article.about_us') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('article.about_us') ? 'text-secondary' : 'text-white' }}">
+                            <i class="bi bi-info-square mx-auto fs-4"></i>
                             About Us
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-white d-flex flex-column">
-                            <i class="bi bi-table mx-auto fs-4"></i>
-                            Orders
+                        <a href="{{ route('article.list') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('article.list') ? 'text-secondary' : 'text-white' }}">
+                            <i class="bi bi-card-text mx-auto fs-4"></i>
+                            Articles
                         </a>
                     </li>
                     <li>

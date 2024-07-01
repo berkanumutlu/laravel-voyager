@@ -6,6 +6,25 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
+    public function index()
+    {
+        $records = \TCG\Voyager\Models\Post::query()->where('status', 'PUBLISHED')
+            ->with(['category:id,name,slug', 'authorId:id,name'])
+            ->select([
+                'id', 'title', 'slug', 'excerpt', 'image', 'meta_description', 'meta_keywords', 'created_at',
+                'category_id', 'author_id'
+            ])
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
+        $records->map(function ($item) {
+            $item->url = route('article.detail', ['article' => $item]);
+            $item->image_url = asset('storage/'.$item->image);
+            $item->published_at_text = format_date($item->created_at, 'date');
+        });
+        $title = 'Articles';
+        return view('web.article.index', compact(['title', 'records']));
+    }
+
     public function show_article_page()
     {
         config('app.locale');
