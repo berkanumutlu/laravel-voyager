@@ -15,11 +15,11 @@ class ArticleController extends Controller
                 'category_id', 'author_id'
             ])
             ->orderBy('created_at', 'desc')
-            ->paginate(15);
+            ->paginate(16);
         $records->map(function ($item) {
             $item->url = route('article.detail', ['article' => $item]);
             $item->image_url = asset('storage/'.$item->image);
-            $item->published_at_text = format_date($item->created_at, 'date');
+            $item->published_at_text = format_date($item->created_at, 'date-text');
         });
         $title = 'Articles';
         return view('web.article.index', compact(['title', 'records']));

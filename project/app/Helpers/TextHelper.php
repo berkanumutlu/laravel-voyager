@@ -15,11 +15,14 @@ if (!function_exists('format_date')) {
         if ($type == 'time') {
             return \Carbon\Carbon::parse($date)->format('H:i');
         }
-        if ($type == 'second') {
+        if ($type == 'time-second') {
             return \Carbon\Carbon::parse($date)->format('H:i:s');
         }
         if ($type == 'date') {
             return \Carbon\Carbon::parse($date)->format('d.m.Y');
+        }
+        if ($type == 'date-text') {
+            return \Carbon\Carbon::parse($date)->format('d M Y');
         }
         if ($type == 'full') {
             return \Carbon\Carbon::parse($date)->format('d.m.Y H:i');
