@@ -18,7 +18,7 @@ Route::name('article.')->controller('ArticleController')->group(function () {
     Route::get('about-us', [\App\Http\Controllers\Web\ArticleController::class, 'show_article_page'])->name('about_us');
     Route::get('articles', [\App\Http\Controllers\Web\ArticleController::class, 'index'])->name('list');
     Route::get('articles/{category:slug}', [\App\Http\Controllers\Web\ArticleController::class, 'index'])->name('category');
-    Route::get('article/{article:slug}', [\App\Http\Controllers\Web\ArticleController::class, 'show'])->name('detail');
+    Route::get('article/{post:slug}', [\App\Http\Controllers\Web\ArticleController::class, 'show'])->name('detail');
 });
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

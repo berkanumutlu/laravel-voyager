@@ -17,7 +17,7 @@
                                             class="d-inline-block mb-2 text-primary-emphasis">{{ $item->category?->name }}</strong></a>
                                     <h3 class="mb-0">{{ $item->title }}</h3>
                                     <div class="mb-1 text-body-secondary">
-                                        {{ $item->published_at_text ?? $item->created_at }}
+                                        {{ $item->published_at_text ?? $item->published_at }}
                                     </div>
                                     <p class="card-text mb-auto">{!! $item->excerpt !!}</p>
                                     <a href="{{ $item->url }}" class="icon-link gap-1 icon-link-hover stretched-link">
