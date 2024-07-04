@@ -56,9 +56,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-white d-flex flex-column">
+                        <a href="{{ route('catalog.list') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('catalog.list') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-grid mx-auto fs-4"></i>
-                            Products
+                            Catalogs
                         </a>
                     </li>
                     <li>
