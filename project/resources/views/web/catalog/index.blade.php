@@ -5,7 +5,7 @@
 @section("content")
     <div class="catalogs-page">
         <div class="container container-page">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
                 @if($records->total() > 0)
                     @foreach($records as $item)
                         <div class="col">

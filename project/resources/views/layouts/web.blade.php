@@ -63,9 +63,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-white d-flex flex-column">
-                            <i class="bi bi-person-circle mx-auto fs-4"></i>
-                            Customers
+                        <a href="{{ route('news.list') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('news.list') ? 'text-secondary' : 'text-white' }}">
+                            <i class="bi bi-newspaper mx-auto fs-4"></i>
+                            News
                         </a>
                     </li>
                 </ul>

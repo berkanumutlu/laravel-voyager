@@ -17,15 +17,17 @@ Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->nam
 Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
     Route::get('about-us', "show_article_page")->name('about_us');
     Route::get('articles', "index")->name('list');
-    Route::get('articles/{category:slug}', "show_category")->name('category');
+    Route::get('articles/category/{category:slug}', "show_category")->name('category');
     Route::get('article/{post:slug}', "show")->name('detail');
 });
 Route::name('catalog.')->controller('\App\Http\Controllers\Web\CatalogController')->group(function () {
     Route::get('catalogs', "index")->name('list');
     Route::get('catalog/{catalog:slug}', "show")->name('detail');
 });
-Route::get('storage/catalogs/{*}', function () {
-    dd('test');
+Route::name('news.')->controller('\App\Http\Controllers\Web\NewsController')->group(function () {
+    Route::get('news', "index")->name('list');
+    Route::get('news/category/{category:slug}', "show_category")->name('category');
+    Route::get('news/{news:slug}', "show")->name('detail');
 });
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

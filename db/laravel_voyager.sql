@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 04 Tem 2024, 11:51:26
+-- Üretim Zamanı: 05 Tem 2024, 08:40:52
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -46,8 +46,8 @@ CREATE TABLE `catalogs` (
 --
 
 INSERT INTO `catalogs` (`id`, `title`, `slug`, `image`, `file`, `featured`, `hit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Katalog 1', 'katalog-1', 'catalogs/May2024/C3wyVnpWPPOtKbqVKxlo.png', '[{\"download_link\":\"catalogs\\/July2024\\/AaA2O6clFzFxRxs3woFa.pdf\",\"original_name\":\"pdf-sample_0.pdf\"}]', 1, 4, 1, '2024-05-30 14:56:06', '2024-07-04 08:19:23', NULL),
-(2, 'Katalog 2', 'katalog-2', 'catalogs/May2024/WAYkmotzBv8J2PZP7jMj.png', '[{\"download_link\":\"catalogs\\/July2024\\/RL7koQ7JxgkaZAKJw0ZT.pdf\",\"original_name\":\"pdf-sample_1.pdf\"}]', 1, 3, 1, '2024-05-30 14:56:31', '2024-07-04 08:19:42', NULL);
+(1, 'Katalog 1', 'katalog-1', 'catalogs/May2024/C3wyVnpWPPOtKbqVKxlo.png', '[{\"download_link\":\"catalogs\\/July2024\\/AaA2O6clFzFxRxs3woFa.pdf\",\"original_name\":\"pdf-sample_0.pdf\"}]', 1, 5, 1, '2024-05-30 14:56:06', '2024-07-04 08:19:23', NULL),
+(2, 'Katalog 2', 'katalog-2', 'catalogs/May2024/WAYkmotzBv8J2PZP7jMj.png', '[{\"download_link\":\"catalogs\\/July2024\\/RL7koQ7JxgkaZAKJw0ZT.pdf\",\"original_name\":\"pdf-sample_1.pdf\"}]', 1, 4, 1, '2024-05-30 14:56:31', '2024-07-04 08:19:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -233,7 +233,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (70, 7, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 10),
 (71, 7, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 11),
 (72, 8, 'id', 'number', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(73, 8, 'author_id', 'text', 'Author Id', 1, 1, 1, 1, 1, 0, '{\"validation\":{\"rule\":\"required\"}}', 2),
+(73, 8, 'author_id', 'text', 'Author Id', 1, 0, 0, 0, 0, 0, '{\"validation\":{\"rule\":\"required\"}}', 2),
 (74, 8, 'category_id', 'text', 'Category Id', 0, 0, 0, 1, 1, 0, '{\"validation\":{\"rule\":\"required\"}}', 3),
 (75, 8, 'title', 'text', 'Başlık', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|max:255\"}}', 6),
 (76, 8, 'slug', 'text', 'Slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:news,slug\"}}', 7),
@@ -246,9 +246,9 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (83, 8, 'featured', 'checkbox', 'Öne Çıkanlar', 1, 1, 1, 1, 1, 1, '{\"default\":0,\"on\":\"Evet\",\"off\":\"Hay\\u0131r\",\"checked\":false}', 14),
 (84, 8, 'hit', 'number', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15),
 (85, 8, 'status', 'select_dropdown', 'Durum', 1, 1, 1, 1, 1, 1, '{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"Yay\\u0131nland\\u0131\",\"DRAFT\":\"Taslak\",\"PENDING\":\"Bekliyor\"}}', 16),
-(86, 8, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 17),
-(87, 8, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 18),
-(88, 8, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 19),
+(86, 8, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 0, 1, 0, 0, 0, '{}', 18),
+(87, 8, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 19),
+(88, 8, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 20),
 (89, 8, 'news_belongsto_category_relationship', 'relationship', 'Kategori', 0, 1, 1, 1, 1, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"category_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 4),
 (90, 8, 'news_belongsto_user_relationship', 'relationship', 'Yazar', 1, 1, 1, 1, 1, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
 (91, 9, 'id', 'number', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
@@ -324,7 +324,8 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (161, 18, 'ticket_belongsto_user_relationship_1', 'relationship', 'Alıcı', 0, 1, 1, 0, 0, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"receiver_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6),
 (162, 18, 'ticket_belongstomany_ticket_message_relationship', 'relationship', 'Mesajlar', 0, 0, 1, 0, 0, 1, '{\"model\":\"App\\\\Models\\\\TicketMessage\",\"table\":\"ticket_messages\",\"type\":\"hasMany\",\"column\":\"ticket_id\",\"key\":\"id\",\"label\":\"message\",\"pivot_table\":\"ticket_messages\",\"pivot\":\"0\",\"taggable\":\"0\"}', 13),
 (163, 6, 'page_belongsto_user_relationship', 'relationship', 'Yazar', 0, 1, 1, 0, 0, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 3),
-(164, 5, 'published_at', 'timestamp', 'Yayınlanma Tarihi', 0, 1, 1, 1, 1, 1, '{}', 17);
+(164, 5, 'published_at', 'timestamp', 'Yayınlanma Tarihi', 0, 1, 1, 1, 1, 1, '{}', 17),
+(165, 8, 'published_at', 'timestamp', 'Yayınlanma Tarihi', 0, 1, 1, 1, 1, 1, '{}', 17);
 
 -- --------------------------------------------------------
 
@@ -362,7 +363,7 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (5, 'posts', 'posts', 'Gönderi', 'Gönderiler', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-07-04 09:25:19'),
 (6, 'pages', 'pages', 'Sayfa', 'Sayfalar', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-28 16:17:02'),
 (7, 'catalogs', 'catalogs', 'Katalog', 'Kataloglar', 'voyager-documentation', 'App\\Models\\Catalog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-30 13:11:16', '2024-07-04 11:14:07'),
-(8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-07-04 09:25:23'),
+(8, 'news', 'news', 'Haber', 'Haberler', 'voyager-news', 'App\\Models\\News', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 11:28:31', '2024-07-05 08:24:05'),
 (9, 'contact_messages', 'contact-messages', 'İletişim Mesajı', 'İletişim Mesajları', 'voyager-mail', 'App\\Models\\ContactMessage', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-31 23:40:10', '2024-06-05 14:52:03'),
 (10, 'currencies', 'currencies', 'Para Birimi', 'Para Birimleri', 'voyager-credit-cards', 'App\\Models\\Currency', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"sort\",\"order_display_column\":\"name\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-06-02 11:17:09', '2024-06-05 14:52:26'),
 (11, 'qualities', 'qualities', 'Kalite', 'Kaliteler', 'voyager-documentation', 'App\\Models\\Quality', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-06-03 07:54:08', '2024-06-05 14:55:31'),
@@ -526,6 +527,7 @@ CREATE TABLE `news` (
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `hit` int(11) DEFAULT '0',
   `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `published_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -535,9 +537,9 @@ CREATE TABLE `news` (
 -- Tablo döküm verisi `news`
 --
 
-INSERT INTO `news` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt`, `body`, `image`, `meta_description`, `meta_keywords`, `seo_title`, `featured`, `hit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'Haber 1', 'haber-1', 'Haber 1 alıntı mesajı', '<p>Haber 1 i&ccedil;eriği</p>', 'news/May2024/Ayf6YpvkrZY2Ur736LHo.png', 'Haber 1 meta açıklaması', 'haber, haber 1', NULL, 1, 0, 'PUBLISHED', '2024-05-31 11:49:13', '2024-05-31 11:49:13', NULL),
-(2, 2, 2, 'Haber 2', 'haber-2', 'Haber 2 alıntı mesajı', '<p>Haber 2 i&ccedil;eriği</p>', 'news/May2024/apHykyNts427oITW7Wx8.png', 'Haber 2 meta açıklaması', 'haber, haber 2', NULL, 0, 0, 'PUBLISHED', '2024-05-31 11:56:01', '2024-05-31 11:56:01', NULL);
+INSERT INTO `news` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt`, `body`, `image`, `meta_description`, `meta_keywords`, `seo_title`, `featured`, `hit`, `status`, `published_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 'Haber 1', 'haber-1', 'Haber 1 alıntı mesajı', '<p>Haber 1 i&ccedil;eriği</p>', 'news/May2024/Ayf6YpvkrZY2Ur736LHo.png', 'Haber 1 meta açıklaması', 'haber, haber 1', NULL, 1, 90, 'PUBLISHED', '2024-05-31 11:49:13', '2024-05-31 11:49:13', '2024-05-31 11:49:13', NULL),
+(2, 2, 2, 'Haber 2', 'haber-2', 'Haber 2 alıntı mesajı', '<p>Haber 2 i&ccedil;eriği</p>', 'news/May2024/apHykyNts427oITW7Wx8.png', 'Haber 2 meta açıklaması', 'haber, haber 2', NULL, 0, 26, 'PUBLISHED', '2024-05-31 11:56:01', '2024-05-31 11:56:01', '2024-05-31 11:56:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -828,8 +830,8 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt`, `body`, `image`, `meta_description`, `meta_keywords`, `seo_title`, `featured`, `hit`, `status`, `published_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 1, 'Lorem Ipsum Yazısı', 'lorem-ipsum-yazisi', 'Bu yazının kısa açıklamasıdır.', '<h2>Lorem Ipsum Nedir?</h2>\n<p><strong>Lorem Ipsum</strong>, dizgi ve baskı end&uuml;strisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak &uuml;zere bir yazı galerisini alarak karıştırdığı 1500\'lerden beri end&uuml;stri standardı sahte metinler olarak kullanılmıştır. Beşy&uuml;z yıl boyunca varlığını s&uuml;rd&uuml;rmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sı&ccedil;ramıştır. 1960\'larda Lorem Ipsum pasajları da i&ccedil;eren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum s&uuml;r&uuml;mleri i&ccedil;eren masa&uuml;st&uuml; yayıncılık yazılımları ile pop&uuml;ler olmuştur.</p>\n<h2>Nereden Gelir?</h2>\n<p>Yaygın inancın tersine, Lorem Ipsum rastgele s&ouml;zc&uuml;klerden oluşmaz. K&ouml;kleri M.&Ouml;. 45 tarihinden bu yana klasik Latin edebiyatına kadar uzanan 2000 yıllık bir ge&ccedil;mişi vardır. Virginia\'daki Hampden-Sydney College\'dan Latince profes&ouml;r&uuml; Richard McClintock, bir Lorem Ipsum pasajında ge&ccedil;en ve anlaşılması en g&uuml;&ccedil; s&ouml;zc&uuml;klerden biri olan \'consectetur\' s&ouml;zc&uuml;ğ&uuml;n&uuml;n klasik edebiyattaki &ouml;rneklerini incelediğinde kesin bir kaynağa ulaşmıştır. Lorm Ipsum, &Ccedil;i&ccedil;ero tarafından M.&Ouml;. 45 tarihinde kaleme alınan \"de Finibus Bonorum et Malorum\" (İyi ve K&ouml;t&uuml;n&uuml;n U&ccedil; Sınırları) eserinin 1.10.32 ve 1.10.33 sayılı b&ouml;l&uuml;mlerinden gelmektedir. Bu kitap, ahlak kuramı &uuml;zerine bir tezdir ve R&ouml;nesans d&ouml;neminde &ccedil;ok pop&uuml;ler olmuştur. Lorem Ipsum pasajının ilk satırı olan \"Lorem ipsum dolor sit amet\" 1.10.32 sayılı b&ouml;l&uuml;mdeki bir satırdan gelmektedir.</p>\n<p>1500\'lerden beri kullanılmakta olan standard Lorem Ipsum metinleri ilgilenenler i&ccedil;in yeniden &uuml;retilmiştir. &Ccedil;i&ccedil;ero tarafından yazılan 1.10.32 ve 1.10.33 b&ouml;l&uuml;mleri de 1914 H. Rackham &ccedil;evirisinden alınan İngilizce s&uuml;r&uuml;mleri eşliğinde &ouml;zg&uuml;n bi&ccedil;iminden yeniden &uuml;retilmiştir.</p>\n<h2>Neden Kullanırız?</h2>\n<p>Yinelenen bir sayfa i&ccedil;eriğinin okuyucunun dikkatini dağıttığı bilinen bir ger&ccedil;ektir. Lorem Ipsum kullanmanın amacı, s&uuml;rekli \'buraya metin gelecek, buraya metin gelecek\' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda bir&ccedil;ok masa&uuml;st&uuml; yayıncılık paketi ve web sayfa d&uuml;zenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında \'lorem ipsum\' anahtar s&ouml;zc&uuml;kleri ile arama yapıldığında hen&uuml;z tasarım aşamasında olan &ccedil;ok sayıda site listelenir. Yıllar i&ccedil;inde, bazen kazara, bazen bilin&ccedil;li olarak (&ouml;rneğin mizah katılarak), &ccedil;eşitli s&uuml;r&uuml;mleri geliştirilmiştir.</p>\n<h2>Nereden Bulabilirim?</h2>\n<p>Lorem Ipsum pasajlarının bir&ccedil;ok &ccedil;eşitlemesi vardır. Ancak bunların b&uuml;y&uuml;k bir &ccedil;oğunluğu mizah katılarak veya rastgele s&ouml;zc&uuml;kler eklenerek değiştirilmişlerdir. Eğer bir Lorem Ipsum pasajı kullanacaksanız, metin aralarına utandırıcı s&ouml;zc&uuml;kler gizlenmediğinden emin olmanız gerekir. İnternet\'teki t&uuml;m Lorem Ipsum &uuml;rete&ccedil;leri &ouml;nceden belirlenmiş metin bloklarını yineler. Bu da, bu &uuml;reteci İnternet &uuml;zerindeki ger&ccedil;ek Lorem Ipsum &uuml;reteci yapar. Bu &uuml;rete&ccedil;, 200\'den fazla Latince s&ouml;zc&uuml;k ve onlara ait c&uuml;mle yapılarını i&ccedil;eren bir s&ouml;zl&uuml;k kullanır. Bu nedenle, &uuml;retilen Lorem Ipsum metinleri yinelemelerden, mizahtan ve karakteristik olmayan s&ouml;zc&uuml;klerden uzaktır.</p>\n<figure class=\"image\"><img title=\"G&ouml;rsel Başlığı\" src=\"http://localhost/storage/posts/May2024/lorem.png\" alt=\"Alternatif A&ccedil;ıklama\">\n<figcaption>G&ouml;rsel Alt Başlık</figcaption>\n</figure>\n<p>&nbsp;</p>', 'posts/post1.jpg', 'Bu meta açıklamasıdır.', 'anahtar1, anahtar2, anahtar3', 'SEO Başlığı', 0, 59, 'PUBLISHED', '2024-07-01 09:12:00', '2024-05-21 13:05:53', '2024-07-04 11:13:25', NULL),
 (2, 1, 1, 'Örnek Yazı', 'ornek-yazi', 'Bu örnek yazının alıntısıdır', '<p>Bu, g&ouml;vdeyi i&ccedil;eren &ouml;rnek g&ouml;nderinin g&ouml;vdesidir.</p>\n<h2>Her t&uuml;rl&uuml; formatı kullanabiliriz!</h2>\n<p>Ve bir s&uuml;r&uuml; başka şey ekleyin.</p>', 'posts/post2.jpg', 'Örnek yazı için Meta Açıklama', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 2, 'PUBLISHED', '2024-07-03 10:34:00', '2024-05-22 13:05:54', '2024-05-28 13:15:42', NULL),
-(3, 1, 2, 'Son Yazı', 'son-yazi', 'Bu son yazının alıntısı', '<p>Bu son yazının i&ccedil;eriği</p>', 'posts/post3.jpg', 'Bu meta açıklamasıdır', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 2, 'PUBLISHED', '2024-07-03 14:46:00', '2024-05-23 13:05:55', '2024-05-28 13:17:19', NULL),
-(4, 1, 2, 'Yarr Yazısı', 'yarr-yazisi', 'Resif yelkenleri, kablo sandığının üzerine bir yay getiriyor, jüri direği sivri uçlu Sekiz Parçası kıç güvertesini yağmalıyor. Kırpıcı sürücüsü dümenci kalyon kenevir yular baskı çetesi ile geliyor çete kalasları tekneler liderliği sallıyor. Nipperkin yarda gök yelkeni sürüntü kordonu Blimey sintine suyu ho çeyrek Buccaneer.', '<p>Swab &ouml;l&uuml; ışıklar Korsan ateş gemisi kare te&ccedil;hizatlı dans kenevir jig\'i tartmak &ccedil;apa gevezelik meyve i&ccedil;eceği salkımı. Jenny\'nin &ccedil;ay fincanı kovalayan silahlar, kalplerin ruhları, fı&ccedil;ı kafalı Gold Road, zincirlerinize g&ouml;re &ouml;l&ccedil;&uuml;len altı poundluk kula&ccedil;. Ana ıskota vekili, yelkenli barkadeer kıvrımlı mizzenmast tugayı yağmalamaya &ccedil;alışıyor.</p>\n<p>Mizzen ligi keelhaul kalyon ihale dişli kovalamaca Berberi Sahili doublon Jenny\'nin &ccedil;ay bardağını kırdı. Adamı u&ccedil;urun yelkenli ateş gemisi pinnace kıkırdama meyve hattı warp Kara saldırı renkleri doubloon\'un amirali. Jack Ketch\'le m&uuml;cadele edin, kıvrımlı rom draft frengileri pruvada r&uuml;zgar kestane rengi bir atış yapın.</p>\n<p>Interloper listeyi aşağı &ccedil;ekiyor, s&uuml;r&uuml;c&uuml; kutsal taş frengisine basıyor ve &ccedil;apasındaki sintineli sintineyle m&uuml;cadele ediyor. Jack Tar araya giren taslak kıskacı mizzen direği hulk knave kablo kı&ccedil; yatırması fı&ccedil;ıbaşı. Gaff yağma, grog kı&ccedil;ını takip etmek i&ccedil;in silahları korsanlık yardarm d&uuml;zenbaz g&ouml;k g&uuml;r&uuml;lt&uuml;s&uuml; alkışını takip ediyor.</p>', 'posts/post4.jpg', 'bu bir meta açıklama olsun', 'Resif yelkenleri, Nipperkin yarda gök yelkeni, Buccaneer', NULL, 0, 3, 'PUBLISHED', '2024-07-03 14:54:00', '2024-05-25 13:05:56', '2024-07-03 11:54:08', NULL);
+(3, 1, 2, 'Son Yazı', 'son-yazi', 'Bu son yazının alıntısı', '<p>Bu son yazının i&ccedil;eriği</p>', 'posts/post3.jpg', 'Bu meta açıklamasıdır', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 3, 'PUBLISHED', '2024-07-03 14:46:00', '2024-05-23 13:05:55', '2024-05-28 13:17:19', NULL),
+(4, 1, 2, 'Yarr Yazısı', 'yarr-yazisi', 'Resif yelkenleri, kablo sandığının üzerine bir yay getiriyor, jüri direği sivri uçlu Sekiz Parçası kıç güvertesini yağmalıyor. Kırpıcı sürücüsü dümenci kalyon kenevir yular baskı çetesi ile geliyor çete kalasları tekneler liderliği sallıyor. Nipperkin yarda gök yelkeni sürüntü kordonu Blimey sintine suyu ho çeyrek Buccaneer.', '<p>Swab &ouml;l&uuml; ışıklar Korsan ateş gemisi kare te&ccedil;hizatlı dans kenevir jig\'i tartmak &ccedil;apa gevezelik meyve i&ccedil;eceği salkımı. Jenny\'nin &ccedil;ay fincanı kovalayan silahlar, kalplerin ruhları, fı&ccedil;ı kafalı Gold Road, zincirlerinize g&ouml;re &ouml;l&ccedil;&uuml;len altı poundluk kula&ccedil;. Ana ıskota vekili, yelkenli barkadeer kıvrımlı mizzenmast tugayı yağmalamaya &ccedil;alışıyor.</p>\n<p>Mizzen ligi keelhaul kalyon ihale dişli kovalamaca Berberi Sahili doublon Jenny\'nin &ccedil;ay bardağını kırdı. Adamı u&ccedil;urun yelkenli ateş gemisi pinnace kıkırdama meyve hattı warp Kara saldırı renkleri doubloon\'un amirali. Jack Ketch\'le m&uuml;cadele edin, kıvrımlı rom draft frengileri pruvada r&uuml;zgar kestane rengi bir atış yapın.</p>\n<p>Interloper listeyi aşağı &ccedil;ekiyor, s&uuml;r&uuml;c&uuml; kutsal taş frengisine basıyor ve &ccedil;apasındaki sintineli sintineyle m&uuml;cadele ediyor. Jack Tar araya giren taslak kıskacı mizzen direği hulk knave kablo kı&ccedil; yatırması fı&ccedil;ıbaşı. Gaff yağma, grog kı&ccedil;ını takip etmek i&ccedil;in silahları korsanlık yardarm d&uuml;zenbaz g&ouml;k g&uuml;r&uuml;lt&uuml;s&uuml; alkışını takip ediyor.</p>', 'posts/post4.jpg', 'bu bir meta açıklama olsun', 'Resif yelkenleri, Nipperkin yarda gök yelkeni, Buccaneer', NULL, 0, 4, 'PUBLISHED', '2024-07-03 14:54:00', '2024-05-25 13:05:56', '2024-07-03 11:54:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -1368,7 +1370,8 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (303, 'data_rows', 'display_name', 162, 'en', 'ticket_messages', '2024-06-06 18:06:20', '2024-06-06 18:06:20'),
 (304, 'pages', 'excerpt', 1, 'en', 'Hang the prop, grog, grog flower, dance with the hemp jig, press the dock, take the bilge rat to the account raider. Nelson\'s crazy gabion line draft scallywag fire ship gaff fluke fathom case shot. Sea Legs has a shot at the Gold Road gear league with their bilge rat sloop matey gabion longsuits.', '2024-06-16 12:12:45', '2024-06-29 16:35:48'),
 (305, 'data_rows', 'display_name', 163, 'en', 'users', '2024-06-28 16:16:24', '2024-06-28 16:16:24'),
-(306, 'data_rows', 'display_name', 164, 'en', 'Published At', '2024-07-03 11:53:05', '2024-07-03 11:53:05');
+(306, 'data_rows', 'display_name', 164, 'en', 'Published At', '2024-07-03 11:53:05', '2024-07-03 11:53:05'),
+(307, 'data_rows', 'display_name', 165, 'en', 'Published At', '2024-07-05 08:24:05', '2024-07-05 08:24:05');
 
 -- --------------------------------------------------------
 
@@ -1640,7 +1643,7 @@ ALTER TABLE `currencies`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
@@ -1748,7 +1751,7 @@ ALTER TABLE `ticket_messages`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
