@@ -69,6 +69,13 @@
                             News
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('quality.list') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('quality.list') ? 'text-secondary' : 'text-white' }}">
+                            <i class="bi bi-award mx-auto fs-4"></i>
+                            Quality
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

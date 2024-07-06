@@ -16,7 +16,7 @@ class CatalogController extends Controller
             ->select(['id', 'title', 'slug', 'image', 'file'])
             ->orderBy('created_at', 'desc')->orderBy('id', 'desc')
             ->paginate(16);
-        $records->map(function ($item) {
+        $records->each(function ($item) {
             if (empty($item->file)) {
                 $item->file_url = 'javascript:;';
             } else {

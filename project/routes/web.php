@@ -29,6 +29,10 @@ Route::name('news.')->controller('\App\Http\Controllers\Web\NewsController')->gr
     Route::get('news/category/{category:slug}', "show_category")->name('category');
     Route::get('news/{news:slug}', "show")->name('detail');
 });
+Route::name('quality.')->controller('\App\Http\Controllers\Web\QualityController')->group(function () {
+    Route::get('quality', "index")->name('list');
+    Route::get('quality/{quality:slug}', "show")->name('detail');
+});
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::post('tickets/{id}/reply', [App\Http\Controllers\Admin\TicketController::class, 'reply'])->name('admin.tickets.reply');
