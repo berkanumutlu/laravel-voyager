@@ -33,6 +33,10 @@ Route::name('quality.')->controller('\App\Http\Controllers\Web\QualityController
     Route::get('quality', "index")->name('list');
     Route::get('quality/{quality:slug}', "show")->name('detail');
 });
+Route::name('contact.')->controller('\App\Http\Controllers\Web\ContactController')->group(function () {
+    Route::get('contact', "index")->name('list');
+    Route::post('contact/message', "message")->name('message');
+});
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::post('tickets/{id}/reply', [App\Http\Controllers\Admin\TicketController::class, 'reply'])->name('admin.tickets.reply');
