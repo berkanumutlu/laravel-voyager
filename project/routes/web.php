@@ -34,7 +34,7 @@ Route::name('quality.')->controller('\App\Http\Controllers\Web\QualityController
     Route::get('quality/{quality:slug}', "show")->name('detail');
 });
 Route::name('contact.')->controller('\App\Http\Controllers\Web\ContactController')->group(function () {
-    Route::get('contact', "index")->name('list');
+    Route::get('contact', "index")->name('index');
     Route::post('contact/message', "message")->name('message');
 });
 Route::group(['prefix' => 'admin'], function () {

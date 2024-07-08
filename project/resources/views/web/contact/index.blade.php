@@ -7,22 +7,34 @@
         <div class="container container-page container-contact100">
             <div class="wrap-contact100">
                 <form action="{{ route('contact.message') }}" method="POST" class="contact100-form validate-form">
+                    @csrf
                     <span class="contact100-form-title">Send Us A Message</span>
-                    <label class="label-input100" for="first-name">Tell us your name *</label>
+                    @if(session('success'))
+                        <div class="w-100">
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="w-100">
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        </div>
+                    @endif
+                    <label class="label-input100" for="first_name">Tell us your name *</label>
                     <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-                        <input id="first-name" class="input100" type="text" name="first-name" placeholder="First name"
-                               required>
+                        <input id="first_name" class="input100" type="text" name="first_name" placeholder="First name"
+                               value="{{ old('first_name') ?? '' }}" required>
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-                        <input class="input100" type="text" name="last-name" placeholder="Last name" required>
+                        <input class="input100" type="text" name="last_name" placeholder="Last name"
+                               value="{{ old('last_name') ?? '' }}" required>
                         <span class="focus-input100"></span>
                     </div>
                     <label class="label-input100" for="email">Enter your email *</label>
                     <div class="wrap-input100 validate-input"
                          data-validate="Valid email is required: ex@abc.xyz">
                         <input id="email" class="input100" type="text" name="email"
-                               placeholder="Eg. example@email.com" required>
+                               placeholder="Eg. example@email.com" value="{{ old('email') ?? '' }}" required>
                         <span class="focus-input100"></span>
                     </div>
                     <div class="row">
@@ -30,7 +42,7 @@
                             <label class="label-input100" for="phone">Enter phone number *</label>
                             <div class="wrap-input100">
                                 <input id="phone" class="input100" type="text" name="phone"
-                                       placeholder="Eg. +1 800 000000" required>
+                                       value="{{ old('phone') ?? '' }}" placeholder="Eg. +1 800 000000" required>
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
@@ -38,27 +50,25 @@
                             <label class="label-input100" for="company">Enter company name</label>
                             <div class="wrap-input100">
                                 <input id="company" class="input100" type="text" name="company"
-                                       placeholder="Eg. Microsoft">
+                                       value="{{ old('company') ?? '' }}" placeholder="Eg. Microsoft">
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
                     </div>
                     <label class="label-input100" for="subject">Subject *</label>
                     <div class="wrap-input100">
-                        <input id="subject" class="input100" type="text" name="subject" required
-                               placeholder="Enter your subject">
+                        <input id="subject" class="input100" type="text" name="subject"
+                               value="{{ old('subject') ?? '' }}" placeholder="Enter your subject" required>
                         <span class="focus-input100"></span>
                     </div>
                     <label class="label-input100" for="message">Message *</label>
                     <div class="wrap-input100 validate-input" data-validate="Message is required">
                         <textarea id="message" class="input100" name="message" required
-                                  placeholder="Write us a message"></textarea>
+                                  placeholder="Write us a message">{{ old('message') ?? '' }}</textarea>
                         <span class="focus-input100"></span>
                     </div>
                     <div class="container-contact100-form-btn">
-                        <button class="contact100-form-btn">
-                            Send Message
-                        </button>
+                        <button class="contact100-form-btn">Send Message</button>
                     </div>
                 </form>
                 <div class="contact100-more flex-col-c-m"

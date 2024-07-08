@@ -77,8 +77,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('contact.list') }}"
-                           class="nav-link d-flex flex-column {{ Route::is('contact.list') ? 'text-secondary' : 'text-white' }}">
+                        <a href="{{ route('contact.index') }}"
+                           class="nav-link d-flex flex-column {{ Route::is('contact.index') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-chat-left-dots mx-auto fs-4"></i>
                             Contact
                         </a>
