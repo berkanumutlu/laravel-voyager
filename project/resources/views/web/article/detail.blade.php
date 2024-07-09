@@ -77,11 +77,13 @@
                         @endif
                         <div class="p-4">
                             <h4 class="fst-italic">Elsewhere</h4>
-                            <ol class="list-unstyled">
-                                <li><a href="#">GitHub</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Facebook</a></li>
-                            </ol>
+                            @if(!empty($social_media_list))
+                                <ol class="list-unstyled">
+                                    @foreach($social_media_list as $item)
+                                        <li><a href="{{ $item->link }}" rel="nofollow">{{ $item->name }}</a></li>
+                                    @endforeach
+                                </ol>
+                            @endif
                         </div>
                     </div>
                 </div>

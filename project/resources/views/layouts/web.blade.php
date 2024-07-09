@@ -150,23 +150,19 @@
         </div>
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 border-top">
             <p>© 2024 {{ $site_name }}. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3">
-                    <a class="link-body-emphasis" href="#">
-                        <i class="bi bi-twitter fs-24"></i>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="link-body-emphasis" href="#">
-                        <i class="bi bi-instagram fs-24"></i>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="link-body-emphasis" href="#">
-                        <i class="bi bi-facebook fs-24"></i>
-                    </a>
-                </li>
-            </ul>
+            @if(!empty($social_media_list))
+                <ul class="list-unstyled d-flex">
+                    @foreach($social_media_list as $item)
+                        <li class="ms-3">
+                            <a class="link-body-emphasis" href="{{ $item->link }}" target="_blank" rel="noopener">
+                                @if(!empty($item->icon))
+                                    <i class="{{ $item->icon }} fs-5"></i>
+                                @endif
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
 </footer>

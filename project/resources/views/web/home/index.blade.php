@@ -5,7 +5,7 @@
 @endsection
 @section("content")
     @if(!empty($slider_list))
-        <div class="owl-carousel slider-section home-slider mb-5" data-ride="carousel">
+        <div class="owl-carousel slider-section home-slider" data-ride="carousel">
             @foreach($slider_list as $item)
                 <div class="slider-item">
                     @if($item->type == 'IMAGE')
@@ -29,7 +29,7 @@
             @endforeach
         </div>
     @endif
-    <div class="container marketing">
+    <div class="container marketing mt-5">
         <!-- Three columns of text below the carousel -->
         <div class="row">
             <div class="col-lg-4">

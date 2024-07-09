@@ -63,10 +63,16 @@ class NewsController extends Controller
             });
             return $records;
         });
+        $social_media_list = \App\Models\SocialMedia::query()->where('status', 1)
+            ->select(['name', 'icon', 'link', 'description'])
+            ->orderBy('sort', 'asc')->get();
         $title = $record->seo_title ?? $record->title;
         $meta_description = $record->meta_description;
         $meta_keywords = $record->meta_keywords;
         return view('web.news.detail',
-            compact(['title', 'meta_description', 'meta_keywords', 'record', 'last_records', 'category_list']));
+            compact([
+                'title', 'meta_description', 'meta_keywords', 'record', 'last_records', 'category_list',
+                'social_media_list'
+            ]));
     }
 }

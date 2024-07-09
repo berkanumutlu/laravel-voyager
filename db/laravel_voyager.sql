@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 05 Tem 2024, 08:40:52
+-- Üretim Zamanı: 09 Tem 2024, 13:03:32
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -100,7 +100,8 @@ CREATE TABLE `contact_messages` (
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `phone`, `company`, `subject`, `message`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Berkan TEST', 'berkan@test.com', '05123456789', 'Test Company', 'Test Subject', 'Test message', 'PENDING', '2024-06-01 02:48:58', NULL, NULL);
+(1, 'Berkan TEST', 'berkan@test.com', '05123456789', 'Test Company', 'Test Subject', 'Test message', 'PENDING', '2024-06-01 02:48:58', NULL, NULL),
+(2, 'Berkan TEST', 'test@test.com', '01232223344', 'Test Company', 'Test Konu', 'Bu bir test mesajıdır.', 'PENDING', '2024-07-08 11:27:50', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -538,8 +539,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt`, `body`, `image`, `meta_description`, `meta_keywords`, `seo_title`, `featured`, `hit`, `status`, `published_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'Haber 1', 'haber-1', 'Haber 1 alıntı mesajı', '<p>Haber 1 i&ccedil;eriği</p>', 'news/May2024/Ayf6YpvkrZY2Ur736LHo.png', 'Haber 1 meta açıklaması', 'haber, haber 1', NULL, 1, 90, 'PUBLISHED', '2024-05-31 11:49:13', '2024-05-31 11:49:13', '2024-05-31 11:49:13', NULL),
-(2, 2, 2, 'Haber 2', 'haber-2', 'Haber 2 alıntı mesajı', '<p>Haber 2 i&ccedil;eriği</p>', 'news/May2024/apHykyNts427oITW7Wx8.png', 'Haber 2 meta açıklaması', 'haber, haber 2', NULL, 0, 26, 'PUBLISHED', '2024-05-31 11:56:01', '2024-05-31 11:56:01', '2024-05-31 11:56:01', NULL);
+(1, 1, 1, 'Haber 1', 'haber-1', 'Haber 1 alıntı mesajı', '<p>Haber 1 i&ccedil;eriği</p>', 'news/May2024/Ayf6YpvkrZY2Ur736LHo.png', 'Haber 1 meta açıklaması', 'haber, haber 1', NULL, 1, 91, 'PUBLISHED', '2024-05-31 11:49:13', '2024-05-31 11:49:13', '2024-05-31 11:49:13', NULL),
+(2, 2, 2, 'Haber 2', 'haber-2', 'Haber 2 alıntı mesajı', '<p>Haber 2 i&ccedil;eriği</p>', 'news/May2024/apHykyNts427oITW7Wx8.png', 'Haber 2 meta açıklaması', 'haber, haber 2', NULL, 0, 31, 'PUBLISHED', '2024-05-31 11:56:01', '2024-05-31 11:56:01', '2024-05-31 11:56:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -829,9 +830,9 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `slug`, `excerpt`, `body`, `image`, `meta_description`, `meta_keywords`, `seo_title`, `featured`, `hit`, `status`, `published_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 1, 'Lorem Ipsum Yazısı', 'lorem-ipsum-yazisi', 'Bu yazının kısa açıklamasıdır.', '<h2>Lorem Ipsum Nedir?</h2>\n<p><strong>Lorem Ipsum</strong>, dizgi ve baskı end&uuml;strisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak &uuml;zere bir yazı galerisini alarak karıştırdığı 1500\'lerden beri end&uuml;stri standardı sahte metinler olarak kullanılmıştır. Beşy&uuml;z yıl boyunca varlığını s&uuml;rd&uuml;rmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sı&ccedil;ramıştır. 1960\'larda Lorem Ipsum pasajları da i&ccedil;eren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum s&uuml;r&uuml;mleri i&ccedil;eren masa&uuml;st&uuml; yayıncılık yazılımları ile pop&uuml;ler olmuştur.</p>\n<h2>Nereden Gelir?</h2>\n<p>Yaygın inancın tersine, Lorem Ipsum rastgele s&ouml;zc&uuml;klerden oluşmaz. K&ouml;kleri M.&Ouml;. 45 tarihinden bu yana klasik Latin edebiyatına kadar uzanan 2000 yıllık bir ge&ccedil;mişi vardır. Virginia\'daki Hampden-Sydney College\'dan Latince profes&ouml;r&uuml; Richard McClintock, bir Lorem Ipsum pasajında ge&ccedil;en ve anlaşılması en g&uuml;&ccedil; s&ouml;zc&uuml;klerden biri olan \'consectetur\' s&ouml;zc&uuml;ğ&uuml;n&uuml;n klasik edebiyattaki &ouml;rneklerini incelediğinde kesin bir kaynağa ulaşmıştır. Lorm Ipsum, &Ccedil;i&ccedil;ero tarafından M.&Ouml;. 45 tarihinde kaleme alınan \"de Finibus Bonorum et Malorum\" (İyi ve K&ouml;t&uuml;n&uuml;n U&ccedil; Sınırları) eserinin 1.10.32 ve 1.10.33 sayılı b&ouml;l&uuml;mlerinden gelmektedir. Bu kitap, ahlak kuramı &uuml;zerine bir tezdir ve R&ouml;nesans d&ouml;neminde &ccedil;ok pop&uuml;ler olmuştur. Lorem Ipsum pasajının ilk satırı olan \"Lorem ipsum dolor sit amet\" 1.10.32 sayılı b&ouml;l&uuml;mdeki bir satırdan gelmektedir.</p>\n<p>1500\'lerden beri kullanılmakta olan standard Lorem Ipsum metinleri ilgilenenler i&ccedil;in yeniden &uuml;retilmiştir. &Ccedil;i&ccedil;ero tarafından yazılan 1.10.32 ve 1.10.33 b&ouml;l&uuml;mleri de 1914 H. Rackham &ccedil;evirisinden alınan İngilizce s&uuml;r&uuml;mleri eşliğinde &ouml;zg&uuml;n bi&ccedil;iminden yeniden &uuml;retilmiştir.</p>\n<h2>Neden Kullanırız?</h2>\n<p>Yinelenen bir sayfa i&ccedil;eriğinin okuyucunun dikkatini dağıttığı bilinen bir ger&ccedil;ektir. Lorem Ipsum kullanmanın amacı, s&uuml;rekli \'buraya metin gelecek, buraya metin gelecek\' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda bir&ccedil;ok masa&uuml;st&uuml; yayıncılık paketi ve web sayfa d&uuml;zenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında \'lorem ipsum\' anahtar s&ouml;zc&uuml;kleri ile arama yapıldığında hen&uuml;z tasarım aşamasında olan &ccedil;ok sayıda site listelenir. Yıllar i&ccedil;inde, bazen kazara, bazen bilin&ccedil;li olarak (&ouml;rneğin mizah katılarak), &ccedil;eşitli s&uuml;r&uuml;mleri geliştirilmiştir.</p>\n<h2>Nereden Bulabilirim?</h2>\n<p>Lorem Ipsum pasajlarının bir&ccedil;ok &ccedil;eşitlemesi vardır. Ancak bunların b&uuml;y&uuml;k bir &ccedil;oğunluğu mizah katılarak veya rastgele s&ouml;zc&uuml;kler eklenerek değiştirilmişlerdir. Eğer bir Lorem Ipsum pasajı kullanacaksanız, metin aralarına utandırıcı s&ouml;zc&uuml;kler gizlenmediğinden emin olmanız gerekir. İnternet\'teki t&uuml;m Lorem Ipsum &uuml;rete&ccedil;leri &ouml;nceden belirlenmiş metin bloklarını yineler. Bu da, bu &uuml;reteci İnternet &uuml;zerindeki ger&ccedil;ek Lorem Ipsum &uuml;reteci yapar. Bu &uuml;rete&ccedil;, 200\'den fazla Latince s&ouml;zc&uuml;k ve onlara ait c&uuml;mle yapılarını i&ccedil;eren bir s&ouml;zl&uuml;k kullanır. Bu nedenle, &uuml;retilen Lorem Ipsum metinleri yinelemelerden, mizahtan ve karakteristik olmayan s&ouml;zc&uuml;klerden uzaktır.</p>\n<figure class=\"image\"><img title=\"G&ouml;rsel Başlığı\" src=\"http://localhost/storage/posts/May2024/lorem.png\" alt=\"Alternatif A&ccedil;ıklama\">\n<figcaption>G&ouml;rsel Alt Başlık</figcaption>\n</figure>\n<p>&nbsp;</p>', 'posts/post1.jpg', 'Bu meta açıklamasıdır.', 'anahtar1, anahtar2, anahtar3', 'SEO Başlığı', 0, 59, 'PUBLISHED', '2024-07-01 09:12:00', '2024-05-21 13:05:53', '2024-07-04 11:13:25', NULL),
-(2, 1, 1, 'Örnek Yazı', 'ornek-yazi', 'Bu örnek yazının alıntısıdır', '<p>Bu, g&ouml;vdeyi i&ccedil;eren &ouml;rnek g&ouml;nderinin g&ouml;vdesidir.</p>\n<h2>Her t&uuml;rl&uuml; formatı kullanabiliriz!</h2>\n<p>Ve bir s&uuml;r&uuml; başka şey ekleyin.</p>', 'posts/post2.jpg', 'Örnek yazı için Meta Açıklama', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 2, 'PUBLISHED', '2024-07-03 10:34:00', '2024-05-22 13:05:54', '2024-05-28 13:15:42', NULL),
+(2, 1, 1, 'Örnek Yazı', 'ornek-yazi', 'Bu örnek yazının alıntısıdır', '<p>Bu, g&ouml;vdeyi i&ccedil;eren &ouml;rnek g&ouml;nderinin g&ouml;vdesidir.</p>\n<h2>Her t&uuml;rl&uuml; formatı kullanabiliriz!</h2>\n<p>Ve bir s&uuml;r&uuml; başka şey ekleyin.</p>', 'posts/post2.jpg', 'Örnek yazı için Meta Açıklama', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 3, 'PUBLISHED', '2024-07-03 10:34:00', '2024-05-22 13:05:54', '2024-05-28 13:15:42', NULL),
 (3, 1, 2, 'Son Yazı', 'son-yazi', 'Bu son yazının alıntısı', '<p>Bu son yazının i&ccedil;eriği</p>', 'posts/post3.jpg', 'Bu meta açıklamasıdır', 'anahtar kelime1, anahtar kelime2, anahtar kelime3', '', 0, 3, 'PUBLISHED', '2024-07-03 14:46:00', '2024-05-23 13:05:55', '2024-05-28 13:17:19', NULL),
-(4, 1, 2, 'Yarr Yazısı', 'yarr-yazisi', 'Resif yelkenleri, kablo sandığının üzerine bir yay getiriyor, jüri direği sivri uçlu Sekiz Parçası kıç güvertesini yağmalıyor. Kırpıcı sürücüsü dümenci kalyon kenevir yular baskı çetesi ile geliyor çete kalasları tekneler liderliği sallıyor. Nipperkin yarda gök yelkeni sürüntü kordonu Blimey sintine suyu ho çeyrek Buccaneer.', '<p>Swab &ouml;l&uuml; ışıklar Korsan ateş gemisi kare te&ccedil;hizatlı dans kenevir jig\'i tartmak &ccedil;apa gevezelik meyve i&ccedil;eceği salkımı. Jenny\'nin &ccedil;ay fincanı kovalayan silahlar, kalplerin ruhları, fı&ccedil;ı kafalı Gold Road, zincirlerinize g&ouml;re &ouml;l&ccedil;&uuml;len altı poundluk kula&ccedil;. Ana ıskota vekili, yelkenli barkadeer kıvrımlı mizzenmast tugayı yağmalamaya &ccedil;alışıyor.</p>\n<p>Mizzen ligi keelhaul kalyon ihale dişli kovalamaca Berberi Sahili doublon Jenny\'nin &ccedil;ay bardağını kırdı. Adamı u&ccedil;urun yelkenli ateş gemisi pinnace kıkırdama meyve hattı warp Kara saldırı renkleri doubloon\'un amirali. Jack Ketch\'le m&uuml;cadele edin, kıvrımlı rom draft frengileri pruvada r&uuml;zgar kestane rengi bir atış yapın.</p>\n<p>Interloper listeyi aşağı &ccedil;ekiyor, s&uuml;r&uuml;c&uuml; kutsal taş frengisine basıyor ve &ccedil;apasındaki sintineli sintineyle m&uuml;cadele ediyor. Jack Tar araya giren taslak kıskacı mizzen direği hulk knave kablo kı&ccedil; yatırması fı&ccedil;ıbaşı. Gaff yağma, grog kı&ccedil;ını takip etmek i&ccedil;in silahları korsanlık yardarm d&uuml;zenbaz g&ouml;k g&uuml;r&uuml;lt&uuml;s&uuml; alkışını takip ediyor.</p>', 'posts/post4.jpg', 'bu bir meta açıklama olsun', 'Resif yelkenleri, Nipperkin yarda gök yelkeni, Buccaneer', NULL, 0, 4, 'PUBLISHED', '2024-07-03 14:54:00', '2024-05-25 13:05:56', '2024-07-03 11:54:08', NULL);
+(4, 1, 2, 'Yarr Yazısı', 'yarr-yazisi', 'Resif yelkenleri, kablo sandığının üzerine bir yay getiriyor, jüri direği sivri uçlu Sekiz Parçası kıç güvertesini yağmalıyor. Kırpıcı sürücüsü dümenci kalyon kenevir yular baskı çetesi ile geliyor çete kalasları tekneler liderliği sallıyor. Nipperkin yarda gök yelkeni sürüntü kordonu Blimey sintine suyu ho çeyrek Buccaneer.', '<p>Swab &ouml;l&uuml; ışıklar Korsan ateş gemisi kare te&ccedil;hizatlı dans kenevir jig\'i tartmak &ccedil;apa gevezelik meyve i&ccedil;eceği salkımı. Jenny\'nin &ccedil;ay fincanı kovalayan silahlar, kalplerin ruhları, fı&ccedil;ı kafalı Gold Road, zincirlerinize g&ouml;re &ouml;l&ccedil;&uuml;len altı poundluk kula&ccedil;. Ana ıskota vekili, yelkenli barkadeer kıvrımlı mizzenmast tugayı yağmalamaya &ccedil;alışıyor.</p>\n<p>Mizzen ligi keelhaul kalyon ihale dişli kovalamaca Berberi Sahili doublon Jenny\'nin &ccedil;ay bardağını kırdı. Adamı u&ccedil;urun yelkenli ateş gemisi pinnace kıkırdama meyve hattı warp Kara saldırı renkleri doubloon\'un amirali. Jack Ketch\'le m&uuml;cadele edin, kıvrımlı rom draft frengileri pruvada r&uuml;zgar kestane rengi bir atış yapın.</p>\n<p>Interloper listeyi aşağı &ccedil;ekiyor, s&uuml;r&uuml;c&uuml; kutsal taş frengisine basıyor ve &ccedil;apasındaki sintineli sintineyle m&uuml;cadele ediyor. Jack Tar araya giren taslak kıskacı mizzen direği hulk knave kablo kı&ccedil; yatırması fı&ccedil;ıbaşı. Gaff yağma, grog kı&ccedil;ını takip etmek i&ccedil;in silahları korsanlık yardarm d&uuml;zenbaz g&ouml;k g&uuml;r&uuml;lt&uuml;s&uuml; alkışını takip ediyor.</p>', 'posts/post4.jpg', 'bu bir meta açıklama olsun', 'Resif yelkenleri, Nipperkin yarda gök yelkeni, Buccaneer', NULL, 0, 5, 'PUBLISHED', '2024-07-03 14:54:00', '2024-05-25 13:05:56', '2024-07-03 11:54:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -858,7 +859,9 @@ CREATE TABLE `qualities` (
 
 INSERT INTO `qualities` (`id`, `title`, `slug`, `image`, `content`, `hit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Kalite 1', 'kalite-1', 'qualities/June2024/aoumlLiXcFkRdhj3c6HK.png', '<p>Kalite 1 İ&ccedil;erik</p>', 0, 1, '2024-06-03 08:18:08', '2024-06-03 08:18:08', NULL),
-(2, 'Kalite 2', 'kalite-2', 'qualities/June2024/2Evz1n3bd2WBgqYpECZ1.png', '<p>Kalite 2 İ&ccedil;erik</p>', 0, 1, '2024-06-03 08:25:53', '2024-06-03 08:25:53', NULL);
+(2, 'Kalite 2', 'kalite-2', 'qualities/June2024/2Evz1n3bd2WBgqYpECZ1.png', '<p>Kalite 2 İ&ccedil;erik</p>', 0, 1, '2024-06-03 08:25:53', '2024-06-03 08:25:53', NULL),
+(3, 'Kalite 3', 'kalite-3', 'qualities/July2024/qMbvuHJKTExvXPfQEQb7.png', '', 0, 1, '2024-07-06 03:32:09', '2024-07-06 03:32:09', NULL),
+(4, 'Kalite 4', 'kalite-4', 'qualities/July2024/GmgJ5dVvzBUaKFCUSv2R.jpg', '', 0, 1, '2024-07-06 03:33:16', '2024-07-06 03:33:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -915,7 +918,10 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (9, 'admin.icon_image', 'Admin Icon Image', '', '', 'image', 5, 'Admin'),
 (10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', NULL, '', 'text', 7, 'Admin'),
 (11, 'admin.fw_version', 'Framework Version', 'v1.0.0', NULL, 'text', 1, 'Admin'),
-(12, 'site.logo_secondary', 'Site Logo Secondary', 'settings/June2024/X6YzWsBXiFH1CO9pViEu.png', NULL, 'image', 4, 'Site');
+(12, 'site.logo_secondary', 'Site Logo Secondary', 'settings/June2024/X6YzWsBXiFH1CO9pViEu.png', NULL, 'image', 4, 'Site'),
+(13, 'site-contact.address', 'Address', 'Mada Center 8th floor, 379 Hudson St, New York, NY 10018 US', NULL, 'text', 9, 'Site Contact'),
+(14, 'site-contact.phone', 'Phone', '+1 800 1236879', NULL, 'text', 10, 'Site Contact'),
+(15, 'site-contact.info_email', 'InfoEmail', 'contact@example.com', NULL, 'text', 11, 'Site Contact');
 
 -- --------------------------------------------------------
 
@@ -970,12 +976,12 @@ CREATE TABLE `social_media` (
 --
 
 INSERT INTO `social_media` (`id`, `name`, `icon`, `link`, `description`, `sort`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Facebook', 'fa-brands fa-facebook', 'https://www.facebook.com', NULL, 1, 1, '2024-06-05 14:58:33', '2024-06-05 14:58:33', NULL),
-(2, 'Twitter', 'fa-brands fa-twitter', 'https://twitter.com', NULL, 2, 1, '2024-06-05 14:59:21', '2024-06-05 14:59:21', NULL),
-(3, 'Instagram', 'fa-brands fa-instagram', 'https://www.instagram.com', NULL, 3, 1, '2024-06-05 15:00:01', '2024-06-05 15:00:01', NULL),
-(4, 'Youtube', 'fa-brands fa-youtube', 'https://www.youtube.com', NULL, 4, 1, '2024-06-05 15:02:36', '2024-06-05 15:02:36', NULL),
-(5, 'Linkedin', 'fa-brands fa-linkedin', 'https://www.linkedin.com', NULL, 5, 1, '2024-06-05 15:03:57', '2024-06-05 15:03:57', NULL),
-(6, 'Google', 'fa-solid fa-location-dot', 'https://google.com/maps', NULL, 6, 1, '2024-06-05 15:14:59', '2024-06-05 15:15:08', NULL);
+(1, 'Facebook', 'bi bi-facebook', 'https://www.facebook.com', NULL, 1, 1, '2024-06-05 14:58:33', '2024-06-05 14:58:33', NULL),
+(2, 'Twitter', 'bi bi-twitter', 'https://twitter.com', NULL, 2, 1, '2024-06-05 14:59:21', '2024-06-05 14:59:21', NULL),
+(3, 'Instagram', 'bi bi-instagram', 'https://www.instagram.com', NULL, 3, 1, '2024-06-05 15:00:01', '2024-06-05 15:00:01', NULL),
+(4, 'Youtube', 'bi bi-youtube', 'https://www.youtube.com', NULL, 4, 1, '2024-06-05 15:02:36', '2024-06-05 15:02:36', NULL),
+(5, 'Linkedin', 'bi bi-linkedin', 'https://www.linkedin.com', NULL, 5, 1, '2024-06-05 15:03:57', '2024-06-05 15:03:57', NULL),
+(6, 'Google', 'bi bi-geo-alt-fill', 'https://google.com/maps', NULL, 6, 1, '2024-06-05 15:14:59', '2024-06-05 15:15:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -1371,7 +1377,11 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (304, 'pages', 'excerpt', 1, 'en', 'Hang the prop, grog, grog flower, dance with the hemp jig, press the dock, take the bilge rat to the account raider. Nelson\'s crazy gabion line draft scallywag fire ship gaff fluke fathom case shot. Sea Legs has a shot at the Gold Road gear league with their bilge rat sloop matey gabion longsuits.', '2024-06-16 12:12:45', '2024-06-29 16:35:48'),
 (305, 'data_rows', 'display_name', 163, 'en', 'users', '2024-06-28 16:16:24', '2024-06-28 16:16:24'),
 (306, 'data_rows', 'display_name', 164, 'en', 'Published At', '2024-07-03 11:53:05', '2024-07-03 11:53:05'),
-(307, 'data_rows', 'display_name', 165, 'en', 'Published At', '2024-07-05 08:24:05', '2024-07-05 08:24:05');
+(307, 'data_rows', 'display_name', 165, 'en', 'Published At', '2024-07-05 08:24:05', '2024-07-05 08:24:05'),
+(308, 'qualities', 'title', 3, 'en', 'Quality 3', '2024-07-06 03:32:09', '2024-07-06 03:32:09'),
+(309, 'qualities', 'slug', 3, 'en', 'quality-3', '2024-07-06 03:32:09', '2024-07-06 03:32:09'),
+(310, 'qualities', 'title', 4, 'en', 'Quality 4', '2024-07-06 03:33:16', '2024-07-06 03:33:16'),
+(311, 'qualities', 'slug', 4, 'en', 'quality-4', '2024-07-06 03:33:16', '2024-07-06 03:33:16');
 
 -- --------------------------------------------------------
 
@@ -1631,7 +1641,7 @@ ALTER TABLE `categories`
 -- Tablo için AUTO_INCREMENT değeri `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `currencies`
@@ -1709,7 +1719,7 @@ ALTER TABLE `posts`
 -- Tablo için AUTO_INCREMENT değeri `qualities`
 --
 ALTER TABLE `qualities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `roles`
@@ -1721,7 +1731,7 @@ ALTER TABLE `roles`
 -- Tablo için AUTO_INCREMENT değeri `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `sliders`
@@ -1751,7 +1761,7 @@ ALTER TABLE `ticket_messages`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
