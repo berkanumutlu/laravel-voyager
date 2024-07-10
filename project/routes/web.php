@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->name('home');
+Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterController')->group(function () {
+    Route::get('register', "index")->name('index');
+});
 Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
     Route::get('about-us', "show_article_page")->name('about_us');
     Route::get('articles', "index")->name('list');

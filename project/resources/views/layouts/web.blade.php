@@ -94,7 +94,7 @@
             </form>
             <div class="text-end">
                 <button type="button" class="btn btn-light text-dark me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
+                <a href="{{ route('register.index') }}" class="btn btn-primary">Sign-up</a>
             </div>
         </div>
     </div>
