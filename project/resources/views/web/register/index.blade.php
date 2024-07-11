@@ -19,14 +19,15 @@
                     <form action="{{ route('register.index') }}" method="POST"
                           class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
                         @csrf
+                        <x-web.alert :errors="$errors"></x-web.alert>
                         <div class="form-floating mb-3">
                             <input type="text" id="name" name="name" class="form-control"
-                                   placeholder="name@example.com" required>
+                                   placeholder="name@example.com" value="{{ old('name') ?? '' }}" required>
                             <label for="name">Full Name</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" id="email" name="email" class="form-control"
-                                   placeholder="name@example.com" required>
+                                   placeholder="name@example.com" value="{{ old('email') ?? '' }}" required>
                             <label for="email">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
