@@ -21,7 +21,7 @@ class WebServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (!request()->fullUrlIs('*admin*') && !request()->fullUrlIs('*api*')) {
-            View::composer(['layouts.web'], function ($view) {
+            View::composer(['layouts.web', 'web.login.index'], function ($view) {
                 $social_media_list = \App\Models\SocialMedia::query()->where('status', 1)
                     ->select(['name', 'icon', 'link', 'description'])
                     ->orderBy('sort', 'asc')->get();

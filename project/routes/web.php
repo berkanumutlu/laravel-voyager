@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->name('home');
-Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterController')->middleware('guest:web')->group(function () {
+Route::name('login.')->controller('\App\Http\Controllers\Web\LoginController')->group(function () {
+    Route::get('login', "index")->name('index');
+});
+Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterController')->group(function () {
     Route::get('register', "index")->name('index');
     Route::post('register', "store");
 });

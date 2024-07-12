@@ -93,7 +93,7 @@
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
             <div class="text-end">
-                <button type="button" class="btn btn-light text-dark me-2">Login</button>
+                <a href="{{ route('login.index') }}" class="btn btn-light text-dark me-2">Login</a>
                 <a href="{{ route('register.index') }}" class="btn btn-primary">Sign-up</a>
             </div>
         </div>
