@@ -6,11 +6,14 @@
     <div class="login-page">
         <div class="d-flex align-items-center py-4 bg-body-tertiary">
             <main class="form-signin w-100 m-auto">
-                <form>
+                <form action="{{ route('login.index') }}" method="POST">
+                    @csrf
                     <img class="img-fluid mb-4" src="{{ $site_logo }}" alt="Site Logo">
                     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                    <x-web.alert :errors="$errors"></x-web.alert>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                               value="{{ old('email') ?? '' }}">
                         <label for="email">Email address</label>
                     </div>
                     <div class="form-floating">
@@ -19,7 +22,8 @@
                         <label for="password">Password</label>
                     </div>
                     <div class="form-check text-start my-3">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember"
+                            {{ old('remember_me') ? 'checked' : '' }}>
                         <label class="form-check-label" for="remember">Remember me</label>
                     </div>
                     <button type="submit" class="btn btn-primary w-100 py-2">Sign in</button>

@@ -93,8 +93,32 @@
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
             <div class="text-end">
-                <a href="{{ route('login.index') }}" class="btn btn-light text-dark me-2">Login</a>
-                <a href="{{ route('register.index') }}" class="btn btn-primary">Sign-up</a>
+                @if(auth()->guard('web')->check())
+                    <div class="dropdown h-100 d-flex align-items-center">
+                        <a href="javascript:;" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            @if(!empty(auth()->guard('web')->user()->avatar))
+                                <img src="{{ asset('storage/'.auth()->guard('web')->user()->avatar) }}"
+                                     alt="{{ auth()->guard('web')->user()->name }}"
+                                     class="rounded-circle" width="32" height="32">
+                            @else
+                                {{ auth()->guard('web')->user()->name }}
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Log out</a></li>
+                        </ul>
+                    </div>
+                @else
+                    <a href="{{ route('login.index') }}" class="btn btn-light text-dark me-2">Login</a>
+                    <a href="{{ route('register.index') }}" class="btn btn-primary">Sign-up</a>
+                @endif
             </div>
         </div>
     </div>

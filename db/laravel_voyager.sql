@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: mysql
--- Üretim Zamanı: 09 Tem 2024, 13:03:32
+-- Üretim Zamanı: 13 Tem 2024, 11:44:56
 -- Sunucu sürümü: 5.7.44
 -- PHP Sürümü: 8.2.19
 
@@ -166,13 +166,13 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (2, 1, 'name', 'text', 'Ad', 1, 1, 1, 1, 1, 1, '{}', 2),
 (3, 1, 'email', 'text', 'E-posta', 1, 1, 1, 1, 1, 1, '{}', 3),
 (4, 1, 'password', 'password', 'Şifre', 1, 0, 0, 1, 1, 0, '{}', 4),
-(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, '{}', 10),
-(6, 1, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 12),
-(7, 1, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 0, 0, 0, 0, '{}', 13),
+(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, '{}', 11),
+(6, 1, 'created_at', 'timestamp', 'Oluşturma Tarihi', 0, 1, 1, 0, 0, 0, '{}', 13),
+(7, 1, 'updated_at', 'timestamp', 'Güncelleme Tarihi', 0, 0, 0, 0, 0, 0, '{}', 14),
 (8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, '{}', 5),
 (9, 1, 'user_belongsto_role_relationship', 'relationship', 'Rol', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7),
-(10, 1, 'user_belongstomany_role_relationship', 'relationship', 'Roller', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}', 8),
-(11, 1, 'settings', 'hidden', 'Ayarlar', 0, 0, 0, 0, 0, 0, '{}', 11),
+(10, 1, 'user_belongstomany_role_relationship', 'relationship', 'Roller', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}', 9),
+(11, 1, 'settings', 'hidden', 'Ayarlar', 0, 0, 0, 0, 0, 0, '{}', 12),
 (12, 2, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
 (13, 2, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
 (14, 2, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, '{}', 3),
@@ -219,7 +219,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (55, 6, 'image', 'image', 'Görsel', 0, 1, 1, 1, 1, 1, '{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 8),
 (56, 4, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 0, '{}', 9),
 (57, 5, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 20),
-(58, 1, 'email_verified_at', 'timestamp', 'E-posta Doğrulama Tarihi', 0, 1, 1, 1, 1, 1, '{}', 9),
+(58, 1, 'email_verified_at', 'timestamp', 'E-posta Doğrulama Tarihi', 0, 1, 1, 1, 1, 1, '{}', 10),
 (59, 5, 'post_belongsto_user_relationship', 'relationship', 'Yazar', 1, 1, 1, 1, 1, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
 (60, 5, 'post_belongsto_category_relationship', 'relationship', 'Kategori', 1, 1, 1, 0, 0, 1, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"category_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 4),
 (61, 5, 'hit', 'number', 'Hit', 0, 1, 1, 0, 0, 0, '{\"default\":0}', 15),
@@ -326,7 +326,9 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (162, 18, 'ticket_belongstomany_ticket_message_relationship', 'relationship', 'Mesajlar', 0, 0, 1, 0, 0, 1, '{\"model\":\"App\\\\Models\\\\TicketMessage\",\"table\":\"ticket_messages\",\"type\":\"hasMany\",\"column\":\"ticket_id\",\"key\":\"id\",\"label\":\"message\",\"pivot_table\":\"ticket_messages\",\"pivot\":\"0\",\"taggable\":\"0\"}', 13),
 (163, 6, 'page_belongsto_user_relationship', 'relationship', 'Yazar', 0, 1, 1, 0, 0, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"author_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"catalogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 3),
 (164, 5, 'published_at', 'timestamp', 'Yayınlanma Tarihi', 0, 1, 1, 1, 1, 1, '{}', 17),
-(165, 8, 'published_at', 'timestamp', 'Yayınlanma Tarihi', 0, 1, 1, 1, 1, 1, '{}', 17);
+(165, 8, 'published_at', 'timestamp', 'Yayınlanma Tarihi', 0, 1, 1, 1, 1, 1, '{}', 17),
+(166, 1, 'description', 'text', 'Description', 0, 1, 1, 1, 1, 1, '{}', 8),
+(167, 1, 'deleted_at', 'timestamp', 'Silinme Tarihi', 0, 0, 1, 0, 0, 1, '{}', 15);
 
 -- --------------------------------------------------------
 
@@ -357,7 +359,7 @@ CREATE TABLE `data_types` (
 --
 
 INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `display_name_plural`, `icon`, `model_name`, `policy_name`, `controller`, `description`, `generate_permissions`, `server_side`, `details`, `created_at`, `updated_at`) VALUES
-(1, 'users', 'users', 'Kullanıcı', 'Kullanıcılar', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-30 10:47:45'),
+(1, 'users', 'users', 'Kullanıcı', 'Kullanıcılar', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-07-13 10:39:33'),
 (2, 'menus', 'menus', 'Menü', 'Menüler', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:18:46'),
 (3, 'roles', 'roles', 'Rol', 'Roller', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 07:13:16', '2024-05-28 12:37:41'),
 (4, 'categories', 'categories', 'Kategori', 'Kategoriler', 'voyager-categories', 'TCG\\Voyager\\Models\\Category', NULL, NULL, 'Deneme kategori tanımı', 1, 0, '{\"order_column\":\"created_at\",\"order_display_column\":\"name\",\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2024-05-25 13:05:53', '2024-06-05 14:51:33'),
@@ -1007,7 +1009,7 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id`, `department`, `sender_id`, `receiver_id`, `code`, `subject`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'OTHER', 2, 1, 'ABC123', 'Test', 1, '2024-06-06 16:05:52', NULL, NULL);
+(1, 'OTHER', 2, 1, 'ABCDE12345', 'Test', 1, '2024-06-06 16:05:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1381,7 +1383,9 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 (308, 'qualities', 'title', 3, 'en', 'Quality 3', '2024-07-06 03:32:09', '2024-07-06 03:32:09'),
 (309, 'qualities', 'slug', 3, 'en', 'quality-3', '2024-07-06 03:32:09', '2024-07-06 03:32:09'),
 (310, 'qualities', 'title', 4, 'en', 'Quality 4', '2024-07-06 03:33:16', '2024-07-06 03:33:16'),
-(311, 'qualities', 'slug', 4, 'en', 'quality-4', '2024-07-06 03:33:16', '2024-07-06 03:33:16');
+(311, 'qualities', 'slug', 4, 'en', 'quality-4', '2024-07-06 03:33:16', '2024-07-06 03:33:16'),
+(312, 'data_rows', 'display_name', 166, 'en', 'Description', '2024-07-13 10:39:33', '2024-07-13 10:39:33'),
+(313, 'data_rows', 'display_name', 167, 'en', 'Deleted At', '2024-07-13 10:39:33', '2024-07-13 10:39:33');
 
 -- --------------------------------------------------------
 
@@ -1399,18 +1403,20 @@ CREATE TABLE `users` (
   `description` text COLLATE utf8mb4_unicode_ci,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `settings` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `avatar`, `description`, `remember_token`, `settings`, `email_verified_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Admin', 'admin@admin.com', '$2y$12$hGqVoNWGJNa5.H81u93vB.G6CX.bv.6QT91eGboFt4IKO1L72YKwO', 'users/default.png', 'I am the administrator of this website.', 'NAaFB4UoIvymYzQr0svw5QuuunDvg6F2bsQdc9jeR7pxGNbcRx3QQK4ZEkVV', '{\"locale\":\"tr\"}', NULL, '2024-05-25 07:21:47', '2024-05-28 11:37:02'),
-(2, 2, 'User', 'user@user.com', '$2y$12$rX.ISptVFOTL.crMksfU6uA2dRldtphvov7R.2ZJwI8hmlRndOSa2', 'users/default.png', NULL, NULL, '{\"locale\":\"tr\"}', NULL, '2024-05-30 07:30:57', '2024-05-30 07:30:57');
+INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `avatar`, `description`, `remember_token`, `settings`, `status`, `email_verified_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'Admin', 'admin@admin.com', '$2y$12$hGqVoNWGJNa5.H81u93vB.G6CX.bv.6QT91eGboFt4IKO1L72YKwO', 'users/default.png', 'I am the administrator of this website.', 'NAaFB4UoIvymYzQr0svw5QuuunDvg6F2bsQdc9jeR7pxGNbcRx3QQK4ZEkVV', '{\"locale\":\"tr\"}', 1, NULL, '2024-05-25 07:21:47', '2024-05-28 11:37:02', NULL),
+(2, 2, 'User', 'user@user.com', '$2y$12$rX.ISptVFOTL.crMksfU6uA2dRldtphvov7R.2ZJwI8hmlRndOSa2', 'users/default.png', NULL, 'e0QQ22JRYO5iaAltefeacMtnJT6YGT4C9RHTioobq6Z5MdrIYvAuhPLJGwhg', '{\"locale\":\"tr\"}', 1, NULL, '2024-05-30 07:30:57', '2024-05-30 07:30:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -1653,7 +1659,7 @@ ALTER TABLE `currencies`
 -- Tablo için AUTO_INCREMENT değeri `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `data_types`
@@ -1761,7 +1767,7 @@ ALTER TABLE `ticket_messages`
 -- Tablo için AUTO_INCREMENT değeri `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
