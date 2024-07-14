@@ -112,7 +112,10 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Log out</a></li>
+                            <li>
+                                @csrf
+                                <a class="dropdown-item btnUserLogout" href="{{ route('logout') }}">Log out</a>
+                            </li>
                         </ul>
                     </div>
                 @else
