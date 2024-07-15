@@ -23,6 +23,9 @@ Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterControll
     Route::get('register', "index")->name('index');
     Route::post('register', "store");
 });
+Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->middleware('auth:web')->group(function () {
+    Route::get('profile', "profile")->name('profile');
+});
 Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
     Route::get('about-us', "show_article_page")->name('about_us');
     Route::get('articles', "index")->name('list');
