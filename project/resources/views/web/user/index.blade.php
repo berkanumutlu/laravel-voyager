@@ -8,7 +8,18 @@
             <h1>Update Profile</h1>
             <hr>
             <div class="my-2">
-                <form>
+                <form action="{{ route('user.profile.edit', ['user' => $user->id]) }}" method="POST">
+                    @csrf
+                    @if(session('success'))
+                        <div class="w-100">
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="w-100">
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
@@ -41,7 +52,7 @@
                         </div>
                         <div class="col-12">
                             <div class="d-flex align-items-center justify-content-md-end">
-                                <button type="button" class="btn btn-primary">Update Profile</button>
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
                                 <button type="reset" class="btn btn-light">Reset Changes</button>
                             </div>
                         </div>

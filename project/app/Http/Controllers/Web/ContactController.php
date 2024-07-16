@@ -37,7 +37,7 @@ class ContactController extends Controller
             ];
             ContactMessage::insert($data);
             Mail::send(new SendContactMessageMail($data));
-            return redirect()->route('contact.index')->with('success', 'Success Message');
+            return redirect()->route('contact.index')->with('success', 'Success Message')->onlyInput();
         } catch (\Exception $e) {
             //TODO: Hata log düşülebilir.
             return redirect()->route('contact.index')->with('error', 'Error Message')->exceptInput('token');
