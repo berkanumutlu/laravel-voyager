@@ -7,19 +7,19 @@
         <div class="container container-page">
             <h1>Update Profile</h1>
             <hr>
+            @if(session('success'))
+                <div class="w-100">
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="w-100">
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                </div>
+            @endif
             <div class="my-2">
-                <form action="{{ route('user.profile.edit', ['user' => $user->id]) }}" method="POST">
+                <form action="{{ route('user.profile.edit', ['user' => $user]) }}" method="POST">
                     @csrf
-                    @if(session('success'))
-                        <div class="w-100">
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        </div>
-                    @endif
-                    @if(session('error'))
-                        <div class="w-100">
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        </div>
-                    @endif
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
@@ -61,8 +61,20 @@
             </div>
             <div class="my-5">
                 <hr>
-                <h2>Change Password</h2>
-                <form>
+                <h2 class="mb-4">Change Password</h2>
+                <x-web.errors :errors="$errors"></x-web.errors>
+                @if(session('success_password'))
+                    <div class="w-100">
+                        <div class="alert alert-success">{{ session('success_password') }}</div>
+                    </div>
+                @endif
+                @if(session('error_password'))
+                    <div class="w-100">
+                        <div class="alert alert-danger">{{ session('error_password') }}</div>
+                    </div>
+                @endif
+                <form action="{{ route('user.password.edit', ['user' => $user]) }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-floating mb-3">
@@ -87,7 +99,7 @@
                         </div>
                         <div class="col-12">
                             <div class="d-flex align-items-center justify-content-md-end">
-                                <button type="button" class="btn btn-primary">Change Password</button>
+                                <button type="submit" class="btn btn-primary">Change Password</button>
                             </div>
                         </div>
                     </div>

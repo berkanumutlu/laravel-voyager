@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\UserUpdatePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -24,7 +26,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $user = User::findOrFail($id);
         $user_image = $user->avatar;
@@ -51,10 +53,33 @@ class UserController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->route('user.profile')->with('error',
-                'Your information could not be saved.')->exceptInput('_token', 'image');
+            return redirect()->route('user.profile')->with('error', 'Your information could not be saved.')
+                ->exceptInput('_token', 'image');
         }
-        return redirect()->route('user.profile')->with('success',
-            'Your information has been updated successfully.')->onlyInput();
+        return redirect()->route('user.profile')->with('success', 'Your information has been updated successfully.')
+            ->onlyInput();
+    }
+
+    /**
+     * @param  UserUpdatePasswordRequest  $request
+     * @param  User  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update_password(UserUpdatePasswordRequest $request, User $user): \Illuminate\Http\RedirectResponse
+    {
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->route('user.profile')->with('error_password', 'The current password is incorrect.')
+                ->exceptInput('_token', 'image');
+        }
+        try {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            Auth::guard('web')->logout();
+        } catch (\Exception $e) {
+            return redirect()->route('user.profile')->with('error_password', 'Your password could not be saved.')
+                ->exceptInput('_token', 'image');
+        }
+        return redirect()->route('login.index')->with('success', 'Your password has been updated successfully.')
+            ->onlyInput();
     }
 }
