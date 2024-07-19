@@ -25,7 +25,7 @@ Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterControll
 });
 Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->middleware('auth:web')->group(function () {
     Route::get('profile', "profile")->name('profile');
-    Route::post('profile/edit/{user:id}', "update")->name('profile.edit')->whereNumber('id');
+    Route::post('profile/edit', "update")->name('profile.edit');
     Route::post('profile/change-password/{user:id}', "update_password")->name('password.edit')->whereNumber('id');
 });
 Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {

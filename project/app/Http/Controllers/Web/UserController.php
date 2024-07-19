@@ -26,8 +26,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
+    public function update(Request $request): \Illuminate\Http\RedirectResponse
     {
+        if (!Auth::guard('web')->check()) {
+            abort(401);
+        }
+        $id = Auth::guard('web')->user()->id;
         $user = User::findOrFail($id);
         $user_image = $user->avatar;
         $user->name = $request->name;
