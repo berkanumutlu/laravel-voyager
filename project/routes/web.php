@@ -27,6 +27,7 @@ Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->mi
     Route::get('profile', "profile")->name('profile');
     Route::post('profile/edit', "update")->name('profile.edit');
     Route::post('profile/change-password/{user:id}', "update_password")->name('password.edit')->whereNumber('id');
+    Route::get('tickets', "tickets")->name('tickets');
 });
 Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
     Route::get('about-us', "show_article_page")->name('about_us');

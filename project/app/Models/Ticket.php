@@ -27,4 +27,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Voyager::modelClass('User'), 'sender_id', 'id');
     }
+
+    public function receiverId()
+    {
+        return $this->belongsTo(Voyager::modelClass('User'), 'receiver_id', 'id');
+    }
 }

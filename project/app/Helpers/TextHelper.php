@@ -24,6 +24,9 @@ if (!function_exists('format_date')) {
         if ($type == 'date-text') {
             return \Carbon\Carbon::parse($date)->format('d M Y');
         }
+        if ($type == 'date-text-with-hour') {
+            return \Carbon\Carbon::parse($date)->format('F j, Y, g:i a');
+        }
         if ($type == 'full') {
             return \Carbon\Carbon::parse($date)->format('d.m.Y H:i');
         }

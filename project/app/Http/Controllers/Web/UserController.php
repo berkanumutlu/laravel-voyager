@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Enums\TicketStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\UserUpdatePasswordRequest;
+use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,5 +87,18 @@ class UserController extends Controller
         }
         return redirect()->route('login.index')->with('success', 'Your password has been updated successfully.')
             ->onlyInput();
+    }
+
+    public function tickets()
+    {
+        $records = Ticket::query()->where('sender_id', Auth::guard('web')->id())
+            ->with('receiverId:id,name')
+            ->select(['id', 'department', 'receiver_id', 'code', 'subject', 'status', 'created_at', 'deleted_at'])
+            ->get();
+        $records->map(function ($item) {
+            $item->status_text = TicketStatus::from($item->status)->textWithBadge();
+            $item->created_at_text = format_date(\Carbon\Carbon::parse($item->created_at), 'date-text-with-hour');
+        });
+        return view('web.user.tickets', compact('records'));
     }
 }

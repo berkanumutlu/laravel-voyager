@@ -106,9 +106,9 @@
                             @endif
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.tickets') }}">Tickets</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
