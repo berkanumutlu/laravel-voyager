@@ -6,6 +6,7 @@ use App\Enums\TicketStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\UserUpdatePasswordRequest;
 use App\Models\Ticket;
+use App\Models\TicketMessage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,9 +97,39 @@ class UserController extends Controller
             ->select(['id', 'department', 'receiver_id', 'code', 'subject', 'status', 'created_at', 'deleted_at'])
             ->get();
         $records->map(function ($item) {
+            $item->url = route('user.tickets.detail', ['code' => $item->code]);
             $item->status_text = TicketStatus::from($item->status)->textWithBadge();
             $item->created_at_text = format_date(\Carbon\Carbon::parse($item->created_at), 'date-text-with-hour');
         });
         return view('web.user.tickets', compact('records'));
+    }
+
+    public function show_ticket()
+    {
+        $user = Auth::guard('web')->user();
+        $sender_id = Auth::guard('web')->id();
+        $record = Ticket::query()->where('sender_id', $sender_id)
+            ->with(['receiverId:id,name'])
+            ->select(['id', 'department', 'receiver_id', 'code', 'subject', 'status', 'created_at', 'deleted_at'])
+            ->first();
+        if (empty($record)) {
+            abort(404);
+        }
+        $ticket_messages = TicketMessage::where('ticket_id', $record->id)
+            ->selectRaw('DATE(created_at) as day, count(*) as message_count')
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get()->map(function ($item) use ($record) {
+                $item->messages = TicketMessage::where('ticket_id', $record->id)
+                    ->whereDate('created_at', $item->day)
+                    ->get()->map(function ($sub_item) {
+                        $sub_item->hour = $sub_item->created_at->format('H:i');
+                        return $sub_item;
+                    });
+                $item->messages->load('sender:id,name,email,avatar');
+                return $item;
+            });
+        $default_logo = voyager_asset('images/logo-icon.png');
+        return view('web.user.ticket-detail', compact(['record', 'ticket_messages', 'user', 'default_logo']));
     }
 }

@@ -20,7 +20,7 @@
 
                     <!-- Chat Options -->
                     <ul class="nav flex-nowrap">
-                        <li class="nav-item list-inline-item d-none d-sm-block mr-1">
+                        <li class="nav-item list-inline-item d-none d-sm-flex align-items-sm-center mr-1">
                             <a class="nav-link text-muted pt-2 pb-2 px-1" data-toggle="collapse"
                                data-target="#searchCollapse"
                                href="javascript:;" aria-expanded="false">
@@ -303,9 +303,9 @@
                                                     <span class="message-status">Edited</span>
                                                 @endif
                                                 <div class="dropdown">
-                                                    <a class="text-muted" href="#" data-toggle="dropdown"
-                                                       aria-haspopup="true"
-                                                       aria-expanded="false">
+                                                    <a class="text-muted" href="#"
+                                                       data-toggle="dropdown"
+                                                       aria-haspopup="true" aria-expanded="false">
                                                         <svg class="hw-18" fill="none" viewBox="0 0 24 24"
                                                              stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -388,7 +388,7 @@
 
                 <!-- Chat Footer Start-->
                 <div class="chat-footer">
-                    <form action="{{ route('admin.tickets.reply', ['id' => $dataTypeContent->id]) }}" method="POST"
+                    <form action="{{ route('user.ticket.reply', ['ticket' => $record->code]) }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="attachment">
@@ -473,15 +473,15 @@
         </div>
     </main>
 </div>
-<x-admin.errors :errors="$errors"></x-admin.errors>
+<x-web.errors :errors="$errors"></x-web.errors>
 
-@pushonce("css")
+@pushonce("style")
     {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">--}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/emojionearea/emojionearea.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/chat.min.css') }}">
 @endpushonce
 
-@pushonce("javascript")
+@pushonce("script_files")
     <script src="{{ asset('assets/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/svg-inject/svg-inject.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/modal-steps/modal-steps.min.js') }}"></script>

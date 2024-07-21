@@ -5,7 +5,7 @@
 @section("content")
     <div class="user-tickets-page">
         <div class="container container-page">
-            @if(!empty($records))
+            @if($records->count() > 0)
                 <div class="table-responsive table-card" style="min-height: 500px">
                     <table class="table text-nowrap mb-0 table-centered table-hover">
                         <thead class="table-light">
@@ -36,7 +36,7 @@
                                     </div>
                                 </td>
                                 <td class="ps-1">
-                                    <a href="#">#{{ $item->code }}</a>
+                                    <a href="{{ $item->url }}">#{{ $item->code }}</a>
                                 </td>
                                 <td>{{ $item->department }}</td>
                                 <td>{{ $item->subject }}</td>
