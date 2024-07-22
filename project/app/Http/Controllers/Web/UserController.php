@@ -104,10 +104,14 @@ class UserController extends Controller
         return view('web.user.tickets', compact('records'));
     }
 
-    public function show_ticket()
+    public function show_ticket(Ticket $ticket)
     {
         $user = Auth::guard('web')->user();
         $sender_id = Auth::guard('web')->id();
+        $sender_id = 2;
+        if ($ticket->sender_id != $sender_id) {
+            abort(403);
+        }
         $record = Ticket::query()->where('sender_id', $sender_id)
             ->with(['receiverId:id,name'])
             ->select(['id', 'department', 'receiver_id', 'code', 'subject', 'status', 'created_at', 'deleted_at'])
