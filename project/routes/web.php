@@ -29,7 +29,7 @@ Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->mi
     Route::post('profile/change-password/{user:id}', "update_password")->name('password.edit')->whereNumber('id');
     Route::get('tickets', "tickets")->name('tickets');
     Route::get('ticket/{ticket:code}', "show_ticket")->name('ticket.detail');
-    Route::post('ticket/{ticket:code}/reply', "reply")->name('ticket.reply');
+    Route::post('ticket/{ticket:code}/reply', "reply_ticket")->name('ticket.reply');
 });
 Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
     Route::get('about-us', "show_article_page")->name('about_us');

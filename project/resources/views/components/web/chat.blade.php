@@ -8,13 +8,13 @@
                     <div class="media chat-name align-items-center text-truncate">
                         <div class="avatar avatar-online d-none d-sm-inline-block mr-3">
                             @php
-                                $user_avatar = !empty($user->avatar) ? Voyager::image($user->avatar) : $defaultAvatar;
+                                $user_avatar = !empty($record->receiverId->avatar) ? Voyager::image($record->receiverId->avatar) : $defaultAvatar;
                             @endphp
-                            <img src="{{ $user_avatar }}" alt="{{ $user->name ?? '' }}">
+                            <img src="{{ $user_avatar }}" alt="{{ $record->receiverId?->avatar ?? '' }}">
                         </div>
                         <div class="media-body align-self-center ">
-                            <h6 class="text-truncate mb-0">{{ !empty($user->name) ? ucwords($user->name) : '' }}</h6>
-                            <small class="text-muted">{{ $user->email ?? '' }}</small>
+                            <h6 class="text-truncate mb-0">{{ !empty($record->receiverId->name) ? ucwords($record->receiverId->name) : '' }}</h6>
+                            <small class="text-muted">{{ $record->receiverId->email ?? '' }}</small>
                         </div>
                     </div>
 
@@ -473,7 +473,6 @@
         </div>
     </main>
 </div>
-<x-web.errors :errors="$errors"></x-web.errors>
 
 @pushonce("style")
     {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">--}}

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -97,7 +98,7 @@ class UserController extends Controller
             ->select(['id', 'department', 'receiver_id', 'code', 'subject', 'status', 'created_at', 'deleted_at'])
             ->get();
         $records->map(function ($item) {
-            $item->url = route('user.tickets.detail', ['code' => $item->code]);
+            $item->url = route('user.ticket.detail', ['ticket' => $item->code]);
             $item->status_text = TicketStatus::from($item->status)->textWithBadge();
             $item->created_at_text = format_date(\Carbon\Carbon::parse($item->created_at), 'date-text-with-hour');
         });
@@ -108,12 +109,11 @@ class UserController extends Controller
     {
         $user = Auth::guard('web')->user();
         $sender_id = Auth::guard('web')->id();
-        $sender_id = 2;
         if ($ticket->sender_id != $sender_id) {
             abort(403);
         }
         $record = Ticket::query()->where('sender_id', $sender_id)
-            ->with(['receiverId:id,name'])
+            ->with(['receiverId:id,name,avatar'])
             ->select(['id', 'department', 'receiver_id', 'code', 'subject', 'status', 'created_at', 'deleted_at'])
             ->first();
         if (empty($record)) {
@@ -135,5 +135,41 @@ class UserController extends Controller
             });
         $default_logo = voyager_asset('images/logo-icon.png');
         return view('web.user.ticket-detail', compact(['record', 'ticket_messages', 'user', 'default_logo']));
+    }
+
+    /**
+     * @param  Request  $request
+     * @param  Ticket  $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function reply_ticket(Request $request, Ticket $ticket): \Illuminate\Http\RedirectResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'message' => ['required', 'string', 'min:2']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with([
+                'message'    => $validator->errors()->all(),
+                'alert-type' => 'danger'
+            ]);
+        }
+        try {
+            Ticket::query()->findOrFail($ticket->id);
+            $ticket_message = new TicketMessage();
+            $ticket_message->ticket_id = $ticket->id;
+            $ticket_message->sender_id = Auth::guard('web')->id();
+            $ticket_message->message = strip_tags(htmlentities($request->message));
+            $ticket_message->updated_at = null;
+            $ticket_message->save();
+            return redirect()->back()->with([
+                'message'    => 'Message sent successfully.',
+                'alert-type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with([
+                'message'    => $e->getMessage(),
+                'alert-type' => 'danger'
+            ]);
+        }
     }
 }
