@@ -1,0 +1,36 @@
+.article-post .article-meta {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.article-post .article-meta p {
+    margin-bottom: 0;
+}
+
+.article-post .article-meta .article-publish-date i,
+.article-post .article-meta .article-author i,
+.article-post .article-meta .article-category i,
+.article-post .article-meta .article-views i {
+    margin-right: 7px;
+}
+
+.article-post .article-meta a:hover {
+    color: var(--color-primary-hover);
+}
+
+.article-post .article-text img {
+    max-width: 100%;
+}
+
+.article-sidebar .last-records ul li a:hover img {
+    filter: grayscale(40%);
+    -webkit-filter: grayscale(40%);
+    -moz-filter: grayscale(40%);
+}
+
+.article-sidebar .category-list ol li a:hover {
+    color: var(--color-primary-hover);
+}

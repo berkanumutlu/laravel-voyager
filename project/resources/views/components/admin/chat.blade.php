@@ -10,7 +10,7 @@
                             @php
                                 $user_avatar = !empty($user->avatar) ? Voyager::image($user->avatar) : $defaultAvatar;
                             @endphp
-                            <img src="{{ $user_avatar }}" alt="">
+                            <img src="{{ $user_avatar }}" alt="{{ $user->name ?? '' }}">
                         </div>
                         <div class="media-body align-self-center ">
                             <h6 class="text-truncate mb-0">{{ !empty($user->name) ? ucwords($user->name) : '' }}</h6>

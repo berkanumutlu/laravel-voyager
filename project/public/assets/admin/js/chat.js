@@ -37,7 +37,6 @@ $(document).ready(function () {
         $(".chat-info").removeClass("chat-info-visible");
     })
 
-
     $('.contacts-list .contacts-link').on('click', function () {
         $(".main").addClass("main-visible");
     })
@@ -112,10 +111,8 @@ $(document).ready(function () {
         $(this).next('.custom-file-label').html(event.target.files[0].name);
     })
 
-
     // SVG File Inject
     SVGInject(document.getElementsByClassName('injectable'));
-
 
     //Toggle Appbar
     $('#appNavTab .nav-link').on('click', function () {
@@ -155,7 +152,6 @@ $(document).ready(function () {
         $("#appNavTab .nav-link").removeClass("active");
     })
 
-
     // Todo task done
     $('.todo-item input[type="checkbox"]').click(function () {
         if ($(this).is(":checked")) {
@@ -175,7 +171,6 @@ $(document).ready(function () {
     }
     checkSize();
     $(window).resize(checkSize);
-
 
     // Emojione Area
     $("#messageInput").emojioneArea();

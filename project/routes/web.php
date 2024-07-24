@@ -13,10 +13,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->name('home');
+Route::name('login.')->controller('\App\Http\Controllers\Web\LoginController')->middleware('guest:web')->group(function () {
+    Route::get('login', "index")->name('index');
+    Route::post('login', "login");
 });
-
+Route::post('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"])->name('logout');
+Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterController')->middleware('guest:web')->group(function () {
+    Route::get('register', "index")->name('index');
+    Route::post('register', "store");
+});
+Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->middleware('auth:web')->group(function () {
+    Route::get('profile', "profile")->name('profile');
+    Route::post('profile/edit', "update")->name('profile.edit');
+    Route::post('profile/change-password/{user:id}', "update_password")->name('password.edit')->whereNumber('id');
+    Route::get('tickets', "tickets")->name('tickets');
+    Route::get('ticket/{ticket:code}', "show_ticket")->name('ticket.detail');
+    Route::post('ticket/{ticket:code}/reply', "reply_ticket")->name('ticket.reply');
+});
+Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
+    Route::get('about-us', "show_article_page")->name('about_us');
+    Route::get('articles', "index")->name('list');
+    Route::get('articles/category/{category:slug}', "show_category")->name('category');
+    Route::get('article/{post:slug}', "show")->name('detail');
+});
+Route::name('catalog.')->controller('\App\Http\Controllers\Web\CatalogController')->group(function () {
+    Route::get('catalogs', "index")->name('list');
+    Route::get('catalog/{catalog:slug}', "show")->name('detail');
+});
+Route::name('news.')->controller('\App\Http\Controllers\Web\NewsController')->group(function () {
+    Route::get('news', "index")->name('list');
+    Route::get('news/category/{category:slug}', "show_category")->name('category');
+    Route::get('news/{news:slug}', "show")->name('detail');
+});
+Route::name('quality.')->controller('\App\Http\Controllers\Web\QualityController')->group(function () {
+    Route::get('quality', "index")->name('list');
+    Route::get('quality/{quality:slug}', "show")->name('detail');
+});
+Route::name('contact.')->controller('\App\Http\Controllers\Web\ContactController')->group(function () {
+    Route::get('contact', "index")->name('index');
+    Route::post('contact/message', "message")->name('message');
+});
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::post('tickets/{id}/reply', [App\Http\Controllers\Admin\TicketController::class, 'reply'])->name('admin.tickets.reply');
