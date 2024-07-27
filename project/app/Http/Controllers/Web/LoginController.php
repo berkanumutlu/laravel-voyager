@@ -64,4 +64,18 @@ class LoginController extends Controller
         }
         return response()->json($response);
     }
+
+    public function logout_get()
+    {
+        if (Auth::guard('web')->check()) {
+            try {
+                Auth::guard('web')->logout();
+                //$request->session()->invalidate();
+                //$request->session()->regenerate();
+            } catch (\Exception $e) {
+                //TODO: Hata log düşülebilir.
+            }
+        }
+        return response()->redirect()->back();
+    }
 }

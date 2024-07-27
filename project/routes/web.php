@@ -18,6 +18,7 @@ Route::name('login.')->controller('\App\Http\Controllers\Web\LoginController')->
     Route::get('login', "index")->name('index');
     Route::post('login', "login");
 });
+Route::get('logout', [\App\Http\Controllers\Web\LoginController::class, "logout_get"])->name('logout');
 Route::post('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"])->name('logout');
 Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterController')->middleware('guest:web')->group(function () {
     Route::get('register', "index")->name('index');
