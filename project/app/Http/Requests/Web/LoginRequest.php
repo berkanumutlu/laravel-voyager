@@ -30,7 +30,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.exists' => "There is no account for this email."
+            'email.exists' => __('validation.email.exists')
         ];
     }
 }

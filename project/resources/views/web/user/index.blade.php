@@ -5,7 +5,7 @@
 @section("content")
     <div class="user-profile-page">
         <div class="container container-page">
-            <h1>Update Profile</h1>
+            <h1>{{ __('global.update_profile') }}</h1>
             <hr>
             @if(session('success'))
                 <div class="w-100">
@@ -23,16 +23,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Full Name"
+                                <input type="text" id="name" name="name" class="form-control"
+                                       placeholder="{{ __('global.full_name') }}"
                                        value="{{ old('name') ?? ($user->name ?? '') }}" required>
-                                <label for="name">Full Name</label>
+                                <label for="name">{{ __('global.full_name') }}</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                <input type="email" name="email" id="email" class="form-control"
+                                       placeholder="{{ __('global.email') }}"
                                        value="{{ old('email') ?? ($user->email ?? '') }}" required>
-                                <label for="email">Email</label>
+                                <label for="email">{{ __('global.email') }}</label>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -46,14 +48,14 @@
                             <div class="form-floating mb-3">
                         <textarea id="description" name="description" class="form-control" rows="10"
                                   style="height: 250px"
-                                  placeholder="Description">{!! old('description') ?? ($user->description ?? '') !!}</textarea>
-                                <label for="description">Description</label>
+                                  placeholder="{{ __('global.description') }}">{!! old('description') ?? ($user->description ?? '') !!}</textarea>
+                                <label for="description">{{ __('global.description') }}</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="d-flex align-items-center justify-content-md-end">
-                                <button type="submit" class="btn btn-primary">Update Profile</button>
-                                <button type="reset" class="btn btn-light">Reset Changes</button>
+                                <button type="submit" class="btn btn-primary">{{ __('global.update_profile') }}</button>
+                                <button type="reset" class="btn btn-light">{{ __('global.reset_changes') }}</button>
                             </div>
                         </div>
                     </div>
@@ -61,7 +63,7 @@
             </div>
             <div class="my-5">
                 <hr>
-                <h2 class="mb-4">Change Password</h2>
+                <h2 class="mb-4">{{ __('global.change_password') }}</h2>
                 <x-web.errors :errors="$errors"></x-web.errors>
                 @if(session('success_password'))
                     <div class="w-100">
@@ -79,27 +81,29 @@
                         <div class="col-md-4">
                             <div class="form-floating mb-3">
                                 <input type="password" id="current_password" name="current_password"
-                                       class="form-control" placeholder="Current Password" required>
-                                <label for="current_password">Current Password</label>
+                                       class="form-control" placeholder="{{ __('global.current_password') }}" required>
+                                <label for="current_password">{{ __('global.current_password') }}</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3">
                                 <input type="password" id="new_password" name="new_password"
-                                       class="form-control" placeholder="New Password" required>
-                                <label for="new_password">New Password</label>
+                                       class="form-control" placeholder="{{ __('global.new_password') }}" required>
+                                <label for="new_password">{{ __('global.new_password') }}</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3">
                                 <input type="password" id="new_password_confirmation" name="new_password_confirmation"
-                                       class="form-control" placeholder="Confirm New Password" required>
-                                <label for="new_password_confirmation">Confirm New Password</label>
+                                       class="form-control" placeholder="{{ __('global.confirm_new_password') }}"
+                                       required>
+                                <label for="new_password_confirmation">{{ __('global.confirm_new_password') }}</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="d-flex align-items-center justify-content-md-end">
-                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                <button type="submit"
+                                        class="btn btn-primary">{{ __('global.change_password') }}</button>
                             </div>
                         </div>
                     </div>

@@ -11,17 +11,18 @@
                         <div class="col">
                             <div class="card shadow-sm">
                                 <a href="{{ $item->file_url }}" target="_blank" rel="noopener">
-                                    <img class="card-img-top" src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                                    <img class="card-img-top" src="{{ $item->image_url }}"
+                                         alt="{{ $item->getTranslatedAttribute('title') }}"
                                          width="100%" height="225">
                                     <div class="card-body">
-                                        <p class="card-text">{{ $item->title }}</p>
+                                        <p class="card-text">{{ $item->getTranslatedAttribute('title') }}</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     @endforeach
                 @else
-                    <div class="alert alert-info">Not found</div>
+                    <div class="alert alert-info">{{ __('global.not_found') }}</div>
                 @endif
                 @if($records->lastPage() > 1)
                     <div class="col-12">

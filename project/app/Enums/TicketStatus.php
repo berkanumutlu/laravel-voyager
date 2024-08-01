@@ -11,18 +11,18 @@ enum TicketStatus: int
     public function text(): string
     {
         return match ($this) {
-            self::CLOSED => 'Closed',
-            self::OPEN => 'Open',
-            self::ANSWERED => 'Answered'
+            self::CLOSED => __('global.closed'),
+            self::OPEN => __('global.open'),
+            self::ANSWERED => __('global.answered')
         };
     }
 
     public function textWithBadge(): string
     {
         return match ($this) {
-            self::CLOSED => '<span class="badge bg-danger">Closed</span>',
-            self::OPEN => '<span class="badge bg-success">Open</span>',
-            self::ANSWERED => '<span class="badge bg-warning">Answered</span>'
+            self::CLOSED => '<span class="badge bg-danger">'.$this->text().'</span>',
+            self::OPEN => '<span class="badge bg-success">'.$this->text().'</span>',
+            self::ANSWERED => '<span class="badge bg-warning">'.$this->text().'</span>'
         };
     }
 }

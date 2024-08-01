@@ -23,7 +23,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::guard('web')->user();
-        $title = 'User Profile';
+        $title = __('global.user_profile');
         return view('web.user.index', compact(['title', 'user']));
     }
 

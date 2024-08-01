@@ -7,13 +7,8 @@
         <div class="container container-page col-xl-10 col-xxl-8">
             <div class="row align-items-center g-lg-5 py-5">
                 <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Vertically centered hero sign-up
-                        form</h1>
-                    <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls.
-                        Each
-                        required form group has a validation state that can be triggered by attempting to submit the
-                        form
-                        without completing it.</p>
+                    <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">{{ __('global.register_form_title') }}</h1>
+                    <p class="col-lg-10 fs-4">{{ __('global.register_form_description') }}</p>
                 </div>
                 <div class="col-md-10 mx-auto col-lg-5">
                     <form action="{{ route('register.index') }}" method="POST"
@@ -22,27 +17,27 @@
                         <x-web.alert :errors="$errors"></x-web.alert>
                         <div class="form-floating mb-3">
                             <input type="text" id="name" name="name" class="form-control"
-                                   placeholder="name@example.com" value="{{ old('name') ?? '' }}" required>
-                            <label for="name">Full Name</label>
+                                   placeholder="John Doe" value="{{ old('name') ?? '' }}" required>
+                            <label for="name">{{ __('global.full_name') }}</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" id="email" name="email" class="form-control"
                                    placeholder="name@example.com" value="{{ old('email') ?? '' }}" required>
-                            <label for="email">Email address</label>
+                            <label for="email">{{ __('global.email') }}</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" id="password" name="password" class="form-control"
-                                   placeholder="Password" required>
-                            <label for="password">Password</label>
+                                   placeholder="{{ __('global.password') }}" required>
+                            <label for="password">{{ __('global.password') }}</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" id="password_confirmation" name="password_confirmation"
-                                   class="form-control" placeholder="Confirm Password" required>
-                            <label for="password_confirmation">Confirm Password</label>
+                                   class="form-control" placeholder="{{ __('global.confirm_password') }}" required>
+                            <label for="password_confirmation">{{ __('global.confirm_password') }}</label>
                         </div>
-                        <button type="submit" class="w-100 btn btn-lg btn-primary">Sign up</button>
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">{{ __('global.register') }}</button>
                         <hr class="my-4">
-                        <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+                        <small class="text-body-secondary">{{ __('global.register_form_info') }}</small>
                     </form>
                 </div>
             </div>

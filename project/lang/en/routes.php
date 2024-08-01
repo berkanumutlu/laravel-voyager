@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'home'                    => "",
+    'login'                   => "login",
+    'logout'                  => "logout",
+    'register'                => "register",
+    'contact'                 => "contact",
+    'about_us'                => "about-us",
+    'articles'                => "articles",
+    'article_detail'          => "article/{slug}",
+    'articles_category'       => "articles/category/{category:slug}",
+    'news'                    => "news",
+    'news_detail'             => "news/{slug}",
+    'news_category'           => "news/category/{category:slug}",
+    'catalogs'                => "catalogs",
+    'catalog_detail'          => "catalog/{slug}",
+    'quality'                 => "quality",
+    'profile'                 => "profile",
+    'profile_edit'            => "profile/edit",
+    'profile_change_password' => "profile/change-password/{user:id}",
+    'tickets'                 => "tickets",
+    'ticket'                  => "ticket/{ticket:code}",
+    'ticket_reply'            => "ticket/{ticket:code}/reply",
+];

@@ -18,10 +18,11 @@
                     @endif
                     @if(!empty($item->title) || !empty($item->description))
                         <div class="text-section">
-                            <h1 class="title">{{ $item->title }}</h1>
-                            <h1 class="description">{{ $item->description }}</h1>
-                            @if(!empty($item->url))
-                                <a class="button" href="{{ $item->url }}">Visit</a>
+                            <h1 class="title">{{ $item->getTranslatedAttribute('title') }}</h1>
+                            <h1 class="description">{{ $item->getTranslatedAttribute('description') }}</h1>
+                            @if(!empty($item->getTranslatedAttribute('url')))
+                                <a class="button"
+                                   href="{{ $item->getTranslatedAttribute('url') }}">{{ __('global.visit') }}</a>
                             @endif
                         </div>
                     @endif
