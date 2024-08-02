@@ -15,7 +15,8 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('web.login.index');
+        $title = __('global.login');
+        return view('web.login.index', compact('title'));
     }
 
     public function login(LoginRequest $request)
@@ -27,12 +28,12 @@ class LoginController extends Controller
         if (!empty($user)) {
             if (!empty($user->deleted_at)) {
                 return redirect()->route('login.index')->withErrors([
-                    "deleted_at" => "Your account has been blocked."
+                    "deleted_at" => __('auth.user_banned')
                 ])->onlyInput("email", "remember");
             }
             if ($user->status != 1) {
                 return redirect()->route('login.index')->withErrors([
-                    "status" => "Your account has not been approved."
+                    "status" => __('auth.user_not_approved')
                 ])->onlyInput("email", "remember");
             }
             if (Hash::check($password, $user->password)) {
@@ -40,9 +41,8 @@ class LoginController extends Controller
                 return redirect()->route('home');
             }
         }
-        return redirect()->route('login.index')->withErrors([
-            "email" => "Email or password is incorrect."
-        ])->onlyInput("email", "remember");
+        return redirect()->route('login.index')->withErrors(["email" => __('auth.failed')])
+            ->onlyInput("email", "remember");
     }
 
     /**

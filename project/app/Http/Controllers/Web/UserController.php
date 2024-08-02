@@ -61,10 +61,10 @@ class UserController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->route('user.profile')->with('error', 'Your information could not be saved.')
+            return redirect()->route('user.profile')->with('error', trans_choice('auth.user_update_profile', 'error'))
                 ->exceptInput('_token', 'image');
         }
-        return redirect()->route('user.profile')->with('success', 'Your information has been updated successfully.')
+        return redirect()->route('user.profile')->with('success', trans_choice('auth.user_update_profile', 'success'))
             ->onlyInput();
     }
 
@@ -76,7 +76,7 @@ class UserController extends Controller
     public function update_password(UserUpdatePasswordRequest $request, User $user): \Illuminate\Http\RedirectResponse
     {
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->route('user.profile')->with('error_password', 'The current password is incorrect.')
+            return redirect()->route('user.profile')->with('error_password', __('auth.current_password_failed'))
                 ->exceptInput('_token', 'image');
         }
         try {
@@ -84,10 +84,11 @@ class UserController extends Controller
             $user->save();
             Auth::guard('web')->logout();
         } catch (\Exception $e) {
-            return redirect()->route('user.profile')->with('error_password', 'Your password could not be saved.')
+            return redirect()->route('user.profile')->with('error_password',
+                trans_choice('auth.user_change_password', 'error'))
                 ->exceptInput('_token', 'image');
         }
-        return redirect()->route('login.index')->with('success', 'Your password has been updated successfully.')
+        return redirect()->route('login.index')->with('success', trans_choice('auth.user_change_password', 'success'))
             ->onlyInput();
     }
 
@@ -162,12 +163,12 @@ class UserController extends Controller
             $ticket_message->updated_at = null;
             $ticket_message->save();
             return redirect()->back()->with([
-                'message'    => 'Message sent successfully.',
+                'message'    => trans_choice('alert.send_ticket_message', 'success'),
                 'alert-type' => 'success'
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->with([
-                'message'    => $e->getMessage(),
+                'message'    => trans_choice('alert.send_ticket_message', 'error'),
                 'alert-type' => 'danger'
             ]);
         }
