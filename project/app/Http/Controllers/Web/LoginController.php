@@ -59,7 +59,7 @@ class LoginController extends Controller
                 $response['status'] = true;
                 $response['refreshPage'] = true;
             } catch (\Exception $e) {
-                $response['message'] = 'An error occurred while logging out.';
+                $response['message'] = __('auth.user_logout_failed');
             }
         }
         return response()->json($response);

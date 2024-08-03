@@ -16,6 +16,7 @@ return [
     'contact'                   => "Contacto",
     'contact_us'                => "Contáctenos",
     'contacts'                  => "Contactos",
+    'contact_title'             => "Mandanos un mensaje",
     'current_password'          => "Contraseña actual",
     'default'                   => "Por defecto",
     'description'               => "Descripción",
@@ -79,4 +80,7 @@ return [
     'status'                    => "Estado",
     'created_date'              => "Fecha de creación",
     'actions'                   => "Acciones",
+    'address'                   => "Dirección",
+    'lets_talk'                 => "Hablemos",
+    'general_support'           => "Soporte general",
 ];

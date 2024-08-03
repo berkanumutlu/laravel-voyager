@@ -16,6 +16,7 @@ return [
     'failed'                  => 'These credentials do not match our records.',
     'password'                => 'The provided password is incorrect.',
     'throttle'                => 'Too many login attempts. Please try again in :seconds seconds.',
+    'user_logout_failed'      => "An error occurred while logging out.",
     'user_not_approved'       => "This user has not been approved.",
     'user_banned'             => "This user has been banned.",
     'user_register'           => "{error} An error occurred while registering.|{success} You have successfully registered.|{success_with_confirmation} You have successfully registered. A confirmation email has been sent to your e-mail address.",

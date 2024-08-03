@@ -16,6 +16,7 @@ return [
     'contact'                   => "İletişim",
     'contact_us'                => "Bize Ulaşın",
     'contacts'                  => "Kişiler",
+    'contact_title'             => "Bize mesaj gönder",
     'current_password'          => "Mevcut Şifre",
     'default'                   => "Varsayılan",
     'description'               => "Açıklama",
@@ -79,4 +80,7 @@ return [
     'status'                    => "Durum",
     'created_date'              => "Oluşturulma Tarihi",
     'actions'                   => "İşlemler",
+    'address'                   => "Adres",
+    'lets_talk'                 => "Hadi Konuşalım",
+    'general_support'           => "Genel Destek",
 ];

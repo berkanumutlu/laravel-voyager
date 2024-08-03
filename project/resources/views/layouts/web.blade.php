@@ -89,8 +89,12 @@
     </div>
     <div class="px-3 py-2 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
-            <div class="dropdown me-2">
-                <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            <form action="#" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+                <input type="search" class="form-control" placeholder="{{ __('global.search') }}..."
+                       aria-label="{{ __('global.search') }}">
+            </form>
+            <div class="dropdown me-2 ms-lg-auto">
+                <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                    aria-expanded="false">{{ LaravelLocalization::getCurrentLocaleNative() }}</a>
                 <ul class="dropdown-menu">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -104,10 +108,6 @@
                     @endforeach
                 </ul>
             </div>
-            <form action="#" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-                <input type="search" class="form-control" placeholder="{{ __('global.search') }}..."
-                       aria-label="{{ __('global.search') }}">
-            </form>
             <div class="text-end">
                 @if(auth()->guard('web')->check())
                     <div class="dropdown h-100 d-flex align-items-center">

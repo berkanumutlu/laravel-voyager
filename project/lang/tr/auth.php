@@ -16,6 +16,7 @@ return [
     'failed'                  => 'Bu kimlik bilgileri kayıtlarımızla eşleşmiyor.',
     'password'                => 'Sağlanan şifre yanlış.',
     'throttle'                => 'Çok fazla giriş denemesi. Lütfen :seconds saniye sonra tekrar deneyin.',
+    'user_logout_failed'      => "Çıkış yaparken bir hata oluştu.",
     'user_not_approved'       => "Bu kullanıcı onaylanmadı.",
     'user_banned'             => "Bu kullanıcı yasaklandı.",
     'user_register'           => "{error} Kayıt olurken bir hata oluştu.|{success} Başarıyla kayıt oldunuz.|{success_with_confirmation} Başarıyla kayıt oldunuz. E-posta adresinize bir onay e-postası gönderildi.",
