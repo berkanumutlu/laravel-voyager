@@ -12,7 +12,7 @@
 
 # Laravel Voyager
 
-It is a project for Laravel Voyager with articles, news, catalogs, qualities, sliders, contact messages, tickets, social_media, currencies.
+It is a project for Laravel Voyager with articles, news, catalogs, qualities, sliders, contact messages, tickets, social_media, currencies and laravel localization.
 
 ## Installation
 
