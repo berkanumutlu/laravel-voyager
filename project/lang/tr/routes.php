@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'home'                    => "",
+    'login'                   => "giris-yap",
+    'logout'                  => "cikis",
+    'register'                => "kayit",
+    'contact'                 => "iletisim",
+    'about_us'                => "hakkimizda",
+    'articles'                => "makaleler",
+    'article_detail'          => "makale/{slug}",
+    'articles_category'       => "makaleler/kategori/{category:slug}",
+    'news'                    => "haberler",
+    'news_detail'             => "haber/{slug}",
+    'news_category'           => "haberler/kategori/{category:slug}",
+    'catalogs'                => "kataloglar",
+    'catalog_detail'          => "katalog/{slug}",
+    'quality'                 => "kalite",
+    'profile'                 => "profil",
+    'profile_edit'            => "profil/duzenle",
+    'profile_change_password' => "profil/sifre-degistir/{user:id}",
+    'tickets'                 => "destek-kayitlari",
+    'ticket'                  => "destek-kaydi/{ticket:code}",
+    'ticket_reply'            => "destek-kaydi/{ticket:code}/cevapla",
+];

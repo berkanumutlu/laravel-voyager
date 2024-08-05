@@ -12,48 +12,54 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale())->controller('\Mcamara\LaravelLocalization\Facades\LaravelLocalization')->middleware(['localize', 'localizationRedirect'])
+->group(function () {
+    Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.home'), [\App\Http\Controllers\Web\HomeController::class, "index"])->name('home');
+    Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.login'))->name('login.')->controller('LoginController')->middleware('guest:web')->group(function () {
+        Route::get('', "index")->name('index');
+        Route::post('', "login");
+    });
+    Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.logout'))->controller('LoginController')->group(function () {
+        Route::get('', "logout_get")->name('logout');
+        Route::post('', "logout");
+    });
+    Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.register'))->name('register.')->controller('RegisterController')->middleware('guest:web')->group(function () {
+        Route::get('', "index")->name('index');
+        Route::post('', "store");
+    });
+    Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->middleware('auth:web')->group(function () {
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.profile'), "profile")->name('profile');
+        Route::post(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.profile_edit'), "update")->name('profile.edit');
+        Route::post(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.profile_change_password'), "update_password")->name('password.edit')->whereNumber('id');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.tickets'), "tickets")->name('tickets');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.ticket'), "show_ticket")->name('ticket.detail');
+        Route::post(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.ticket_reply'), "reply_ticket")->name('ticket.reply');
+    });
+    Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.about_us'), "show_article_page")->name('about_us');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.articles'), "index")->name('list');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.articles_category'), "show_category")->name('category');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_detail'), "show")->name('detail');
+    });
+    Route::name('catalog.')->controller('CatalogController')->group(function () {
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.catalogs'), "index")->name('list');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.catalog_detail'), "show")->name('detail');
+    });
+    Route::name('news.')->controller('NewsController')->group(function () {
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.news'), "index")->name('list');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.news_detail'), "show")->name('detail');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.news_category'), "show_category")->name('category');
+    });
+    Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.quality'))->name('quality.')->controller('QualityController')->group(function () {
+        Route::get('', "index")->name('list');
+        Route::get('/{quality:slug}', "show")->name('detail');
+    });
+    Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.contact'))->name('contact.')->controller('ContactController')->group(function () {
+        Route::get('', "index")->name('index');
+        Route::post('', "message")->name('message');
+    });
+});
 
-Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->name('home');
-Route::name('login.')->controller('\App\Http\Controllers\Web\LoginController')->middleware('guest:web')->group(function () {
-    Route::get('login', "index")->name('index');
-    Route::post('login', "login");
-});
-Route::post('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"])->name('logout');
-Route::name('register.')->controller('\App\Http\Controllers\Web\RegisterController')->middleware('guest:web')->group(function () {
-    Route::get('register', "index")->name('index');
-    Route::post('register', "store");
-});
-Route::name('user.')->controller('\App\Http\Controllers\Web\UserController')->middleware('auth:web')->group(function () {
-    Route::get('profile', "profile")->name('profile');
-    Route::post('profile/edit', "update")->name('profile.edit');
-    Route::post('profile/change-password/{user:id}', "update_password")->name('password.edit')->whereNumber('id');
-    Route::get('tickets', "tickets")->name('tickets');
-    Route::get('ticket/{ticket:code}', "show_ticket")->name('ticket.detail');
-    Route::post('ticket/{ticket:code}/reply', "reply_ticket")->name('ticket.reply');
-});
-Route::name('article.')->controller('\App\Http\Controllers\Web\ArticleController')->group(function () {
-    Route::get('about-us', "show_article_page")->name('about_us');
-    Route::get('articles', "index")->name('list');
-    Route::get('articles/category/{category:slug}', "show_category")->name('category');
-    Route::get('article/{post:slug}', "show")->name('detail');
-});
-Route::name('catalog.')->controller('\App\Http\Controllers\Web\CatalogController')->group(function () {
-    Route::get('catalogs', "index")->name('list');
-    Route::get('catalog/{catalog:slug}', "show")->name('detail');
-});
-Route::name('news.')->controller('\App\Http\Controllers\Web\NewsController')->group(function () {
-    Route::get('news', "index")->name('list');
-    Route::get('news/category/{category:slug}', "show_category")->name('category');
-    Route::get('news/{news:slug}', "show")->name('detail');
-});
-Route::name('quality.')->controller('\App\Http\Controllers\Web\QualityController')->group(function () {
-    Route::get('quality', "index")->name('list');
-    Route::get('quality/{quality:slug}', "show")->name('detail');
-});
-Route::name('contact.')->controller('\App\Http\Controllers\Web\ContactController')->group(function () {
-    Route::get('contact', "index")->name('index');
-    Route::post('contact/message', "message")->name('message');
-});
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::post('tickets/{id}/reply', [App\Http\Controllers\Admin\TicketController::class, 'reply'])->name('admin.tickets.reply');

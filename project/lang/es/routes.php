@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'home'                    => "",
+    'login'                   => "acceso",
+    'logout'                  => "cerrar-sesion",
+    'register'                => "registro",
+    'contact'                 => "contacto",
+    'about_us'                => "sobre-nosotros",
+    'articles'                => "articulos",
+    'article_detail'          => "articulo/{slug}",
+    'articles_category'       => "articulos/categoria/{category:slug}",
+    'news'                    => "noticias",
+    'news_detail'             => "noticias/{slug}",
+    'news_category'           => "noticias/categoria/{category:slug}",
+    'catalogs'                => "catalogos",
+    'catalog_detail'          => "catalogar/{slug}",
+    'quality'                 => "calidad",
+    'profile'                 => "perfil",
+    'profile_edit'            => "perfil/editar",
+    'profile_change_password' => "perfil/cambiar-la-contrasena/{user:id}",
+    'tickets'                 => "soportes-de-tickets",
+    'ticket'                  => "ticket-de-soporte/{ticket:code}",
+    'ticket_reply'            => "ticket-de-soporte/{ticket:code}/responder",
+];

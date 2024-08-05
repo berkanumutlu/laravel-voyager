@@ -15,7 +15,8 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('web.login.index');
+        $title = __('global.login');
+        return view('web.login.index', compact('title'));
     }
 
     public function login(LoginRequest $request)
@@ -27,12 +28,12 @@ class LoginController extends Controller
         if (!empty($user)) {
             if (!empty($user->deleted_at)) {
                 return redirect()->route('login.index')->withErrors([
-                    "deleted_at" => "Your account has been blocked."
+                    "deleted_at" => __('auth.user_banned')
                 ])->onlyInput("email", "remember");
             }
             if ($user->status != 1) {
                 return redirect()->route('login.index')->withErrors([
-                    "status" => "Your account has not been approved."
+                    "status" => __('auth.user_not_approved')
                 ])->onlyInput("email", "remember");
             }
             if (Hash::check($password, $user->password)) {
@@ -40,9 +41,8 @@ class LoginController extends Controller
                 return redirect()->route('home');
             }
         }
-        return redirect()->route('login.index')->withErrors([
-            "email" => "Email or password is incorrect."
-        ])->onlyInput("email", "remember");
+        return redirect()->route('login.index')->withErrors(["email" => __('auth.failed')])
+            ->onlyInput("email", "remember");
     }
 
     /**
@@ -59,9 +59,23 @@ class LoginController extends Controller
                 $response['status'] = true;
                 $response['refreshPage'] = true;
             } catch (\Exception $e) {
-                $response['message'] = 'An error occurred while logging out.';
+                $response['message'] = __('auth.user_logout_failed');
             }
         }
         return response()->json($response);
+    }
+
+    public function logout_get()
+    {
+        if (Auth::guard('web')->check()) {
+            try {
+                Auth::guard('web')->logout();
+                //$request->session()->invalidate();
+                //$request->session()->regenerate();
+            } catch (\Exception $e) {
+                //TODO: Hata log düşülebilir.
+            }
+        }
+        return response()->redirect()->back();
     }
 }

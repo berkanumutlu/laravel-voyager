@@ -26,8 +26,9 @@ class WebServiceProvider extends ServiceProvider
                     ->select(['name', 'icon', 'link', 'description'])
                     ->orderBy('sort', 'asc')->get();
                 $view->with([
-                    'site_name'           => setting('site.title'),
-                    'site_slogan'         => setting('site.description'),
+                    'site_name'           => __('global.site_name'),
+                    'site_slogan'         => __('global.site_slogan'),
+                    'site_description'    => __('global.site_description'),
                     'site_logo'           => asset('storage/'.setting('site.logo')),
                     'site_logo_secondary' => asset('storage/'.setting('site.logo_secondary')),
                     'favicon'             => asset('storage/'.setting('admin.icon_image')),

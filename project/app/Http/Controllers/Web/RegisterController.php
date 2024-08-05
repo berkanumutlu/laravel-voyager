@@ -13,7 +13,8 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('web.register.index');
+        $title = __('global.register');
+        return view('web.register.index', compact('title'));
     }
 
     /**
@@ -34,10 +35,11 @@ class RegisterController extends Controller
             if (app()->environment() == 'local') {
                 $redirect->withErrors(['error' => $e->getMessage()]);
             } else {
-                $redirect->withErrors(['error' => 'Register Error']);
+                $redirect->withErrors(['error' => trans_choice('auth.user_register', 'error')]);
             }
             return $redirect;
         }
-        return redirect()->route('register.index')->with('success', 'Register Success')->onlyInput();
+        return redirect()->route('register.index')
+            ->with('success', trans_choice('auth.user_register', 'success'))->onlyInput();
     }
 }

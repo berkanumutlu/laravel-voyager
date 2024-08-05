@@ -8,12 +8,13 @@
             <div class="row">
                 <div class="col-12">
                     @if(!empty($record->image_url))
-                        <img class="article-image" src="{{ $record->image_url }}" alt="{{ $record->title }}">
+                        <img class="article-image" src="{{ $record->image_url }}"
+                             alt="{{ $record->getTranslatedAttribute('title') }}">
                     @endif
                     <div class="page-heading text-center">
-                        <h1 class="page-title">{{ $record->title }}</h1>
+                        <h1 class="page-title">{{ $record->getTranslatedAttribute('title') }}</h1>
                     </div>
-                    <div class="article-text">{!! $record->body !!}</div>
+                    <div class="article-text">{!! $record->getTranslatedAttribute('body') !!}</div>
                 </div>
             </div>
         </div>

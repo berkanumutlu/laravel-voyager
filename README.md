@@ -12,7 +12,7 @@
 
 # Laravel Voyager
 
-It is a project for Laravel Voyager with articles, news, catalogs, qualities, sliders, contact messages, tickets, social_media, currencies.
+It is a project for Laravel Voyager with articles, news, catalogs, qualities, sliders, contact messages, tickets, social_media, currencies and laravel localization.
 
 ## Installation
 
@@ -52,6 +52,48 @@ $ php artisan voyager:admin your@email.com --create
 ```sh
 $ php artisan serve
 ```
+
+## Screenshots
+
+- Home
+![home](screenshots/home.png)
+
+- About Us
+![about_us](screenshots/about_us.png)
+
+- Articles
+![articles](screenshots/articles.png)
+
+- Article Detail
+![article_detail](screenshots/article_detail.png)
+
+- Catalogs
+![catalogs](screenshots/catalogs.png)
+
+- News
+![news](screenshots/news.png)
+
+- Quality
+![quality](screenshots/quality.png)
+
+- Contact
+![contact](screenshots/contact.png)
+
+- Login
+![login](screenshots/login.png)
+
+- Register
+![register](screenshots/register.png)
+
+- User Profile
+![user_profile](screenshots/user_profile.png)
+
+- User Tickets
+![user_tickets](screenshots/user_tickets.png)
+
+- User Ticket Detail
+![user_ticket_detail](screenshots/user_ticket_detail.png)
+
 
 ## License
 

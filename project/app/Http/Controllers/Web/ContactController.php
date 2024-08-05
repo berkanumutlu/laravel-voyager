@@ -18,7 +18,7 @@ class ContactController extends Controller
         $address = setting('site-contact.address');
         $phone = setting('site-contact.phone');
         $info_email = setting('site-contact.info_email');
-        $title = 'Contact';
+        $title = __('global.contact');
         return view('web.contact.index', compact(['title', 'address', 'phone', 'info_email']));
     }
 
@@ -37,10 +37,12 @@ class ContactController extends Controller
             ];
             ContactMessage::insert($data);
             Mail::send(new SendContactMessageMail($data));
-            return redirect()->route('contact.index')->with('success', 'Success Message')->onlyInput();
+            return redirect()->route('contact.index')
+                ->with('success', trans_choice('alert.send_contact_message', 'success'))->onlyInput();
         } catch (\Exception $e) {
             //TODO: Hata log düşülebilir.
-            return redirect()->route('contact.index')->with('error', 'Error Message')->exceptInput('token');
+            return redirect()->route('contact.index')
+                ->with('error', trans_choice('alert.send_contact_message', 'error'))->exceptInput('token');
         }
     }
 }

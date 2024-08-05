@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ $current_language['code'] }}">
 {{--@formatter:off--}}
 <head>
     <meta charset="UTF-8">
@@ -38,49 +38,49 @@
                         <a href="{{ route('home') }}"
                            class="nav-link d-flex flex-column {{ Route::is('home') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-house-door mx-auto fs-4"></i>
-                            Home
+                            {{ __('global.home') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('article.about_us') }}"
                            class="nav-link d-flex flex-column {{ Route::is('article.about_us') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-info-square mx-auto fs-4"></i>
-                            About Us
+                            {{ __('global.about_us') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('article.list') }}"
                            class="nav-link d-flex flex-column {{ Route::is('article.list') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-card-text mx-auto fs-4"></i>
-                            Articles
+                            {{ __('global.articles') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('catalog.list') }}"
                            class="nav-link d-flex flex-column {{ Route::is('catalog.list') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-grid mx-auto fs-4"></i>
-                            Catalogs
+                            {{ __('global.catalogs') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('news.list') }}"
                            class="nav-link d-flex flex-column {{ Route::is('news.list') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-newspaper mx-auto fs-4"></i>
-                            News
+                            {{ __('global.news') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('quality.list') }}"
                            class="nav-link d-flex flex-column {{ Route::is('quality.list') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-award mx-auto fs-4"></i>
-                            Quality
+                            {{ __('global.quality') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('contact.index') }}"
                            class="nav-link d-flex flex-column {{ Route::is('contact.index') ? 'text-secondary' : 'text-white' }}">
                             <i class="bi bi-chat-left-dots mx-auto fs-4"></i>
-                            Contact
+                            {{ __('global.contact') }}
                         </a>
                     </li>
                 </ul>
@@ -90,8 +90,24 @@
     <div class="px-3 py-2 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
             <form action="#" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                <input type="search" class="form-control" placeholder="{{ __('global.search') }}..."
+                       aria-label="{{ __('global.search') }}">
             </form>
+            <div class="dropdown me-2 ms-lg-auto">
+                <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">{{ LaravelLocalization::getCurrentLocaleNative() }}</a>
+                <ul class="dropdown-menu">
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            <a class="dropdown-item {{ $localeCode == LaravelLocalization::getCurrentLocale() ? 'active' : '' }}"
+                               rel="alternate" hreflang="{{ $localeCode }}"
+                               href="{{ LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
             <div class="text-end">
                 @if(auth()->guard('web')->check())
                     <div class="dropdown h-100 d-flex align-items-center">
@@ -106,21 +122,25 @@
                             @endif
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ route('user.tickets') }}">Tickets</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ route('user.profile') }}">{{ __('global.profile') }}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ route('user.tickets') }}">{{ __('global.tickets') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('global.settings') }}</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
                                 @csrf
-                                <a class="dropdown-item btnUserLogout" href="{{ route('logout') }}">Log out</a>
+                                <a class="dropdown-item btnUserLogout"
+                                   href="{{ route('logout') }}">{{ __('global.logout') }}</a>
                             </li>
                         </ul>
                     </div>
                 @else
-                    <a href="{{ route('login.index') }}" class="btn btn-light text-dark me-2">Login</a>
-                    <a href="{{ route('register.index') }}" class="btn btn-primary">Sign-up</a>
+                    <a href="{{ route('login.index') }}"
+                       class="btn btn-light text-dark me-2">{{ __('global.login') }}</a>
+                    <a href="{{ route('register.index') }}" class="btn btn-primary">{{ __('global.register') }}</a>
                 @endif
             </div>
         </div>

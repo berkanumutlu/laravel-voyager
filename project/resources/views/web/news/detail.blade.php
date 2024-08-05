@@ -7,7 +7,7 @@
         <div class="container container-page">
             <div class="row g-5">
                 <div class="col-md-9">
-                    <h2 class="link-body-emphasis pb-3 mb-3 fst-italic border-bottom">{{ $record->title }}</h2>
+                    <h2 class="link-body-emphasis pb-3 mb-3 fst-italic border-bottom">{{ $record->getTranslatedAttribute('title') }}</h2>
                     <article class="news-post">
                         <div class="news-meta">
                             <p class="news-publish-date">
@@ -19,13 +19,13 @@
                             </p>
                             <p class="news-category">
                                 <i class="bi bi-stack"></i><a
-                                    href="{{ route('news.category', ['category' => $record->category?->slug]) }}">{{ $record->category?->name }}</a>
+                                    href="{{ route('news.category', ['category' => $record->category?->getTranslatedAttribute('slug')]) }}">{{ $record->category?->getTranslatedAttribute('name') }}</a>
                             </p>
                             <p class="news-views">
                                 <i class="bi bi-eye"></i>{{ $record->hit }}
                             </p>
                         </div>
-                        <div class="news-text">{!! $record->body !!}</div>
+                        <div class="news-text">{!! $record->getTranslatedAttribute('body') !!}</div>
                     </article>
                 </div>
                 <div class="col-md-3">
@@ -46,16 +46,17 @@
                         </div>
                         @if(!empty($last_records))
                             <div class="last-records">
-                                <h4 class="fst-italic">Recent posts</h4>
+                                <h4 class="fst-italic">{{ __('global.recent_posts') }}</h4>
                                 <ul class="list-unstyled">
                                     @foreach($last_records as $item)
                                         <li>
                                             <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
                                                href="{{ $item->url }}">
-                                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" width="100%"
+                                                <img src="{{ $item->image_url }}"
+                                                     alt="{{ $item->getTranslatedAttribute('title') }}" width="100%"
                                                      height="96">
                                                 <div class="col-lg-8">
-                                                    <h6 class="mb-0">{{ $item->title }}</h6>
+                                                    <h6 class="mb-0">{{ $item->getTranslatedAttribute('title') }}</h6>
                                                     <small
                                                         class="text-body-secondary">{{ $item->published_at_text ?? $item->published_at }}</small>
                                                 </div>
@@ -66,17 +67,18 @@
                             </div>
                         @endif
                         @if(!empty($category_list))
-                            <div class="category-list p-4">
-                                <h4 class="fst-italic">Categories</h4>
+                            <div class="category-list py-4">
+                                <h4 class="fst-italic">{{ __('global.categories') }}</h4>
                                 <ol class="list-unstyled mb-0">
                                     @foreach($category_list as $item)
-                                        <li><a href="{{ $item->url }}">{{ $item->name }}</a></li>
+                                        <li><a href="{{ $item->url }}">{{ $item->getTranslatedAttribute('name') }}</a>
+                                        </li>
                                     @endforeach
                                 </ol>
                             </div>
                         @endif
-                        <div class="p-4">
-                            <h4 class="fst-italic">Elsewhere</h4>
+                        <div class="py-4">
+                            <h4 class="fst-italic">{{ __('global.elsewhere') }}</h4>
                             @if(!empty($social_media_list))
                                 <ol class="list-unstyled">
                                     @foreach($social_media_list as $item)

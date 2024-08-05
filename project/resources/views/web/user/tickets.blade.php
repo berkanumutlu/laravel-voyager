@@ -16,13 +16,13 @@
                                     <label class="form-check-label" for="checkAll"></label>
                                 </div>
                             </th>
-                            <th class="ps-1">Code</th>
-                            <th>Department</th>
-                            <th>Subject</th>
-                            <th>Authorized</th>
-                            <th>Status</th>
-                            <th>Created Date</th>
-                            <th>Actions</th>
+                            <th class="ps-1">{{ __('global.code') }}</th>
+                            <th>{{ __('global.department') }}</th>
+                            <th>{{ __('global.subject') }}</th>
+                            <th>{{ __('global.authorized') }}</th>
+                            <th>{{ __('global.status') }}</th>
+                            <th>{{ __('global.created_date') }}</th>
+                            <th>{{ __('global.actions') }}</th>
                         </tr>
                         </thead>
                         <tbody>
